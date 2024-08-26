@@ -1,0 +1,2648 @@
+
+
+########################################################################
+Electrons and Phonons 
+author: Tyler C. Sterling
+email: ty.sterling@colorado.edu
+affil: Physics Dept., University of Colorado Boulder
+  Neurtron Scattering and Raman Spectroscopy Lab
+########################################################################
+
+
+*** input-args ***
+reading input from:
+  'scf.py'
+
+*** common variables ***
+
+task: polaron_mft
+temperature:   0.010
+lattice_vectors:
+  1.414214   0.000000   0.000000 
+  0.000000   1.414214   0.000000 
+  0.000000   0.000000  10.000000 
+atom_types:
+  Cu Cu O O O O 
+atom_files:
+  Cu.py
+  O.py
+atom_positions: (reduced coords)
+  0.000000   0.000000   0.000000 
+  0.500000   0.500000   0.000000 
+  0.250000   0.250000   0.000000 
+  0.250000   0.750000   0.000000 
+  0.750000   0.250000   0.000000 
+  0.750000   0.750000   0.000000 
+
+*** electron variables ***
+
+orbital_type: tight_binding
+num_electrons:   1.90000
+use_spin: True
+use_hubbard_U: True
+hopping_file:
+  hopping.py
+num_kpts_procs: 4
+kpts_option: mesh
+use_kpts_symmetry: False
+kpts_mesh: 200 200 1
+spin_up_site_density:
+ 2.000 0.000 0.000 0.000 0.000 0.000
+spin_down_site_density:
+ 0.000 1.000 0.000 0.000 0.000 0.000
+do_electron_scf: True
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+electron_mix_method: pulay
+electron_mix_alpha:   0.400
+electron_mix_beta:   0.400
+electron_mix_history: 4
+electron_mix_delay: 10
+electron_output_file: electrons_out.hdf5
+write_electron_eigenvectors: False
+write_site_density: True
+
+*** phonon variables ***
+
+num_qpts_procs: 1
+qpts_option: mesh
+use_qpts_symmetry: False
+qpts_mesh: 1 1 1
+spring_constants_file:
+  spring_constants.py
+phonon_output_file: None
+write_phonon_eigenvectors: True
+phonon_eigenvectors_input_file:
+  phonons.hdf5
+
+*** polaron variables ***
+
+polaron_output_file: polaron.hdf5
+do_polaron_scf: True
+max_polaron_scf_steps: 100
+polaron_scf_displacement_tol: 1.000e-06
+displacement_mix_method: simple
+displacement_mix_alpha:   0.800
+
+########################################################################
+####################### setting up common stuff ########################
+########################################################################
+
+*** lattice (row vectors!) ***
+direct_lattice
+    1.41421   0.00000   0.00000 
+    0.00000   1.41421   0.00000 
+    0.00000   0.00000  10.00000 
+reciprocal_lattice
+    4.44288   0.00000   0.00000 
+    0.00000   4.44288   0.00000 
+    0.00000   0.00000   0.62832 
+
+*** atoms ***
+unique_atom_types:
+  0  Cu
+  1  O
+num_atoms: 6
+ (ind) (type) ---- (crystal coords) -----   ---- (cartesian coords) ----
+    0    0    0.00000   0.00000   0.00000    0.00000   0.00000   0.00000
+    1    0    0.50000   0.50000   0.00000    0.70711   0.70711   0.00000
+    2    1    0.25000   0.25000   0.00000    0.35355   0.35355   0.00000
+    3    1    0.25000   0.75000   0.00000    0.35355   1.06066   0.00000
+    4    1    0.75000   0.25000   0.00000    1.06066   0.35355   0.00000
+    5    1    0.75000   0.75000   0.00000    1.06066   1.06066   0.00000
+
+########################################################################
+####################### setting up polaron stuff #######################
+########################################################################
+
+*** orbitals ***
+orbital_type: tight_binding
+num_orbitals: 2
+
+*** spring constants ***
+getting spring constants from file:
+  'spring_constants.py'
+
+*** hopping ***
+getting hopping data from file:
+  'hopping.py'
+
+*** electrons ***
+total number of electrons in files: 8.00
+number of valence electrons in files: 2.00
+number of core electrons: 6.00
+number of electrons in calculation: 1.90
+
+*** WARNING ***
+the number of electrons in the calculation doesnt match the files!
+usually this is because you are simulating a doped system. adding
+positive background charge to ensure charge neutrality. i hope this
+is intentional! if not, set num_electrons = None in the input file
+
+positive background charge: -0.10 [e]
+
+*** mixing ***
+pulay mixing with 4 iterations
+mix_delay: 10
+beta: 0.4000
+alpha: 0.4000
+
+*** density ***
+magnetization:   0.633
+ (atom) (type) (density) (mag. density)
+     0      0     1.267       1.267
+     1      0     0.633      -0.633
+
+*** k-points ***
+num_kpts_procs: 4
+kpts_option: mesh
+use_kpts_symmetry: False
+
+generating k-points on full grid spanning brillouin zone
+num_kpts on full grid: 40000
+
+max number of k-points over all processes: 10000
+number of k-points on each process:
+ (proc) (num)
+   0   10000
+   1   10000
+   2   10000
+   3   10000
+
+*** q-points ***
+num_qpts_procs: 1
+qpts_option: mesh
+use_qpts_symmetry: False
+
+generating q-points on full grid spanning brillouin zone
+num_qpts on full grid: 1
+
+max number of q-points over all processes: 1
+number of q-points on each process:
+ (proc) (num)
+   0      1
+
+*** phonon io ***
+reading eigenvectors, qpts, etc. from file:
+  'phonons.hdf5'
+
+resetting q-points!
+
+max number of q-points over all processes: 1
+number of q-points on each process:
+ (proc) (num)
+   0      1
+
+*** WARNING ***
+improved pulay mixing (beta != 0.0) isnt proven yet!
+use with caution!
+
+*** mixing ***
+pulay mixing with 4 iterations
+mix_delay: 10
+beta: 0.4000
+alpha: 0.4000
+
+*** electron phonon ***
+number of coupled orbitals: 2
+
+########################################################################
+######################## running 'polaron_mft' #########################
+########################################################################
+
+*** calculating polaron stuff ***
+entering polaron mft calculation
+
+*** polaron scf ***
+entering polaron scf loop
+max_polaron_scf_steps: 100
+polaron_scf_displacement_tol: 1.000e-06
+
+*** polaron ***
+polaron_mft_energy_0: -1.319444e-02
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.295   0.295   0.000
+    3        0.295  -0.295  -0.000
+    4       -0.295   0.295   0.000
+    5       -0.295  -0.295  -0.000
+
+========================= polaron scf step: 0 ==========================
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 4.01244e-10
+ spin up rms: 4.23039e-01
+ spin down rms: 2.12302e-01
+ magnetization:   0.09991
+
+ hubbard_energy: -3.345217e-01
+ free_energy: -1.703242e+00
+ band_energy: -1.367371e+00
+ ground_state_energy: -1.701893e+00
+ entropy: 1.348779e-01
+
+ energy residual:  1.701893e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      2.066      2.066   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 9.39734e-10
+ spin up rms: 2.41367e-01
+ spin down rms: 1.18045e-01
+ magnetization:   0.10000
+
+ hubbard_energy: -5.546240e-01
+ free_energy: -1.594746e+00
+ band_energy: -1.038865e+00
+ ground_state_energy: -1.593489e+00
+ entropy: 1.256604e-01
+
+ energy residual:  1.084038e-01
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      2.137      2.137   s 
+
+----------------------------- scf step: 3 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 2.60696e-10
+ spin up rms: 1.40859e-01
+ spin down rms: 6.79086e-02
+ magnetization:   0.10000
+
+ hubbard_energy: -6.998561e-01
+ free_energy: -1.541698e+00
+ band_energy: -8.406439e-01
+ ground_state_energy: -1.540500e+00
+ entropy: 1.197914e-01
+
+ energy residual:  5.298936e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[3]                     1      2.215      2.215   s 
+
+----------------------------- scf step: 4 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.02084e-11
+ spin up rms: 8.42694e-02
+ spin down rms: 4.21774e-02
+ magnetization:   0.10000
+
+ hubbard_energy: -7.976025e-01
+ free_energy: -1.509591e+00
+ band_energy: -7.108284e-01
+ ground_state_energy: -1.508431e+00
+ entropy: 1.160074e-01
+
+ energy residual:  3.206912e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[4]                     1      2.274      2.274   s 
+
+----------------------------- scf step: 5 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.58038e-10
+ spin up rms: 5.18305e-02
+ spin down rms: 2.84905e-02
+ magnetization:   0.10000
+
+ hubbard_energy: -8.648446e-01
+ free_energy: -1.487588e+00
+ band_energy: -6.216078e-01
+ ground_state_energy: -1.486452e+00
+ entropy: 1.135851e-01
+
+ energy residual:  2.197850e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[5]                     1      2.490      2.490   s 
+
+----------------------------- scf step: 6 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 9.00027e-10
+ spin up rms: 3.28343e-02
+ spin down rms: 2.03371e-02
+ magnetization:   0.10000
+
+ hubbard_energy: -9.119560e-01
+ free_energy: -1.471780e+00
+ band_energy: -5.587040e-01
+ ground_state_energy: -1.470660e+00
+ entropy: 1.120172e-01
+
+ energy residual:  1.579226e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[6]                     1      2.447      2.447   s 
+
+----------------------------- scf step: 7 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 2.24214e-10
+ spin up rms: 2.14251e-02
+ spin down rms: 1.48769e-02
+ magnetization:   0.10000
+
+ hubbard_energy: -9.454188e-01
+ free_energy: -1.460275e+00
+ band_energy: -5.137462e-01
+ ground_state_energy: -1.459165e+00
+ entropy: 1.109807e-01
+
+ energy residual:  1.149513e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[7]                     1      2.458      2.458   s 
+
+----------------------------- scf step: 8 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 5.86306e-10
+ spin up rms: 1.43728e-02
+ spin down rms: 1.09663e-02
+ magnetization:   0.10000
+
+ hubbard_energy: -9.694221e-01
+ free_energy: -1.451880e+00
+ band_energy: -4.813548e-01
+ ground_state_energy: -1.450777e+00
+ entropy: 1.102789e-01
+
+ energy residual:  8.388009e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[8]                     1      2.446      2.446   s 
+
+----------------------------- scf step: 9 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 2.32837e-10
+ spin up rms: 9.87744e-03
+ spin down rms: 8.09293e-03
+ magnetization:   0.10000
+
+ hubbard_energy: -9.867616e-01
+ free_energy: -1.445751e+00
+ band_energy: -4.578919e-01
+ ground_state_energy: -1.444654e+00
+ entropy: 1.097936e-01
+
+ energy residual:  6.123404e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[9]                     1      2.446      2.446   s 
+
+----------------------------- scf step: 10 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.53802e-10
+ spin up rms: 6.92319e-03
+ spin down rms: 5.96868e-03
+ magnetization:   0.10000
+
+ hubbard_energy: -9.993511e-01
+ free_energy: -1.441275e+00
+ band_energy: -4.408298e-01
+ ground_state_energy: -1.440181e+00
+ entropy: 1.094519e-01
+
+ energy residual:  4.472675e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[10]                    1      2.495      2.495   s 
+
+----------------------------- scf step: 11 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.20629e-10
+ spin up rms: 4.92667e-03
+ spin down rms: 4.39868e-03
+ magnetization:   0.10000
+
+ hubbard_energy: -1.034340e+00
+ free_energy: -1.463818e+00
+ band_energy: -4.283850e-01
+ ground_state_energy: -1.462726e+00
+ entropy: 1.092079e-01
+
+ energy residual:  2.254464e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[11]                    1      2.503      2.503   s 
+
+----------------------------- scf step: 12 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 5.12505e-10
+ spin up rms: 5.55405e-04
+ spin down rms: 3.63407e-04
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033627e+00
+ free_energy: -1.428276e+00
+ band_energy: -3.935642e-01
+ ground_state_energy: -1.427191e+00
+ entropy: 1.084990e-01
+
+ energy residual:  3.553429e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[12]                    1      2.604      2.604   s 
+
+----------------------------- scf step: 13 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.66560e-10
+ spin up rms: 6.42002e-04
+ spin down rms: 5.57409e-04
+ magnetization:   0.10000
+
+ hubbard_energy: -1.034045e+00
+ free_energy: -1.429408e+00
+ band_energy: -3.942772e-01
+ ground_state_energy: -1.428322e+00
+ entropy: 1.085984e-01
+
+ energy residual:  1.131141e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[13]                    1      2.580      2.580   s 
+
+----------------------------- scf step: 14 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.66487e-10
+ spin up rms: 1.04610e-05
+ spin down rms: 6.34808e-05
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033918e+00
+ free_energy: -1.428862e+00
+ band_energy: -3.938583e-01
+ ground_state_energy: -1.427777e+00
+ entropy: 1.085436e-01
+
+ energy residual:  5.457774e-04
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[14]                    1      2.608      2.608   s 
+
+----------------------------- scf step: 15 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.29539e-10
+ spin up rms: 1.79501e-05
+ spin down rms: 2.41722e-05
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033863e+00
+ free_energy: -1.428934e+00
+ band_energy: -3.939852e-01
+ ground_state_energy: -1.427849e+00
+ entropy: 1.085440e-01
+
+ energy residual:  7.200925e-05
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[15]                    1      2.576      2.576   s 
+
+----------------------------- scf step: 16 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 7.65346e-10
+ spin up rms: 2.42910e-05
+ spin down rms: 4.30791e-06
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033338e+00
+ free_energy: -1.428463e+00
+ band_energy: -3.940401e-01
+ ground_state_energy: -1.427378e+00
+ entropy: 1.085440e-01
+
+ energy residual:  4.705929e-04
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[16]                    1      2.588      2.588   s 
+
+----------------------------- scf step: 17 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.24050e-10
+ spin up rms: 1.88274e-04
+ spin down rms: 6.59240e-05
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033989e+00
+ free_energy: -1.429640e+00
+ band_energy: -3.945654e-01
+ ground_state_energy: -1.428554e+00
+ entropy: 1.085652e-01
+
+ energy residual:  1.176094e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[17]                    1      2.570      2.570   s 
+
+----------------------------- scf step: 18 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.20383e-10
+ spin up rms: 1.45069e-04
+ spin down rms: 7.49758e-05
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033756e+00
+ free_energy: -1.428756e+00
+ band_energy: -3.939150e-01
+ ground_state_energy: -1.427671e+00
+ entropy: 1.085337e-01
+
+ energy residual:  8.833401e-04
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[18]                    1      2.579      2.579   s 
+
+----------------------------- scf step: 19 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.15216e-10
+ spin up rms: 4.65712e-06
+ spin down rms: 3.50666e-06
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033764e+00
+ free_energy: -1.428997e+00
+ band_energy: -3.941477e-01
+ ground_state_energy: -1.427912e+00
+ entropy: 1.085473e-01
+
+ energy residual:  2.408383e-04
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[19]                    1      2.569      2.569   s 
+
+----------------------------- scf step: 20 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 7.19420e-10
+ spin up rms: 2.77045e-07
+ spin down rms: 1.55101e-06
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033763e+00
+ free_energy: -1.428988e+00
+ band_energy: -3.941395e-01
+ ground_state_energy: -1.427902e+00
+ entropy: 1.085469e-01
+
+ energy residual:  9.123637e-06
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[20]                    1      2.566      2.566   s 
+
+----------------------------- scf step: 21 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 2.09849e-10
+ spin up rms: 9.02271e-08
+ spin down rms: 9.59818e-07
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033763e+00
+ free_energy: -1.428989e+00
+ band_energy: -3.941405e-01
+ ground_state_energy: -1.427903e+00
+ entropy: 1.085469e-01
+
+ energy residual:  1.017868e-06
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[21]                    1      2.557      2.557   s 
+
+----------------------------- scf step: 22 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.50117e-10
+ spin up rms: 4.47787e-08
+ spin down rms: 1.09103e-06
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033762e+00
+ free_energy: -1.428988e+00
+ band_energy: -3.941405e-01
+ ground_state_energy: -1.427902e+00
+ entropy: 1.085468e-01
+
+ energy residual:  1.001952e-06
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[22]                    1      2.580      2.580   s 
+
+----------------------------- scf step: 23 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.18430e-10
+ spin up rms: 9.58893e-08
+ spin down rms: 7.13877e-07
+ magnetization:   0.10000
+
+ hubbard_energy: -1.033761e+00
+ free_energy: -1.428988e+00
+ band_energy: -3.941415e-01
+ ground_state_energy: -1.427902e+00
+ entropy: 1.085469e-01
+
+ energy residual:  1.645695e-08
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[23]                    1      2.571      2.571   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 23 steps
+
+*** final density ***
+magnetization:   0.100
+ (atom) (type) (density) (mag. density)
+     0      0     0.991       0.749
+     1      0     0.909      -0.649
+     2      1     0.000       0.000
+     3      1     0.000       0.000
+     4      1     0.000       0.000
+     5      1     0.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.033760e+00
+free_energy: -1.428987e+00
+band_energy: -3.941415e-01
+ground_state_energy: -1.427901e+00
+entropy: 1.085469e-01
+fermi_energy: 6.788524e-01
+
+*** gap ***
+lumo_energy:   0.679
+homo_energy:   0.679
+estimated gap:   0.000
+metallic: True
+
+*** polaron ***
+polaron_mft_energy_0: -2.247655e-04
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.038   0.038   0.000
+    3        0.038  -0.038  -0.000
+    4       -0.038   0.038   0.000
+    5       -0.038  -0.038  -0.000
+
+*** displacement redidual ***
+residual: 7.245683e-01
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  polaron_scf_step[0]             1     57.027     57.027   s 
+
+========================= polaron scf step: 1 ==========================
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 7.89214e-10
+ spin up rms: 4.75477e-03
+ spin down rms: 4.33317e-03
+ magnetization:   0.09738
+
+ hubbard_energy: -1.033760e+00
+ free_energy: -1.426188e+00
+ band_energy: -3.912581e-01
+ ground_state_energy: -1.425018e+00
+ entropy: 1.170259e-01
+
+ energy residual:  1.425018e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      2.541      2.541   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 4.35795e-10
+ spin up rms: 4.75497e-03
+ spin down rms: 4.33294e-03
+ magnetization:   0.09738
+
+ hubbard_energy: -1.033758e+00
+ free_energy: -1.426186e+00
+ band_energy: -3.912580e-01
+ ground_state_energy: -1.425016e+00
+ entropy: 1.170255e-01
+
+ energy residual:  1.864504e-06
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      2.566      2.566   s 
+
+----------------------------- scf step: 3 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.47016e-10
+ spin up rms: 4.75443e-03
+ spin down rms: 4.33196e-03
+ magnetization:   0.09738
+
+ hubbard_energy: -1.033772e+00
+ free_energy: -1.426202e+00
+ band_energy: -3.912598e-01
+ ground_state_energy: -1.425032e+00
+ entropy: 1.170239e-01
+
+ energy residual:  1.601760e-05
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[3]                     1      2.580      2.580   s 
+
+----------------------------- scf step: 4 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.18035e-10
+ spin up rms: 4.75832e-03
+ spin down rms: 4.33921e-03
+ magnetization:   0.09738
+
+ hubbard_energy: -1.029980e+00
+ free_energy: -1.422396e+00
+ band_energy: -3.912457e-01
+ ground_state_energy: -1.421225e+00
+ entropy: 1.170352e-01
+
+ energy residual:  3.806793e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[4]                     1      2.567      2.567   s 
+
+----------------------------- scf step: 5 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 2.46730e-10
+ spin up rms: 3.23872e-04
+ spin down rms: 7.88999e-04
+ magnetization:   0.09964
+
+ hubbard_energy: -1.030935e+00
+ free_energy: -1.427084e+00
+ band_energy: -3.950424e-01
+ ground_state_energy: -1.425978e+00
+ entropy: 1.106676e-01
+
+ energy residual:  4.752339e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[5]                     1      2.567      2.567   s 
+
+----------------------------- scf step: 6 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 7.16878e-11
+ spin up rms: 4.39502e-04
+ spin down rms: 4.49999e-04
+ magnetization:   0.09960
+
+ hubbard_energy: -1.037120e+00
+ free_energy: -1.432314e+00
+ band_energy: -3.940861e-01
+ ground_state_energy: -1.431206e+00
+ entropy: 1.108052e-01
+
+ energy residual:  5.228192e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[6]                     1      2.581      2.581   s 
+
+----------------------------- scf step: 7 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 7.63256e-10
+ spin up rms: 1.02199e-03
+ spin down rms: 2.10822e-04
+ magnetization:   0.09971
+
+ hubbard_energy: -1.037582e+00
+ free_energy: -1.426593e+00
+ band_energy: -3.879081e-01
+ ground_state_energy: -1.425490e+00
+ entropy: 1.102758e-01
+
+ energy residual:  5.715396e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[7]                     1      2.561      2.561   s 
+
+----------------------------- scf step: 8 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.05219e-10
+ spin up rms: 1.42570e-03
+ spin down rms: 2.19370e-03
+ magnetization:   0.09912
+
+ hubbard_energy: -1.042223e+00
+ free_energy: -1.430780e+00
+ band_energy: -3.874347e-01
+ ground_state_energy: -1.429657e+00
+ entropy: 1.122695e-01
+
+ energy residual:  4.166927e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[8]                     1      2.570      2.570   s 
+
+----------------------------- scf step: 9 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.07460e-10
+ spin up rms: 3.46227e-03
+ spin down rms: 5.25637e-03
+ magnetization:   0.09769
+
+ hubbard_energy: -1.037194e+00
+ free_energy: -1.421148e+00
+ band_energy: -3.827934e-01
+ ground_state_energy: -1.419987e+00
+ entropy: 1.161073e-01
+
+ energy residual:  9.670461e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[9]                     1      2.633      2.633   s 
+
+----------------------------- scf step: 10 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.70759e-10
+ spin up rms: 3.14217e-03
+ spin down rms: 2.10654e-03
+ magnetization:   0.09990
+
+ hubbard_energy: -1.034242e+00
+ free_energy: -1.423203e+00
+ band_energy: -3.878659e-01
+ ground_state_energy: -1.422108e+00
+ entropy: 1.094299e-01
+
+ energy residual:  2.121320e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[10]                    1      2.569      2.569   s 
+
+----------------------------- scf step: 11 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 7.93214e-10
+ spin up rms: 3.52195e-04
+ spin down rms: 3.62978e-04
+ magnetization:   0.09955
+
+ hubbard_energy: -1.028173e+00
+ free_energy: -1.420062e+00
+ band_energy: -3.907794e-01
+ ground_state_energy: -1.418953e+00
+ entropy: 1.109318e-01
+
+ energy residual:  3.155440e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[11]                    1      2.580      2.580   s 
+
+----------------------------- scf step: 12 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.88738e-10
+ spin up rms: 2.27615e-03
+ spin down rms: 6.18991e-04
+ magnetization:   0.09920
+
+ hubbard_energy: -3.799115e+00
+ free_energy: -4.197074e+00
+ band_energy: -3.968368e-01
+ ground_state_energy: -4.195952e+00
+ entropy: 1.122102e-01
+
+ energy residual:  2.776999e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[12]                    1      2.563      2.563   s 
+
+----------------------------- scf step: 13 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.94926e-10
+ spin up rms: 1.20461e+00
+ spin down rms: 1.02341e+00
+ magnetization:  -0.10000
+
+ hubbard_energy: -1.034016e+00
+ free_energy: -1.994041e+00
+ band_energy: -9.590380e-01
+ ground_state_energy: -1.993054e+00
+ entropy: 9.876806e-02
+
+ energy residual:  2.202898e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[13]                    1      2.580      2.580   s 
+
+----------------------------- scf step: 14 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 4.86854e-10
+ spin up rms: 2.65942e-04
+ spin down rms: 2.38500e-04
+ magnetization:   0.09957
+
+ hubbard_energy: -1.034545e+00
+ free_energy: -1.426660e+00
+ band_energy: -3.910066e-01
+ ground_state_energy: -1.425551e+00
+ entropy: 1.108515e-01
+
+ energy residual:  5.675024e-01
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[14]                    1      2.578      2.578   s 
+
+----------------------------- scf step: 15 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.26780e-10
+ spin up rms: 5.18944e-04
+ spin down rms: 5.88547e-04
+ magnetization:   0.09949
+
+ hubbard_energy: -1.027851e+00
+ free_energy: -1.419437e+00
+ band_energy: -3.904757e-01
+ ground_state_energy: -1.418326e+00
+ entropy: 1.111143e-01
+
+ energy residual:  7.225080e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[15]                    1      2.879      2.879   s 
+
+----------------------------- scf step: 16 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.36785e-10
+ spin up rms: 1.34540e-03
+ spin down rms: 4.07979e-04
+ magnetization:   0.09949
+
+ hubbard_energy: -1.027256e+00
+ free_energy: -1.425532e+00
+ band_energy: -3.971630e-01
+ ground_state_energy: -1.424419e+00
+ entropy: 1.112578e-01
+
+ energy residual:  6.092610e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[16]                    1      2.768      2.768   s 
+
+----------------------------- scf step: 17 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 5.87628e-10
+ spin up rms: 1.93212e-03
+ spin down rms: 3.54293e-03
+ magnetization:   0.09989
+
+ hubbard_energy: -1.037671e+00
+ free_energy: -1.436568e+00
+ band_energy: -3.977999e-01
+ ground_state_energy: -1.435471e+00
+ entropy: 1.096458e-01
+
+ energy residual:  1.105232e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[17]                    1      2.784      2.784   s 
+
+----------------------------- scf step: 18 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.67796e-10
+ spin up rms: 2.87994e-03
+ spin down rms: 3.56590e-03
+ magnetization:   0.09836
+
+ hubbard_energy: -1.028142e+00
+ free_energy: -1.416631e+00
+ band_energy: -3.873451e-01
+ ground_state_energy: -1.415487e+00
+ entropy: 1.144416e-01
+
+ energy residual:  1.998440e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[18]                    1      2.628      2.628   s 
+
+----------------------------- scf step: 19 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 9.60610e-11
+ spin up rms: 2.22918e-04
+ spin down rms: 1.53349e-03
+ magnetization:   0.09975
+
+ hubbard_energy: -1.031382e+00
+ free_energy: -1.429368e+00
+ band_energy: -3.968833e-01
+ ground_state_energy: -1.428265e+00
+ entropy: 1.103047e-01
+
+ energy residual:  1.277833e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[19]                    1      3.058      3.058   s 
+
+----------------------------- scf step: 20 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 4.96050e-10
+ spin up rms: 3.44344e-04
+ spin down rms: 4.20910e-04
+ magnetization:   0.09954
+
+ hubbard_energy: -1.032414e+00
+ free_energy: -1.427162e+00
+ band_energy: -3.936379e-01
+ ground_state_energy: -1.426052e+00
+ entropy: 1.110021e-01
+
+ energy residual:  2.213531e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[20]                    1      2.825      2.825   s 
+
+----------------------------- scf step: 21 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 7.52569e-10
+ spin up rms: 3.48939e-04
+ spin down rms: 1.25408e-04
+ magnetization:   0.09953
+
+ hubbard_energy: -1.032986e+00
+ free_energy: -1.426702e+00
+ band_energy: -3.926067e-01
+ ground_state_energy: -1.425592e+00
+ entropy: 1.110008e-01
+
+ energy residual:  4.593647e-04
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[21]                    1      2.886      2.886   s 
+
+----------------------------- scf step: 22 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 1.15641e-10
+ spin up rms: 3.74091e-04
+ spin down rms: 5.83288e-05
+ magnetization:   0.09952
+
+ hubbard_energy: -1.031921e+00
+ free_energy: -1.425066e+00
+ band_energy: -3.920348e-01
+ ground_state_energy: -1.423956e+00
+ entropy: 1.110457e-01
+
+ energy residual:  1.636473e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[22]                    1      2.685      2.685   s 
+
+----------------------------- scf step: 23 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 1.93502e-10
+ spin up rms: 8.18382e-04
+ spin down rms: 1.92733e-04
+ magnetization:   0.09945
+
+ hubbard_energy: -1.032918e+00
+ free_energy: -1.427128e+00
+ band_energy: -3.930969e-01
+ ground_state_energy: -1.426015e+00
+ entropy: 1.113163e-01
+
+ energy residual:  2.058706e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[23]                    1      2.739      2.739   s 
+
+----------------------------- scf step: 24 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 2.91865e-10
+ spin up rms: 2.76624e-05
+ spin down rms: 3.06618e-04
+ magnetization:   0.09958
+
+ hubbard_energy: -1.034825e+00
+ free_energy: -1.428038e+00
+ band_energy: -3.921050e-01
+ ground_state_energy: -1.426930e+00
+ entropy: 1.108109e-01
+
+ energy residual:  9.150902e-04
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[24]                    1      2.621      2.621   s 
+
+----------------------------- scf step: 25 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 9.53210e-10
+ spin up rms: 2.25573e-04
+ spin down rms: 3.77712e-04
+ magnetization:   0.09950
+
+ hubbard_energy: -1.033817e+00
+ free_energy: -1.425123e+00
+ band_energy: -3.901957e-01
+ ground_state_energy: -1.424012e+00
+ entropy: 1.110794e-01
+
+ energy residual:  2.917263e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[25]                    1      2.718      2.718   s 
+
+----------------------------- scf step: 26 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.05733e-10
+ spin up rms: 5.89196e-05
+ spin down rms: 1.42429e-04
+ magnetization:   0.09958
+
+ hubbard_energy: -1.034147e+00
+ free_energy: -1.426461e+00
+ band_energy: -3.912061e-01
+ ground_state_energy: -1.425353e+00
+ entropy: 1.108213e-01
+
+ energy residual:  1.340645e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[26]                    1      2.695      2.695   s 
+
+----------------------------- scf step: 27 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.27651e-10
+ spin up rms: 3.78033e-06
+ spin down rms: 7.51056e-06
+ magnetization:   0.09956
+
+ hubbard_energy: -1.034204e+00
+ free_energy: -1.426188e+00
+ band_energy: -3.908752e-01
+ ground_state_energy: -1.425080e+00
+ entropy: 1.108756e-01
+
+ energy residual:  2.732928e-04
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[27]                    1      3.275      3.275   s 
+
+----------------------------- scf step: 28 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 2.50350e-10
+ spin up rms: 6.92954e-06
+ spin down rms: 1.70042e-05
+ magnetization:   0.09956
+
+ hubbard_energy: -1.034159e+00
+ free_energy: -1.426085e+00
+ band_energy: -3.908176e-01
+ ground_state_energy: -1.424976e+00
+ entropy: 1.108854e-01
+
+ energy residual:  1.033098e-04
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[28]                    1      2.840      2.840   s 
+
+----------------------------- scf step: 29 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.47841e-10
+ spin up rms: 2.17727e-06
+ spin down rms: 1.04140e-06
+ magnetization:   0.09956
+
+ hubbard_energy: -1.034162e+00
+ free_energy: -1.426134e+00
+ band_energy: -3.908633e-01
+ ground_state_energy: -1.425026e+00
+ entropy: 1.108801e-01
+
+ energy residual:  4.926224e-05
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[29]                    1      3.184      3.184   s 
+
+----------------------------- scf step: 30 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.76134e-10
+ spin up rms: 8.12141e-07
+ spin down rms: 8.27132e-07
+ magnetization:   0.09956
+
+ hubbard_energy: -1.034183e+00
+ free_energy: -1.426152e+00
+ band_energy: -3.908597e-01
+ ground_state_energy: -1.425043e+00
+ entropy: 1.108782e-01
+
+ energy residual:  1.729917e-05
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[30]                    1      2.708      2.708   s 
+
+----------------------------- scf step: 31 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.07791e-10
+ spin up rms: 1.08950e-05
+ spin down rms: 4.90540e-06
+ magnetization:   0.09956
+
+ hubbard_energy: -1.034161e+00
+ free_energy: -1.426109e+00
+ band_energy: -3.908389e-01
+ ground_state_energy: -1.425000e+00
+ entropy: 1.108728e-01
+
+ energy residual:  4.312353e-05
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[31]                    1      2.624      2.624   s 
+
+----------------------------- scf step: 32 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.51224e-10
+ spin up rms: 2.50029e-07
+ spin down rms: 6.81279e-07
+ magnetization:   0.09956
+
+ hubbard_energy: -1.034162e+00
+ free_energy: -1.426132e+00
+ band_energy: -3.908612e-01
+ ground_state_energy: -1.425024e+00
+ entropy: 1.108786e-01
+
+ energy residual:  2.378439e-05
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[32]                    1      2.568      2.568   s 
+
+----------------------------- scf step: 33 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.81552e-10
+ spin up rms: 2.34059e-08
+ spin down rms: 8.96729e-08
+ magnetization:   0.09956
+
+ hubbard_energy: -1.034163e+00
+ free_energy: -1.426131e+00
+ band_energy: -3.908597e-01
+ ground_state_energy: -1.425022e+00
+ entropy: 1.108787e-01
+
+ energy residual:  1.260726e-06
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[33]                    1      2.560      2.560   s 
+
+----------------------------- scf step: 34 -----------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 1.77166e-10
+ spin up rms: 2.45860e-09
+ spin down rms: 2.33984e-09
+ magnetization:   0.09956
+
+ hubbard_energy: -1.034163e+00
+ free_energy: -1.426131e+00
+ band_energy: -3.908594e-01
+ ground_state_energy: -1.425022e+00
+ entropy: 1.108788e-01
+
+ energy residual:  2.321562e-07
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[34]                    1      2.564      2.564   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 34 steps
+
+*** final density ***
+magnetization:   0.100
+ (atom) (type) (density) (mag. density)
+     0      0     0.987       0.748
+     1      0     0.913      -0.649
+     2      1     0.000       0.000
+     3      1     0.000       0.000
+     4      1     0.000       0.000
+     5      1     0.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.034163e+00
+free_energy: -1.426131e+00
+band_energy: -3.908594e-01
+ground_state_energy: -1.425022e+00
+entropy: 1.108788e-01
+fermi_energy: 6.527826e-01
+
+*** gap ***
+lumo_energy:   0.653
+homo_energy:   0.653
+estimated gap:   0.000
+metallic: True
+
+*** polaron ***
+polaron_mft_energy_0: -1.845642e-04
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.035   0.035   0.000
+    3        0.035  -0.035  -0.000
+    4       -0.035   0.035   0.000
+    5       -0.035  -0.035  -0.000
+
+*** displacement redidual ***
+residual: 1.551192e-01
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  polaron_scf_step[1]             1     91.749     91.749   s 
+
+========================= polaron scf step: 2 ==========================
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 1.82996e-10
+ spin up rms: 7.15077e-05
+ spin down rms: 6.49685e-05
+ magnetization:   0.09951
+
+ hubbard_energy: -1.034163e+00
+ free_energy: -1.426093e+00
+ band_energy: -3.908196e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110441e-01
+
+ energy residual:  1.424982e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      2.563      2.563   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 9.01375e-10
+ spin up rms: 7.15121e-05
+ spin down rms: 6.49682e-05
+ magnetization:   0.09951
+
+ hubbard_energy: -1.034163e+00
+ free_energy: -1.426093e+00
+ band_energy: -3.908196e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110440e-01
+
+ energy residual:  6.401597e-09
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      2.578      2.578   s 
+
+----------------------------- scf step: 3 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 5.57232e-10
+ spin up rms: 7.15089e-05
+ spin down rms: 6.49647e-05
+ magnetization:   0.09951
+
+ hubbard_energy: -1.034163e+00
+ free_energy: -1.426093e+00
+ band_energy: -3.908196e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110440e-01
+
+ energy residual:  3.952169e-09
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[3]                     1      2.984      2.984   s 
+
+----------------------------- scf step: 4 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 7.40940e-10
+ spin up rms: 7.15087e-05
+ spin down rms: 6.49651e-05
+ magnetization:   0.09951
+
+ hubbard_energy: -1.034187e+00
+ free_energy: -1.426117e+00
+ band_energy: -3.908196e-01
+ ground_state_energy: -1.425007e+00
+ entropy: 1.110440e-01
+
+ energy residual:  2.431751e-05
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[4]                     1      2.645      2.645   s 
+
+----------------------------- scf step: 5 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.49685e-10
+ spin up rms: 4.80865e-05
+ spin down rms: 4.05875e-05
+ magnetization:   0.09953
+
+ hubbard_energy: -1.034177e+00
+ free_energy: -1.426082e+00
+ band_energy: -3.907961e-01
+ ground_state_energy: -1.424973e+00
+ entropy: 1.109670e-01
+
+ energy residual:  3.391746e-05
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[5]                     1      2.807      2.807   s 
+
+----------------------------- scf step: 6 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.46821e-10
+ spin up rms: 1.25533e-06
+ spin down rms: 2.01598e-07
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034174e+00
+ free_energy: -1.426090e+00
+ band_energy: -3.908061e-01
+ ground_state_energy: -1.424980e+00
+ entropy: 1.110024e-01
+
+ energy residual:  7.725172e-06
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[6]                     1      3.135      3.135   s 
+
+----------------------------- scf step: 7 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.03198e-10
+ spin up rms: 2.75658e-07
+ spin down rms: 3.28377e-07
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034173e+00
+ free_energy: -1.426091e+00
+ band_energy: -3.908083e-01
+ ground_state_energy: -1.424981e+00
+ entropy: 1.110028e-01
+
+ energy residual:  9.370253e-07
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[7]                     1      2.696      2.696   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 7 steps
+
+*** final density ***
+magnetization:   0.100
+ (atom) (type) (density) (mag. density)
+     0      0     0.987       0.748
+     1      0     0.913      -0.649
+     2      1     0.000       0.000
+     3      1     0.000       0.000
+     4      1     0.000       0.000
+     5      1     0.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.034173e+00
+free_energy: -1.426091e+00
+band_energy: -3.908083e-01
+ground_state_energy: -1.424981e+00
+entropy: 1.110028e-01
+fermi_energy: 6.524127e-01
+
+*** gap ***
+lumo_energy:   0.652
+homo_energy:   0.652
+estimated gap:   0.000
+metallic: True
+
+*** polaron ***
+polaron_mft_energy_0: -1.839190e-04
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.035   0.035   0.000
+    3        0.035  -0.035  -0.000
+    4       -0.035   0.035   0.000
+    5       -0.035  -0.035  -0.000
+
+*** displacement redidual ***
+residual: 3.119628e-02
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  polaron_scf_step[2]             1     19.518     19.518   s 
+
+========================= polaron scf step: 3 ==========================
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.30871e-10
+ spin up rms: 9.40488e-07
+ spin down rms: 1.10697e-06
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034165e+00
+ free_energy: -1.426084e+00
+ band_energy: -3.908091e-01
+ ground_state_energy: -1.424974e+00
+ entropy: 1.110056e-01
+
+ energy residual:  1.424974e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      2.592      2.592   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 5.60026e-11
+ spin up rms: 1.32051e-06
+ spin down rms: 3.11637e-06
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034175e+00
+ free_energy: -1.426102e+00
+ band_energy: -3.908174e-01
+ ground_state_energy: -1.424992e+00
+ entropy: 1.110040e-01
+
+ energy residual:  1.845901e-05
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      2.620      2.620   s 
+
+----------------------------- scf step: 3 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 5.72138e-10
+ spin up rms: 6.21110e-07
+ spin down rms: 1.00346e-07
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034186e+00
+ free_energy: -1.426103e+00
+ band_energy: -3.908072e-01
+ ground_state_energy: -1.424993e+00
+ entropy: 1.110046e-01
+
+ energy residual:  7.092500e-07
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[3]                     1      2.642      2.642   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 3 steps
+
+*** final density ***
+magnetization:   0.100
+ (atom) (type) (density) (mag. density)
+     0      0     0.987       0.748
+     1      0     0.913      -0.649
+     2      1     0.000       0.000
+     3      1     0.000       0.000
+     4      1     0.000       0.000
+     5      1     0.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.034173e+00
+free_energy: -1.426090e+00
+band_energy: -3.908072e-01
+ground_state_energy: -1.424980e+00
+entropy: 1.110046e-01
+fermi_energy: 6.524073e-01
+
+*** gap ***
+lumo_energy:   0.652
+homo_energy:   0.652
+estimated gap:   0.000
+metallic: True
+
+*** polaron ***
+polaron_mft_energy_0: -1.839092e-04
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.035   0.035   0.000
+    3        0.035  -0.035  -0.000
+    4       -0.035   0.035   0.000
+    5       -0.035  -0.035  -0.000
+
+*** displacement redidual ***
+residual: 6.241863e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  polaron_scf_step[3]             1      7.959      7.959   s 
+
+========================= polaron scf step: 4 ==========================
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.92404e-10
+ spin up rms: 2.65719e-06
+ spin down rms: 2.72721e-06
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034175e+00
+ free_energy: -1.426094e+00
+ band_energy: -3.908089e-01
+ ground_state_energy: -1.424984e+00
+ entropy: 1.110050e-01
+
+ energy residual:  1.424984e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      2.563      2.563   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 5.24902e-10
+ spin up rms: 2.91262e-06
+ spin down rms: 1.96669e-06
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034174e+00
+ free_energy: -1.426091e+00
+ band_energy: -3.908070e-01
+ ground_state_energy: -1.424981e+00
+ entropy: 1.110029e-01
+
+ energy residual:  2.910376e-06
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      2.616      2.616   s 
+
+----------------------------- scf step: 3 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 8.10489e-10
+ spin up rms: 1.06291e-07
+ spin down rms: 3.86029e-07
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034173e+00
+ free_energy: -1.426091e+00
+ band_energy: -3.908079e-01
+ ground_state_energy: -1.424981e+00
+ entropy: 1.110049e-01
+
+ energy residual:  5.765994e-08
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[3]                     1      2.613      2.613   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 3 steps
+
+*** final density ***
+magnetization:   0.100
+ (atom) (type) (density) (mag. density)
+     0      0     0.987       0.748
+     1      0     0.913      -0.649
+     2      1     0.000       0.000
+     3      1     0.000       0.000
+     4      1     0.000       0.000
+     5      1     0.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.034173e+00
+free_energy: -1.426091e+00
+band_energy: -3.908079e-01
+ground_state_energy: -1.424981e+00
+entropy: 1.110049e-01
+fermi_energy: 6.524058e-01
+
+*** gap ***
+lumo_energy:   0.652
+homo_energy:   0.652
+estimated gap:   0.000
+metallic: True
+
+*** polaron ***
+polaron_mft_energy_0: -1.839074e-04
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.035   0.035   0.000
+    3        0.035  -0.035  -0.000
+    4       -0.035   0.035   0.000
+    5       -0.035  -0.035  -0.000
+
+*** displacement redidual ***
+residual: 1.248868e-03
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  polaron_scf_step[4]             1      7.913      7.913   s 
+
+========================= polaron scf step: 5 ==========================
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.03735e-10
+ spin up rms: 1.12277e-07
+ spin down rms: 1.11763e-07
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034173e+00
+ free_energy: -1.426092e+00
+ band_energy: -3.908091e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110050e-01
+
+ energy residual:  1.424982e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      2.691      2.691   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 9.01149e-11
+ spin up rms: 2.97053e-08
+ spin down rms: 1.45834e-07
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034173e+00
+ free_energy: -1.426092e+00
+ band_energy: -3.908092e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110050e-01
+
+ energy residual:  2.307851e-07
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      2.603      2.603   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 2 steps
+
+*** final density ***
+magnetization:   0.100
+ (atom) (type) (density) (mag. density)
+     0      0     0.987       0.748
+     1      0     0.913      -0.649
+     2      1     0.000       0.000
+     3      1     0.000       0.000
+     4      1     0.000       0.000
+     5      1     0.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.034172e+00
+free_energy: -1.426092e+00
+band_energy: -3.908092e-01
+ground_state_energy: -1.424982e+00
+entropy: 1.110050e-01
+fermi_energy: 6.524050e-01
+
+*** gap ***
+lumo_energy:   0.652
+homo_energy:   0.652
+estimated gap:   0.000
+metallic: True
+
+*** polaron ***
+polaron_mft_energy_0: -1.839077e-04
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.035   0.035   0.000
+    3        0.035  -0.035  -0.000
+    4       -0.035   0.035   0.000
+    5       -0.035  -0.035  -0.000
+
+*** displacement redidual ***
+residual: 2.496816e-04
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  polaron_scf_step[5]             1      5.398      5.398   s 
+
+========================= polaron scf step: 6 ==========================
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.72498e-10
+ spin up rms: 2.57755e-08
+ spin down rms: 1.24295e-07
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034172e+00
+ free_energy: -1.426092e+00
+ band_energy: -3.908096e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110050e-01
+
+ energy residual:  1.424982e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      3.094      3.094   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 1.16364e-10
+ spin up rms: 8.48815e-09
+ spin down rms: 1.16218e-08
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034172e+00
+ free_energy: -1.426092e+00
+ band_energy: -3.908098e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110050e-01
+
+ energy residual:  3.353750e-07
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      3.129      3.129   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 2 steps
+
+*** final density ***
+magnetization:   0.100
+ (atom) (type) (density) (mag. density)
+     0      0     0.987       0.748
+     1      0     0.913      -0.649
+     2      1     0.000       0.000
+     3      1     0.000       0.000
+     4      1     0.000       0.000
+     5      1     0.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.034172e+00
+free_energy: -1.426092e+00
+band_energy: -3.908098e-01
+ground_state_energy: -1.424982e+00
+entropy: 1.110050e-01
+fermi_energy: 6.524046e-01
+
+*** gap ***
+lumo_energy:   0.652
+homo_energy:   0.652
+estimated gap:   0.000
+metallic: True
+
+*** polaron ***
+polaron_mft_energy_0: -1.839080e-04
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.035   0.035   0.000
+    3        0.035  -0.035  -0.000
+    4       -0.035   0.035   0.000
+    5       -0.035  -0.035  -0.000
+
+*** displacement redidual ***
+residual: 4.985396e-05
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  polaron_scf_step[6]             1      6.333      6.333   s 
+
+========================= polaron scf step: 7 ==========================
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 7.39218e-10
+ spin up rms: 9.19648e-09
+ spin down rms: 5.32307e-09
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034172e+00
+ free_energy: -1.426092e+00
+ band_energy: -3.908098e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110050e-01
+
+ energy residual:  1.424982e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      2.866      2.866   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 5.75876e-10
+ spin up rms: 8.21246e-09
+ spin down rms: 6.53730e-09
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034172e+00
+ free_energy: -1.426092e+00
+ band_energy: -3.908098e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110049e-01
+
+ energy residual:  6.814080e-08
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      2.616      2.616   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 2 steps
+
+*** final density ***
+magnetization:   0.100
+ (atom) (type) (density) (mag. density)
+     0      0     0.987       0.748
+     1      0     0.913      -0.649
+     2      1     0.000       0.000
+     3      1     0.000       0.000
+     4      1     0.000       0.000
+     5      1     0.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.034172e+00
+free_energy: -1.426092e+00
+band_energy: -3.908098e-01
+ground_state_energy: -1.424982e+00
+entropy: 1.110049e-01
+fermi_energy: 6.524047e-01
+
+*** gap ***
+lumo_energy:   0.652
+homo_energy:   0.652
+estimated gap:   0.000
+metallic: True
+
+*** polaron ***
+polaron_mft_energy_0: -1.839081e-04
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.035   0.035   0.000
+    3        0.035  -0.035  -0.000
+    4       -0.035   0.035   0.000
+    5       -0.035  -0.035  -0.000
+
+*** displacement redidual ***
+residual: 9.964307e-06
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  polaron_scf_step[7]             1      5.590      5.590   s 
+
+========================= polaron scf step: 8 ==========================
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 3.00496e-10
+ spin up rms: 1.51758e-08
+ spin down rms: 1.02821e-09
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034172e+00
+ free_energy: -1.426092e+00
+ band_energy: -3.908098e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110050e-01
+
+ energy residual:  1.424982e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      2.576      2.576   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 2.91333e-10
+ spin up rms: 4.23833e-09
+ spin down rms: 1.28592e-09
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034172e+00
+ free_energy: -1.426092e+00
+ band_energy: -3.908097e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110050e-01
+
+ energy residual:  1.702200e-08
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      2.667      2.667   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 2 steps
+
+*** final density ***
+magnetization:   0.100
+ (atom) (type) (density) (mag. density)
+     0      0     0.987       0.748
+     1      0     0.913      -0.649
+     2      1     0.000       0.000
+     3      1     0.000       0.000
+     4      1     0.000       0.000
+     5      1     0.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.034172e+00
+free_energy: -1.426092e+00
+band_energy: -3.908097e-01
+ground_state_energy: -1.424982e+00
+entropy: 1.110050e-01
+fermi_energy: 6.524047e-01
+
+*** gap ***
+lumo_energy:   0.652
+homo_energy:   0.652
+estimated gap:   0.000
+metallic: True
+
+*** polaron ***
+polaron_mft_energy_0: -1.839080e-04
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.035   0.035   0.000
+    3        0.035  -0.035  -0.000
+    4       -0.035   0.035   0.000
+    5       -0.035  -0.035  -0.000
+
+*** displacement redidual ***
+residual: 1.998514e-06
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  polaron_scf_step[8]             1      5.361      5.361   s 
+
+========================= polaron scf step: 9 ==========================
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 400
+electron_scf_density_tol: 1.000e-05
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 6.19301e-10
+ spin up rms: 9.73399e-10
+ spin down rms: 3.19480e-10
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034172e+00
+ free_energy: -1.426092e+00
+ band_energy: -3.908098e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110049e-01
+
+ energy residual:  1.424982e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      2.882      2.882   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 40000 kpts to do
+proc[0] will do 10000 kpts
+
+ density rms: 2.15659e-10
+ spin up rms: 3.47391e-10
+ spin down rms: 3.55586e-10
+ magnetization:   0.09952
+
+ hubbard_energy: -1.034172e+00
+ free_energy: -1.426092e+00
+ band_energy: -3.908098e-01
+ ground_state_energy: -1.424982e+00
+ entropy: 1.110050e-01
+
+ energy residual:  2.886501e-09
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      2.562      2.562   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 2 steps
+
+*** final density ***
+magnetization:   0.100
+ (atom) (type) (density) (mag. density)
+     0      0     0.987       0.748
+     1      0     0.913      -0.649
+     2      1     0.000       0.000
+     3      1     0.000       0.000
+     4      1     0.000       0.000
+     5      1     0.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.034172e+00
+free_energy: -1.426092e+00
+band_energy: -3.908098e-01
+ground_state_energy: -1.424982e+00
+entropy: 1.110050e-01
+fermi_energy: 6.524047e-01
+
+*** gap ***
+lumo_energy:   0.652
+homo_energy:   0.652
+estimated gap:   0.000
+metallic: True
+
+*** polaron ***
+polaron_mft_energy_0: -1.839080e-04
+ (atom)    (cartesian displacement)
+    0        0.000   0.000  -0.000
+    1        0.000   0.000   0.000
+    2        0.035   0.035   0.000
+    3        0.035  -0.035  -0.000
+    4       -0.035   0.035   0.000
+    5       -0.035  -0.035  -0.000
+
+*** displacement redidual ***
+residual: 4.021999e-07
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  polaron_scf_step[9]             1      5.529      5.529   s 
+
+========================================================================
+
+polaron scf loop converged after 9 steps
+ -*- polaron_mft_energy_0: -1.839080e-04
+ -*- polaron_mft_energy:  3.678160e-04
+
+*** NOTE ***
+pristine crystal energy enforced to be 0.0
+
+*** polaron crystal energy ***
+atom-atom interaction energy at pristine geo:
+ pristine_crystal_energy: 0.000000e+00
+atom-atom interaction energy at distorted geo (strain energy):
+ distorted_crystal_energy: 1.839082e-04
+
+########################################################################
+########################## final timing info ###########################
+########################################################################
+
+*** timing *** 
+  (label)                    (calls)     (lap)     (total) 
+  ELPH                            1      3.543      3.543   m 
+  setup_polaron                   1      0.197      0.197   s 
+  get_hopping_lists               1      0.000      0.000   s 
+  force_constant_matrices         1      0.002      0.002   s 
+  run_polaron                     1    212.404    212.404   s 
+  polaron_scf                     1    212.384    212.384   s 
+  calculate_xi                   11      0.004      0.045   s 
+  electron_scf                   10      5.524    212.323   s 
+  solve_all_k_points             80      2.475    203.386   s 
+
+########################################################################
+the calculation finished willy-nilly
+as always, check the results carefully
+bye!
+########################################################################
+
