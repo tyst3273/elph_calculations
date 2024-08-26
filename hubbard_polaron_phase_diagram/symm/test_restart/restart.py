@@ -23,12 +23,13 @@ orbital_type = 'tight_binding'
 
 #use_kpts_symmetry = True
 kpts_option = 'mesh'
-kpts_mesh = [100,100,1]
+kpts_mesh = [200,200,1]
 
 num_kpts_procs = 8
 
-spin_up_site_density =   [ 2, 0, 0,0,0,0]
-spin_down_site_density = [ 0, 1, 0,0,0,0]
+site_density_input_file = 'electrons.hdf5'
+
+electron_output_file = 'electrons_restart.hdf5'
 
 use_hubbard_U = True
 use_spin = True
@@ -36,12 +37,12 @@ use_spin = True
 do_electron_scf = True
 max_electron_scf_steps = 400
 
-electron_scf_density_tol = 1e-5
+electron_scf_density_tol = 1e-6
 electron_scf_energy_tol = 1e-6
 
 temperature = 0.01
 
-num_electrons = 1.9
+num_electrons = 1.4
 
 electron_mix_method = 'pulay'
 electron_mix_alpha = 0.4
@@ -60,9 +61,16 @@ phonon_eigenvectors_input_file = 'phonons.hdf5'
 
 do_polaron_scf = True
 max_polaron_scf_steps = 100
-polaron_scf_displacement_tol = 1e-6
+polaron_scf_displacement_tol = 1e-8
 
 displacement_mix_method = 'simple'
 displacement_mix_alpha = 0.8
 
-polaron_output_file = 'polaron.hdf5'
+polaron_output_file = 'polaron_restart.hdf5'
+
+electron_dos_step = 0.01
+electron_delta_width = 0.05
+_plot_electron_bands = True
+
+#calc_fermi_surface = True
+

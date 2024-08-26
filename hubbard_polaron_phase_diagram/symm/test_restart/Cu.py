@@ -22,5 +22,6 @@ ang_mom_m = [0]
 # tight binding data
 onsite_energy = [0.0] 
 
-
-hubbard_U = [20.000000]
+# electron phonon interaction
+elph_holstein_constants = [-0.025]
+hubbard_U = [7.000000]
