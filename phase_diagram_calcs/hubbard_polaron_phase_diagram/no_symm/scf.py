@@ -1,0 +1,68 @@
+
+task = 'polaron_mft'
+
+debug = False
+
+lattice_vectors = [[ 2**(1/2),     0.00,     0.00], 
+                   [     0.00, 2**(1/2),     0.00],
+                   [     0.00,     0.00,    10.00]]
+
+atom_types = ['Cu','Cu','O','O','O','O',]
+atom_positions = [[0.00,0.00,0.00],
+                  [0.50,0.50,0.00],
+                  [0.25,0.25,0.00],
+                  [0.25,0.75,0.00],
+                  [0.75,0.25,0.00],
+                  [0.75,0.75,0.00]]
+
+atom_files = ['Cu.py','O.py']
+
+hopping_file = 'hopping.py'
+
+orbital_type = 'tight_binding'
+
+#use_kpts_symmetry = True
+kpts_option = 'mesh'
+kpts_mesh = [100,100,1]
+
+num_kpts_procs = 8
+
+spin_up_site_density =   [ 2, 0, 0,0,0,0]
+spin_down_site_density = [ 0, 1, 0,0,0,0]
+
+use_hubbard_U = True
+use_spin = True
+
+do_electron_scf = True
+max_electron_scf_steps = 400
+
+electron_scf_density_tol = 1e-5
+electron_scf_energy_tol = 1e-6
+
+temperature = 0.01
+
+num_electrons = 1.9
+
+electron_mix_method = 'pulay'
+electron_mix_alpha = 0.4
+electron_mix_beta = 0.4
+electron_mix_history = 4
+electron_mix_delay = 10
+
+write_electron_eigenvectors = False
+
+spring_constants_file = 'spring_constants.py'
+qpts_option = 'mesh'
+qpts_mesh = [1,1,1]
+
+phonon_output_file = None
+phonon_eigenvectors_input_file = 'phonons.hdf5'
+
+do_polaron_scf = True
+max_polaron_scf_steps = 100
+polaron_scf_displacement_tol = 1e-6
+
+displacement_mix_method = 'simple'
+displacement_mix_alpha = 0.8
+
+polaron_output_file = 'polaron.hdf5'
