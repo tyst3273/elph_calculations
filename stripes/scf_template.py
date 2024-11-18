@@ -2,16 +2,14 @@
 debug = False
 
 task = 'electrons'
-temperature = 0.001
-
-atom_files = ['Cu.py','O.py']
+temperature = 0.01
 
 hopping_file = 'hopping.py'
 orbital_type = 'tight_binding'
 
 kpts_option = 'mesh'
-kpts_mesh = [40,80,1]
-num_kpts_procs = 16
+kpts_mesh = [80,80,1]
+num_kpts_procs = 4
 
 use_hubbard_U = True
 use_spin = True
@@ -28,7 +26,6 @@ electron_mix_beta = 0.2
 electron_mix_delay = 10
 electron_mix_history = 4
 
-electron_output_file = 'density.hdf5'
 write_electron_eigenvectors = False
 write_site_density = True
 
