@@ -20,7 +20,7 @@ orbital_type = 'tight_binding'
 kpts_option = 'mesh'
 kpts_mesh = [100,100,1]
 
-num_kpts_procs = 4
+num_kpts_procs = 12
 
 use_hubbard_U = True
 use_spin = True
