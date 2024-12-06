@@ -22,4 +22,8 @@ ang_mom_m = [0]
 # tight binding data
 onsite_energy = [0.0] 
 
+# neutron scattering lengths
+coh_neutron_scattering_len = 5.803+0j
+inc_neutron_scattering_len = 0.0
+
 

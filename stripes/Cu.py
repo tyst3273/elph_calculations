@@ -29,4 +29,6 @@ hubbard_U = [5.0]
 elph_holstein_constants = [-0.025]
 elph_UX_constants = [0.0]
 
-
+# neutron scattering lengths
+coh_neutron_scattering_len = 7.728+0j
+inc_neutron_scattering_len = 0.0

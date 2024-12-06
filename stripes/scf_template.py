@@ -8,7 +8,7 @@ hopping_file = 'hopping.py'
 orbital_type = 'tight_binding'
 
 kpts_option = 'mesh'
-kpts_mesh = [80,80,1]
+kpts_mesh = [50,50,1]
 num_kpts_procs = 4
 
 use_hubbard_U = True
@@ -17,8 +17,8 @@ use_spin = True
 do_electron_scf = True
 
 max_electron_scf_steps = 400
-electron_scf_density_tol = 1e-6
-electron_scf_energy_tol = 1e-6
+electron_scf_density_tol = 1e-4
+electron_scf_energy_tol = 1e-4
 
 electron_mix_method = 'pulay'
 electron_mix_alpha = 0.6
