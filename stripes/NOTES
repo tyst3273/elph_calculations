@@ -1,0 +1,5 @@
+it looks like its disputed whether electron-electron or electron-phonon interaction leads to stripes
+in cuprates and nickelate. see 'refs'. my first pass wants to look at how electron-electron induced 
+stripes couple to phonons. second pass would be self-consistent solution w/ phonons to see 
+a) electron-phonon induced stripes w/o electron-electron interactions (i.e. no hubbard-U) and b)
+stripes w/ both electron-electron and electron-phonon interactions. 
