@@ -197,8 +197,8 @@ plot_fs(fermi_surface,ax,cmap)
 #        ax.plot([-1.5,1.5],[yy+0.5,yy+0.5],lw=1,ls=(0,(2,2)),c=(0,0,0),ms=0,alpha=0.5)
 #        ax.plot([-1.5,1.5],[yy-0.5,yy-0.5],lw=1,ls=(0,(2,2)),c=(0,0,0),ms=0,alpha=0.5)
 
-ax.axis([-0.5,0.5,-0.5,0.5])
-#ax.axis([-1,1,-1,1])
+#ax.axis([-0.5,0.5,-0.5,0.5])
+ax.axis([-1,1,-1,1])
 
 plt.show()
 
