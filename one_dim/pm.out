@@ -1,0 +1,252 @@
+
+
+########################################################################
+Electrons and Phonons 
+author: Tyler C. Sterling
+email: ty.sterling@colorado.edu
+affil: Physics Dept., University of Colorado Boulder
+  Neurtron Scattering and Raman Spectroscopy Lab
+########################################################################
+
+
+*** input-args ***
+reading input from:
+  'pm_hub.py'
+
+*** common variables ***
+
+task: nesting
+temperature:   0.001
+lattice_vectors:
+  2.000000   0.000000   0.000000 
+  0.000000  10.000000   0.000000 
+  0.000000   0.000000  10.000000 
+atom_types:
+  Cu Cu 
+atom_files:
+  Cu.py
+atom_positions: (reduced coords)
+  0.000000   0.000000   0.000000 
+  0.500000   0.000000   0.000000 
+
+*** electron variables ***
+
+orbital_type: tight_binding
+num_electrons:   2.00000
+use_spin: True
+use_hubbard_U: True
+hopping_file:
+  hopping.py
+num_kpts_procs: 4
+kpts_option: mesh
+use_kpts_symmetry: False
+kpts_mesh: 1000 1 1
+num_qpts_procs: 1
+qpts_option: mesh
+use_qpts_symmetry: False
+qpts_mesh: 1 1 1
+spin_up_site_density:
+ 1.000 1.000
+spin_down_site_density:
+ 1.000 1.000
+do_electron_scf: True
+max_electron_scf_steps: 100
+electron_scf_density_tol: 1.000e-06
+electron_scf_energy_tol: 1.000e-06
+electron_mix_method: simple
+electron_mix_alpha:   0.100
+electron_delta_width:   0.010
+electron_output_file: mesh.hdf5
+write_electron_eigenvectors: True
+write_site_density: True
+_plot_electron_bands: True
+
+########################################################################
+####################### setting up common stuff ########################
+########################################################################
+
+*** lattice (row vectors!) ***
+direct_lattice
+    2.00000   0.00000   0.00000 
+    0.00000  10.00000   0.00000 
+    0.00000   0.00000  10.00000 
+reciprocal_lattice
+    3.14159   0.00000   0.00000 
+    0.00000   0.62832   0.00000 
+    0.00000   0.00000   0.62832 
+
+*** atoms ***
+unique_atom_types:
+  0  Cu
+num_atoms: 2
+ (ind) (type) ---- (crystal coords) -----   ---- (cartesian coords) ----
+    0    0    0.00000   0.00000   0.00000    0.00000   0.00000   0.00000
+    1    0    0.50000   0.00000   0.00000    1.00000   0.00000   0.00000
+
+########################################################################
+###################### setting up electron stuff #######################
+########################################################################
+
+*** orbitals ***
+orbital_type: tight_binding
+num_orbitals: 2
+
+*** hopping ***
+getting hopping data from file:
+  'hopping.py'
+
+*** electrons ***
+total number of electrons in files: 4.00
+number of valence electrons in files: 2.00
+number of core electrons: 2.00
+number of electrons in calculation: 2.00
+
+*** mixing ***
+simple mixing
+alpha: 0.1000
+
+*** density ***
+magnetization:   0.000
+ (atom) (type) (density) (mag. density)
+     0      0     1.000       0.000
+     1      0     1.000       0.000
+
+*** k-points ***
+num_kpts_procs: 4
+kpts_option: mesh
+use_kpts_symmetry: False
+
+generating k-points on full grid spanning brillouin zone
+num_kpts on full grid: 1000
+
+max number of k-points over all processes: 250
+number of k-points on each process:
+ (proc) (num)
+   0    250
+   1    250
+   2    250
+   3    250
+
+*** mixing ***
+simple mixing
+alpha: 0.1000
+
+*** q-points ***
+num_qpts_procs: 1
+qpts_option: mesh
+use_qpts_symmetry: False
+
+generating q-points on full grid spanning brillouin zone
+num_qpts on full grid: 1
+
+max number of q-points over all processes: 1
+number of q-points on each process:
+ (proc) (num)
+   0      1
+
+########################################################################
+########################## running 'nesting' ###########################
+########################################################################
+
+*** electron scf ***
+entering electron scf loop
+max_electron_scf_steps: 100
+electron_scf_density_tol: 1.000e-06
+electron_scf_energy_tol: 1.000e-06
+
+----------------------------- scf step: 1 ------------------------------
+
+*** hamiltonian ***
+there are 1000 kpts to do
+proc[0] will do 250 kpts
+
+ density rms: 2.22045e-16
+ spin up rms: 7.85046e-17
+ spin down rms: 7.85046e-17
+ magnetization:   0.00000
+
+ hubbard_energy: -1.000000e+00
+ free_energy: -1.546480e+00
+ band_energy: -5.464769e-01
+ ground_state_energy: -1.546477e+00
+ entropy: 2.881588e-03
+
+ energy residual:  1.546477e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[1]                     1      0.019      0.019   s 
+
+----------------------------- scf step: 2 ------------------------------
+
+*** hamiltonian ***
+there are 1000 kpts to do
+proc[0] will do 250 kpts
+
+ density rms: 2.22045e-16
+ spin up rms: 7.85046e-17
+ spin down rms: 7.85046e-17
+ magnetization:   0.00000
+
+ hubbard_energy: -1.000000e+00
+ free_energy: -1.546480e+00
+ band_energy: -5.464769e-01
+ ground_state_energy: -1.546477e+00
+ entropy: 2.881588e-03
+
+ energy residual:  0.000000e+00
+
+local timer:
+  (label)                    (calls)     (lap)     (total) 
+  scf_step[2]                     1      0.016      0.016   s 
+
+------------------------------------------------------------------------
+
+scf loop converged after 2 steps
+
+*** final density ***
+magnetization:   0.000
+ (atom) (type) (density) (mag. density)
+     0      0     1.000       0.000
+     1      0     1.000       0.000
+
+*** converged electron thermo. ***
+- normalized to the unitcell!
+hubbard_energy: -1.000000e+00
+free_energy: -1.546480e+00
+band_energy: -5.464769e-01
+ground_state_energy: -1.546477e+00
+entropy: 2.881588e-03
+fermi_energy: 1.000000e+00
+
+*** gap ***
+lumo_energy:   1.000
+homo_energy:   1.000
+estimated gap:   0.000
+metallic: True
+
+*** nesting function ***
+now calculating the fermi-surface nesting function
+there are 1 to do
+ now on qpt 0/1
+
+########################################################################
+########################## final timing info ###########################
+########################################################################
+
+*** timing *** 
+  (label)                    (calls)     (lap)     (total) 
+  ELPH                            1      0.027      0.027   m 
+  setup_electrons                 1      0.006      0.006   s 
+  get_hopping_lists               1      0.000      0.000   s 
+  run_electrons                   1      1.612      1.612   s 
+  electron_scf                    1      0.036      0.036   s 
+  solve_all_k_points              3      0.015      0.050   s 
+  fixed_density_nscf              1      0.015      0.015   s 
+
+########################################################################
+the calculation finished willy-nilly
+as always, check the results carefully
+bye!
+########################################################################
+
