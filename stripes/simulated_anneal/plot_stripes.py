@@ -33,7 +33,7 @@ ymax = pos[:,1].max(); ymin = pos[:,1].min()
 cu_inds = np.flatnonzero(nums == 0)
 
 # magnetisation density
-mag = up-down
+mag = (up-down).round(2)
 scale = 1000
 im = ax.scatter(pos[cu_inds,0],pos[cu_inds,1],s=(density-density.min())*scale+50,cmap='bwr',
     c=mag,alpha=1,edgecolors='k',linewidths=1.5)

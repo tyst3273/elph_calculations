@@ -16,7 +16,7 @@ use_hubbard_U = True
 use_spin = True
 
 do_electron_scf = True
-max_electron_scf_steps = 400
+max_electron_scf_steps = 100
 electron_scf_density_tol = 1e-2
 electron_scf_energy_tol = 1e-2
 
@@ -32,8 +32,8 @@ write_site_density = True
 
 do_simulated_annealing = True
 num_anneal_steps = 50
-anneal_start_temperature = 1
-anneal_final_temperature = 0.1
+anneal_start_temperature = 5
+anneal_end_temperature = 0.1
 anneal_step_size = 0.25
 
 atom_files = ['Cu.py']
