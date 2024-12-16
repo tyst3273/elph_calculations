@@ -45,7 +45,7 @@ for ii, n in enumerate(num_sc):
 #    continue
 
     # scf
-    scf_output_file = f'scf_n_{n}_h_{h}.hdf5'
+    scf_output_file = f'scf_n_{n}_h_{h:3f}.hdf5'
     kwargs.update({'electron_output_file':scf_output_file,
                    'num_electrons':num_electrons*(1-h),
                    'kpts_mesh':kpts_mesh})
