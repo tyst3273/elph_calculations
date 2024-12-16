@@ -21,7 +21,7 @@ types = ['Cu']
 #num_sc = np.array([4,6,8,10,16,20],dtype=float)
 #num_holes = 2/num_sc
 
-num_sc = np.array([4])
+num_sc = np.array([8])
 num_holes = 2/num_sc
 
 step = 0
@@ -36,14 +36,14 @@ for ii, n in enumerate(num_sc):
         # start from afm ground state
         stripes = c_stripes(pos,vecs,types,h,[n,n,1])
         stripes.neel_order()
-        stripes.write(f'{n}x{n}_model.txt')
+        #stripes.write(f'{n}x{n}_model.txt')
         kwargs = stripes.get_model_kwargs()
 
         num_sites = len(kwargs['atom_types'])
         num_electrons = num_sites*(1-h)
         tol = num_sites*5e-4
-        start_temp = 1e-3+(num_sites-16)/48
-        end_temp = start_temp/20
+        #start_temp = 1e-3+(num_sites-16)/48
+        #end_temp = start_temp/20
 
         nk = round(40/n) 
         if nk % 2 != 0:
@@ -53,10 +53,8 @@ for ii, n in enumerate(num_sc):
         print('num_electrons:',num_electrons)
         print('tol:',tol)
         print('kpts_mesh:',kpts_mesh)
-        print('start_temp:',start_temp)
-        print('end_temp:',end_temp)
-
-#        break 
+#        print('start_temp:',start_temp)
+#        print('end_temp:',end_temp)
 
         # scf
         scf_output_file = f'scf_n_{n}_h_{h:.3f}_afm.hdf5'
@@ -64,12 +62,14 @@ for ii, n in enumerate(num_sc):
                        'num_electrons':num_electrons*(1-h),
                        'kpts_mesh':kpts_mesh,
                        'electron_scf_energy_tol':tol,
-                       'electron_scf_density_tol':tol,
-                       'anneal_start_temperature':start_temp,
-                       'anneal_end_temperature':end_temp})
+                       'electron_scf_density_tol':tol})
+                       #'anneal_start_temperature':start_temp,
+                       #'anneal_end_temperature':end_temp})
         ELPH = c_ELPH(scf_template)
         ELPH.set_config(**kwargs)
         ELPH.run()
+
+        exit()
 
         # ------------------------------------------------------------------------------------------
 
@@ -83,9 +83,9 @@ for ii, n in enumerate(num_sc):
                        'num_electrons':num_electrons*(1-h),
                        'kpts_mesh':kpts_mesh,
                        'electron_scf_energy_tol':tol,
-                       'electron_scf_density_tol':tol,
-                       'anneal_start_temperature':start_temp,
-                       'anneal_end_temperature':end_temp})
+                       'electron_scf_density_tol':tol})
+                       #'anneal_start_temperature':start_temp,
+                       #'anneal_end_temperature':end_temp})
         ELPH = c_ELPH(scf_template)
         ELPH.set_config(**kwargs)
         ELPH.run()
@@ -102,9 +102,9 @@ for ii, n in enumerate(num_sc):
                        'num_electrons':num_electrons*(1-h),
                        'kpts_mesh':kpts_mesh,
                        'electron_scf_energy_tol':tol,
-                       'electron_scf_density_tol':tol,
-                       'anneal_start_temperature':start_temp,
-                       'anneal_end_temperature':end_temp})
+                       'electron_scf_density_tol':tol})
+                       #'anneal_start_temperature':start_temp,
+                       #'anneal_end_temperature':end_temp})
         ELPH = c_ELPH(scf_template)
         ELPH.set_config(**kwargs)
         ELPH.run()
