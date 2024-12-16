@@ -18,10 +18,10 @@ vecs = [[ 1.0, 0.0, 0.0],
         [ 0.0, 0.0,10.0]]
 types = ['Cu']
 
-num_holes = [32] # number of holes in supercell
+num_holes = [8] # number of holes in supercell
 
 # diagonal stripes
-num_sc = 16
+num_sc = 8
 mult = [num_sc,num_sc,1]
 
 stripes = c_stripes(pos,vecs,types,0.0,mult)
