@@ -37,13 +37,11 @@ for ii, n in enumerate(num_holes):
 
     # scf
     scf_output_file = f'scf_sc_{num_sc}_n_{n}.hdf5'
-    """
     kwargs.update({'electron_output_file':scf_output_file,
                    'num_electrons':num_electrons-n})
     ELPH = c_ELPH(scf_template)
     ELPH.set_config(**kwargs)
     ELPH.run()
-    """
 
     # nscf
     nscf_output_file = f'nscf_sc_{num_sc}_n_{n}.hdf5'
