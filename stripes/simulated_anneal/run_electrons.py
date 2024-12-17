@@ -47,7 +47,8 @@ for ii, n in enumerate(num_sc):
                        'num_electrons':num_electrons})
         ELPH = c_ELPH(scf_template)
         ELPH.set_config(**kwargs)
-        ELPH.run()
+        ELPH.write_config()
+#        ELPH.run()
 
         # ------------------------------------------------------------------------------------------
 
