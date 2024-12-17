@@ -42,13 +42,13 @@ spin_down_site_density = [ 0.0, 0.5, 0.0, 0.5, 0.5, 0.0, 0.5, 0.0, 0.0, 0.5,
      0.0, 0.5, 0.5, 0.0, 0.5, 0.0]
 do_electron_scf = True
 max_electron_scf_steps = 100
-electron_scf_density_tol = 1e-3
-electron_scf_energy_tol = 1e-4
+electron_scf_density_tol = 0.001
+electron_scf_energy_tol = 1e-03
 calc_electron_fermi_surface = False
 electron_dos_step = None
 electron_mix_method = 'simple'
 electron_mix_alpha = 0.8
-electron_output_file = 'scf_n_4_h_0.500.hdf5'
+electron_output_file = 'scf_n_4_h_0.5000.hdf5'
 write_electron_eigenvectors = False
 write_site_density = True
 electron_eigenvectors_input_file = None

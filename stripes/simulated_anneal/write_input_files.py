@@ -20,8 +20,8 @@ types = ['Cu']
 #num_sc = np.array([4,6,8,10,16,20],dtype=float)
 #num_holes = 2/num_sc
 
-num_sc = np.array([4,6])
-num_holes = 2/num_sc
+num_sc = np.array([4])
+num_holes = [0.06250001, 0.125, 0.25, 1/3., 0.5]
 
 step = 0
 num_calcs = len(num_sc)*len(num_holes)
@@ -35,20 +35,20 @@ for ii, n in enumerate(num_sc):
         # start from afm ground state
         stripes = c_stripes(pos,vecs,types,h,[n,n,1])
         stripes.neel_order()
-        stripes.write('model.txt')
         kwargs = stripes.get_model_kwargs()
 
         num_sites = len(kwargs['atom_types'])
         num_electrons = num_sites*(1-h)
 
-        # scf
-        scf_output_file = f'scf_n_{n}_h_{h:.3f}.hdf5'
+        
+        model_file = f'scf_n_{n}_h_{h:.4f}.py'
+        scf_output_file = f'scf_n_{n}_h_{h:.4f}.hdf5'
         kwargs.update({'electron_output_file':scf_output_file,
                        'num_electrons':num_electrons})
         ELPH = c_ELPH(scf_template)
         ELPH.set_config(**kwargs)
-        ELPH.write_config()
-#        ELPH.run()
+        ELPH.write_config(model_file)
+        #ELPH.run()
 
         # ------------------------------------------------------------------------------------------
 
