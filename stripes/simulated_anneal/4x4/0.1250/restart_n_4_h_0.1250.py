@@ -34,7 +34,7 @@ hopping_file = 'hopping.py'
 kpts_option = 'mesh'
 kpts_mesh = [ 48, 48, 1]
 use_kpts_symmetry = False
-num_kpts_procs = 4
+num_kpts_procs = 8
 use_hubbard_U = True
 spin_up_site_density = [ 0.875, 0.0, 0.875, 0.0, 0.0, 0.875, 0.0, 0.875,
      0.875, 0.0, 0.875, 0.0, 0.0, 0.875, 0.0, 0.875]
