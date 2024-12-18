@@ -77,40 +77,44 @@ atom_positions = [[ 0.0, 0.0, 0.0],
     [ 0.75, 0.875, 0.0],
     [ 0.875, 0.875, 0.0]]
 temperature = 0.001
-num_electrons = 60.0
+num_electrons = 48.0
 num_bands = None
 use_spin = True
 orbital_type = 'tight_binding'
 potential_type = None
 hopping_file = 'hopping.py'
 kpts_option = 'mesh'
-kpts_mesh = [ 100, 100, 1]
+kpts_mesh = [ 16, 16, 1]
 use_kpts_symmetry = False
-num_kpts_procs = 6
+num_kpts_procs = 4
 use_hubbard_U = True
-spin_up_site_density = [ 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0,
-     0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.9375, 0.0, 0.9375,
-     0.0, 0.9375, 0.0, 0.9375, 0.0, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0,
-     0.9375, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.0, 0.9375,
-     0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.9375, 0.0, 0.9375, 0.0, 0.9375,
-     0.0, 0.9375, 0.0, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375]
-spin_down_site_density = [ 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375,
-     0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.0, 0.9375, 0.0, 0.9375,
-     0.0, 0.9375, 0.0, 0.9375, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375,
-     0.0, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.9375, 0.0, 0.9375,
-     0.0, 0.9375, 0.0, 0.9375, 0.0, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0,
-     0.9375, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0]
-do_electron_scf = False
-electron_fixed_fermi_energy = False
-calc_electron_fermi_surface = True
-electron_delta_width = 0.01
-electron_dos_step = 0.005
-electron_output_file = 'scf_n_8_h_0.0625.hdf5'
+spin_up_site_density = [ 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.0,
+     0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0,
+     0.75, 0.0, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.75, 0.0, 0.75,
+     0.0, 0.75, 0.0, 0.75, 0.0, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.75,
+     0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0,
+     0.75]
+spin_down_site_density = [ 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.75,
+     0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0,
+     0.75, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.0, 0.75, 0.0, 0.75,
+     0.0, 0.75, 0.0, 0.75, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.0, 0.75,
+     0.0, 0.75, 0.0, 0.75, 0.0, 0.75, 0.75, 0.0, 0.75, 0.0, 0.75, 0.0, 0.75,
+     0.0]
+do_electron_scf = True
+max_electron_scf_steps = 100
+electron_scf_density_tol = 0.0001
+electron_scf_energy_tol = 1e-05
+calc_electron_fermi_surface = False
+electron_dos_step = None
+electron_mix_method = 'simple'
+electron_mix_alpha = 0.8
+electron_output_file = 'restart_n_8_h_0.2500.hdf5'
 write_electron_eigenvectors = False
 write_site_density = True
 electron_eigenvectors_input_file = None
-site_density_input_file = 'scf_n_8_h_0.0625.hdf5'
+site_density_input_file = 'scf_n_8_h_0.2500.hdf5'
 job_description = None
 write_kpts_hdf5_file = False
-_plot_electron_bands = True
+do_simulated_annealing = False
+_plot_electron_bands = False
 _write_kpts = False

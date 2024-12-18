@@ -11,6 +11,7 @@ atom_types = [ 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu',
      'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu',
      'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu']
 atom_files = [ 'Cu.py']
+atom_files_dir = '/Users/ty/research/repos/elph_calculations/stripes/simulated_anneal/8x8'
 atom_positions = [[ 0.0, 0.0, 0.0],
     [ 0.125, 0.0, 0.0],
     [ 0.25, 0.0, 0.0],
@@ -76,7 +77,7 @@ atom_positions = [[ 0.0, 0.0, 0.0],
     [ 0.75, 0.875, 0.0],
     [ 0.875, 0.875, 0.0]]
 temperature = 0.001
-num_electrons = 48.0
+num_electrons = 32.0
 num_bands = None
 use_spin = True
 orbital_type = 'tight_binding'
@@ -99,8 +100,8 @@ spin_down_site_density = [ 0.0, 0.5, 0.0, 0.5, 0.0, 0.5, 0.0, 0.5, 0.5, 0.0,
      0.5, 0.5, 0.0, 0.5, 0.0, 0.5, 0.0, 0.5, 0.0]
 do_electron_scf = True
 max_electron_scf_steps = 100
-electron_scf_density_tol = 1e-2
-electron_scf_energy_tol = 1e-3
+electron_scf_density_tol = 0.01
+electron_scf_energy_tol = 0.001
 calc_electron_fermi_surface = False
 electron_dos_step = None
 electron_mix_method = 'simple'

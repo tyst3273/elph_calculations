@@ -22,7 +22,7 @@ types = ['Cu']
 #num_sc = np.array([4,6,8,10,16,20],dtype=float)
 #num_holes = 2/num_sc
 
-num_sc = np.array([8])
+num_sc = np.array([6])
 num_holes = [0.0625, 0.125, 0.25, 1/3., 0.5]
 
 step = 0

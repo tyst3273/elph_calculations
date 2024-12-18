@@ -23,6 +23,7 @@ with h5py.File(density_file,'r') as db:
     up = db['spin_up_site_density'][cu_inds]
 
     energy = db['ground_state_energy'][...]
+    energy /= up.size
 
 fig, ax = plt.subplots(figsize=(6.5,6),gridspec_kw={'wspace':0.1})
 
