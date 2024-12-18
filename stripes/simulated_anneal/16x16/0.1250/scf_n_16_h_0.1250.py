@@ -360,6 +360,6 @@ max_anneal_steps = 75
 anneal_start_temperature = 1.0
 anneal_end_temperature = 0.001
 anneal_step_size = 0.25
-site_density_input_file = 'scf_n_16_h_0.1250.hdf5'
+#site_density_input_file = 'scf_n_16_h_0.1250.hdf5'
 _plot_electron_bands = False
 _write_kpts = False
