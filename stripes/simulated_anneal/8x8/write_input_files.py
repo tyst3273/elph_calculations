@@ -9,6 +9,7 @@ import os
 
 # template to get args from
 scf_template = 'scf_template.py'
+nscf_template = 'nscf_template.py'
 
 # initial unitcell
 pos = [[ 0.0, 0.0, 0.0]]
@@ -20,8 +21,8 @@ types = ['Cu']
 #num_sc = np.array([4,6,8,10,16,20],dtype=float)
 #num_holes = 2/num_sc
 
-num_sc = np.array([4])
-num_holes = [0.06250001, 0.125, 0.25, 1/3., 0.5]
+num_sc = np.array([8])
+num_holes = [0.0625, 0.125, 0.25, 1/3., 0.5]
 
 step = 0
 num_calcs = len(num_sc)*len(num_holes)
@@ -46,6 +47,16 @@ for ii, n in enumerate(num_sc):
         kwargs.update({'electron_output_file':scf_output_file,
                        'num_electrons':num_electrons})
         ELPH = c_ELPH(scf_template)
+        ELPH.set_config(**kwargs)
+        ELPH.write_config(model_file)
+        #ELPH.run()
+
+        model_file = f'nscf_n_{n}_h_{h:.4f}.py'
+        nscf_output_file = f'nscf_n_{n}_h_{h:.4f}.hdf5'
+        kwargs.update({'electron_output_file':scf_output_file,
+                       'num_electrons':num_electrons,
+                       'site_density_input_file':scf_output_file})
+        ELPH = c_ELPH(nscf_template)
         ELPH.set_config(**kwargs)
         ELPH.write_config(model_file)
         #ELPH.run()

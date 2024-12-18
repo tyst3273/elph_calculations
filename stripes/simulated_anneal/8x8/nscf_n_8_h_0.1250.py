@@ -11,6 +11,7 @@ atom_types = [ 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu',
      'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu',
      'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu']
 atom_files = [ 'Cu.py']
+atom_files_dir = '/Users/ty/research/repos/elph_calculations/stripes/simulated_anneal/8x8'
 atom_positions = [[ 0.0, 0.0, 0.0],
     [ 0.125, 0.0, 0.0],
     [ 0.25, 0.0, 0.0],
@@ -76,21 +77,40 @@ atom_positions = [[ 0.0, 0.0, 0.0],
     [ 0.75, 0.875, 0.0],
     [ 0.875, 0.875, 0.0]]
 temperature = 0.001
-num_electrons = 48
+num_electrons = 56.0
+num_bands = None
 use_spin = True
 orbital_type = 'tight_binding'
+potential_type = None
 hopping_file = 'hopping.py'
 kpts_option = 'mesh'
 kpts_mesh = [ 100, 100, 1]
 use_kpts_symmetry = False
 num_kpts_procs = 6
 use_hubbard_U = True
-site_density_input_file = 'scf_n_8_h_0.2500.hdf5'
+spin_up_site_density = [ 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0,
+     0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.875, 0.0, 0.875, 0.0,
+     0.875, 0.0, 0.875, 0.0, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875,
+     0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.0, 0.875, 0.0, 0.875,
+     0.0, 0.875, 0.0, 0.875, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0,
+     0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875]
+spin_down_site_density = [ 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875,
+     0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.0, 0.875, 0.0, 0.875,
+     0.0, 0.875, 0.0, 0.875, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0,
+     0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.875, 0.0, 0.875, 0.0,
+     0.875, 0.0, 0.875, 0.0, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875,
+     0.875, 0.0, 0.875, 0.0, 0.875, 0.0, 0.875, 0.0]
 do_electron_scf = False
-electron_output_file = 'nscf_n_8_h_0.2500.hdf5'
+electron_fixed_fermi_energy = False
+calc_electron_fermi_surface = True
+electron_delta_width = 0.01
+electron_dos_step = 0.005
+electron_output_file = 'scf_n_8_h_0.1250.hdf5'
 write_electron_eigenvectors = False
 write_site_density = True
+electron_eigenvectors_input_file = None
+site_density_input_file = 'scf_n_8_h_0.1250.hdf5'
+job_description = None
+write_kpts_hdf5_file = False
 _plot_electron_bands = True
-electron_dos_step = 0.005
-electron_delta_width = 0.01
-calc_electron_fermi_surface = True
+_write_kpts = False
