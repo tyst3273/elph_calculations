@@ -11,7 +11,7 @@ atom_types = [ 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu',
      'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu',
      'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu']
 atom_files = [ 'Cu.py']
-atom_files_dir = '/Users/ty/research/repos/elph_calculations/stripes/simulated_anneal/8x8'
+atom_files_dir = '/home/ty/research/repos/elph_calculations/stripes/simulated_anneal/8x8'
 atom_positions = [[ 0.0, 0.0, 0.0],
     [ 0.125, 0.0, 0.0],
     [ 0.25, 0.0, 0.0],

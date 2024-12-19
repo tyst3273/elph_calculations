@@ -11,7 +11,7 @@ atom_types = [ 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu',
      'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu',
      'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu']
 atom_files = [ 'Cu.py']
-atom_files_dir = '/Users/ty/research/repos/elph_calculations/stripes/simulated_anneal/8x8'
+atom_files_dir = '/home/ty/research/repos/elph_calculations/stripes/simulated_anneal/8x8'
 atom_positions = [[ 0.0, 0.0, 0.0],
     [ 0.125, 0.0, 0.0],
     [ 0.25, 0.0, 0.0],
@@ -115,8 +115,8 @@ spin_down_site_density = [ 0.0, 0.6666666666666667, 0.0, 0.6666666666666667,
 do_electron_scf = False
 electron_fixed_fermi_energy = False
 calc_electron_fermi_surface = True
-electron_delta_width = 0.01
-electron_dos_step = 0.005
+electron_delta_width = 0.025
+electron_dos_step = 0.01
 electron_output_file = 'nscf_n_8_h_0.3333.hdf5'
 write_electron_eigenvectors = False
 write_site_density = True
@@ -124,5 +124,5 @@ electron_eigenvectors_input_file = None
 site_density_input_file = 'restart_n_8_h_0.3333.hdf5'
 job_description = None
 write_kpts_hdf5_file = False
-_plot_electron_bands = True
+_plot_electron_bands = False
 _write_kpts = False

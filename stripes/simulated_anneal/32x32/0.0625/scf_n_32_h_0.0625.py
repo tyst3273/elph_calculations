@@ -1124,9 +1124,9 @@ orbital_type = 'tight_binding'
 potential_type = None
 hopping_file = 'hopping.py'
 kpts_option = 'mesh'
-kpts_mesh = [ 1, 1, 1]
+kpts_mesh = [ 2, 2, 1]
 use_kpts_symmetry = False
-num_kpts_procs = 1
+num_kpts_procs = 4
 use_hubbard_U = True
 spin_up_site_density = [ 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0,
      0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375,
