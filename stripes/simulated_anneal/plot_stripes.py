@@ -2,12 +2,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import h5py 
+import os
 import sys
 
 if len(sys.argv) > 1:
     density_file = sys.argv[1]
 else:
     density_file = 'density.hdf5'
+
+#density_file = os.path.abspath(density_file)
+
 
 with h5py.File(density_file,'r') as db:
 
@@ -38,8 +42,8 @@ cu_inds = np.flatnonzero(nums == 0)
 # magnetisation density
 mag = up-down
 scale = 1000
-im = ax.scatter(pos[cu_inds,0],pos[cu_inds,1],s=(density-density.min())*scale+50,cmap='Grays',
-    c=mag,alpha=1,edgecolors='k',linewidths=1.5)
+im = ax.scatter(pos[cu_inds,0],pos[cu_inds,1],s=(density-density.min())*scale+50,cmap='bwr',
+    c=mag,alpha=1,edgecolors='k',linewidths=1.5,vmin=-1,vmax=1)
 fig.colorbar(im,extend='both',aspect=30,pad=0.025)
 
 # configure plots
