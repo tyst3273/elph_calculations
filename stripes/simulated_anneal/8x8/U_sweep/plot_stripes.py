@@ -38,7 +38,7 @@ cu_inds = np.flatnonzero(nums == 0)
 # magnetisation density
 mag = up-down
 scale = 1000
-im = ax.scatter(pos[cu_inds,0],pos[cu_inds,1],s=(density-density.min())*scale+50,cmap='Grays',
+im = ax.scatter(pos[cu_inds,0],pos[cu_inds,1],s=(density-density.min())*scale+50,cmap='bwr',
     c=mag,alpha=1,edgecolors='k',linewidths=1.5,vmin=-1,vmax=1)
 fig.colorbar(im,extend='both',aspect=30,pad=0.025)
 
