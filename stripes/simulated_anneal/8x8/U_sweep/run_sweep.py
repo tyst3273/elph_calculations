@@ -14,7 +14,7 @@ U_vals = np.arange(2.0,9.0,1.0)
 
 for jj, U in enumerate(U_vals):
 
-    if U < 5:
+    if U < 6:
         continue
 
     U_dir = f'U_{U:.4f}'
