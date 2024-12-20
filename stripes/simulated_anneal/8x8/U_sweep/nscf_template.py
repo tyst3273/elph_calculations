@@ -1,4 +1,5 @@
 task = 'electrons'
+atom_files_dir = './'
 debug = False
 atom_positions_file = None
 lattice_vectors = [[ 8.0, 0.0, 0.0],
@@ -83,9 +84,9 @@ hopping_file = 'hopping.py'
 kpts_option = 'mesh'
 kpts_mesh = [ 100, 100, 1]
 use_kpts_symmetry = False
-num_kpts_procs = 6
+num_kpts_procs = 8
 use_hubbard_U = True
-site_density_input_file = 'scf_n_8_h_0.2500.hdf5'
+site_density_input_file = 'restart_n_8_h_0.2500.hdf5'
 do_electron_scf = False
 electron_output_file = 'nscf_n_8_h_0.2500.hdf5'
 write_electron_eigenvectors = False

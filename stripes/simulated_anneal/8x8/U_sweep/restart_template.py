@@ -1,4 +1,5 @@
 task = 'electrons'
+atom_files_dir = './'
 debug = False
 atom_positions_file = None
 lattice_vectors = [[ 8.0, 0.0, 0.0],
@@ -85,7 +86,7 @@ hopping_file = 'hopping.py'
 kpts_option = 'mesh'
 kpts_mesh = [ 16, 16, 1]
 use_kpts_symmetry = False
-num_kpts_procs = 4
+num_kpts_procs = 8
 use_hubbard_U = True
 do_electron_scf = True
 max_electron_scf_steps = 100

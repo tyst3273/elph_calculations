@@ -1,5 +1,5 @@
 task = 'electrons'
-debug = False
+debug = True
 atom_positions_file = None
 lattice_vectors = [[ 32.0, 0.0, 0.0],
     [ 0.0, 32.0, 0.0],
@@ -1308,8 +1308,8 @@ spin_down_site_density = [ 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375, 0.0, 0.9375,
      0.0, 0.9375, 0.0]
 do_electron_scf = True
 max_electron_scf_steps = 100
-electron_scf_density_tol = 0.01
-electron_scf_energy_tol = 0.001
+electron_scf_density_tol = 0.1
+electron_scf_energy_tol = 0.01
 calc_electron_fermi_surface = False
 electron_dos_step = None
 electron_mix_method = 'simple'

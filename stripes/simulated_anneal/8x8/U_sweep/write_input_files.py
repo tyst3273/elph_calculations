@@ -9,15 +9,15 @@ import os
 import shutil
 
 def make_Cu_file(U):
-    with open('Cu_template.py',r) as f:
+    with open('Cu_template.py','r') as f:
         lines = f.readlines()
-    with open('Cu.py',w) as f:
+    with open('Cu.py','w') as f:
         for line in lines:
             if not line.strip().startswith('hubbard_U'):
                 f.write(line)
                 continue
             else:
-                line = 'hubbard_U = [{U:.4f}]\n'
+                line = f'hubbard_U = [{U:.4f}]\n'
                 f.write(line)
 
 
@@ -36,26 +36,23 @@ types = ['Cu']
 #num_sc = np.array([4,6,8,10,16,20],dtype=float)
 #num_holes = 2/num_sc
 
-num_sc = np.array([8])
-num_holes = 0.25
+n = 8
+h = 0.25
 
-U_vals = np.linspace([4.0,8.0,0.5])
-print(U_vals)
+U_vals = np.arange(2.0,9.0,1.0)
 
-step = 0
-num_calcs = len(num_sc)*len(num_holes)
+for jj, U in enumerate(U_vals):
 
-if not os.path.exist(f'{n}x{n}'):
-    os.mkdir(f'{n}x{n}')
-
-for jj, U in enumerate(U_arr):
-
-    print(f'\nnow on num {step}/{num_calcs}')
+    U_dir = f'U_{U:.4f}'
+    if not os.path.exists(U_dir):
+        os.mkdir(U_dir)
 
     # ------------------------------------------------------------------------------------------
 
     make_Cu_file(U)
-    os.rename('Cu.py',f'./{n}x{n}/Cu.py')
+    os.rename('Cu.py',f'./{U_dir}/Cu.py')
+
+    shutil.copy('hopping.py',f'./{U_dir}/hopping.py')
 
     # start from afm ground state
     stripes = c_stripes(pos,vecs,types,h,[n,n,1])
@@ -72,7 +69,7 @@ for jj, U in enumerate(U_arr):
     ELPH = c_ELPH(scf_template)
     ELPH.set_config(**kwargs)
     ELPH.write_config(model_file)
-    os.rename(model_file,f'./{n}x{n}/'+model_file)
+    os.rename(model_file,f'./{U_dir}/'+model_file)
 
     model_file = f'restart_n_{n}_U_{U:.4f}.py'
     restart_output_file = f'restart_n_{n}_U_{U:.4f}.hdf5'
@@ -82,7 +79,7 @@ for jj, U in enumerate(U_arr):
     ELPH = c_ELPH(restart_template)
     ELPH.set_config(**kwargs)
     ELPH.write_config(model_file)
-    os.rename(model_file,f'./{n}x{n}/'+model_file)
+    os.rename(model_file,f'./{U_dir}/'+model_file)
 
     model_file = f'nscf_n_{n}_U_{U:.4f}.py'
     nscf_output_file = f'nscf_n_{n}_U_{U:.4f}.hdf5'
@@ -92,7 +89,7 @@ for jj, U in enumerate(U_arr):
     ELPH = c_ELPH(nscf_template)
     ELPH.set_config(**kwargs)
     ELPH.write_config(model_file)
-    os.rename(model_file,f'./{n}x{n}/'+model_file)
+    os.rename(model_file,f'./{U_dir}/'+model_file)
 
     # ------------------------------------------------------------------------------------------
 

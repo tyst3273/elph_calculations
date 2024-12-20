@@ -23,6 +23,7 @@ with h5py.File(density_file,'r') as db:
     up = db['spin_up_site_density'][cu_inds]
 
     energy = db['ground_state_energy'][...]
+    energy /= up.size
 
 fig, ax = plt.subplots(figsize=(6.5,6),gridspec_kw={'wspace':0.1})
 
@@ -37,10 +38,9 @@ cu_inds = np.flatnonzero(nums == 0)
 # magnetisation density
 mag = up-down
 scale = 1000
-im = ax.scatter(pos[cu_inds,0],pos[cu_inds,1],s=(density-density.min())*scale+50,cmap='bwr',
-    c=mag,alpha=1,edgecolors='k',linewidths=1.5)
+im = ax.scatter(pos[cu_inds,0],pos[cu_inds,1],s=(density-density.min())*scale+50,cmap='Grays',
+    c=mag,alpha=1,edgecolors='k',linewidths=1.5,vmin=-1,vmax=1)
 fig.colorbar(im,extend='both',aspect=30,pad=0.025)
-
 
 # configure plots
 lims = [xmin-0.5,xmax+0.5,ymin-0.5,ymax+0.5]

@@ -1,4 +1,5 @@
 task = 'electrons'
+atom_files_dir = './'
 debug = False
 atom_positions_file = None
 lattice_vectors = [[ 8.0, 0.0, 0.0],
@@ -83,9 +84,9 @@ orbital_type = 'tight_binding'
 potential_type = None
 hopping_file = 'hopping.py'
 kpts_option = 'mesh'
-kpts_mesh = [ 4, 4, 1]
+kpts_mesh = [ 8, 8, 1]
 use_kpts_symmetry = False
-num_kpts_procs = 4
+num_kpts_procs = 8
 use_hubbard_U = True
 spin_up_site_density = [ 0.5, 0.0, 0.5, 0.0, 0.5, 0.0, 0.5, 0.0, 0.0, 0.5,
      0.0, 0.5, 0.0, 0.5, 0.0, 0.5, 0.5, 0.0, 0.5, 0.0, 0.5, 0.0, 0.5, 0.0, 0.0,
@@ -116,7 +117,7 @@ do_simulated_annealing = True
 num_anneal_steps = 50
 max_anneal_steps = 75
 anneal_start_temperature = 0.1
-anneal_end_temperature = 0.001
+anneal_end_temperature = 0.0001
 anneal_step_size = 0.5
 _plot_electron_bands = False
 _write_kpts = False
