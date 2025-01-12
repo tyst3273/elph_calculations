@@ -7,6 +7,7 @@ lattice_vectors = [[ 4.0, 0.0, 0.0],
 atom_types = [ 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu',
      'Cu', 'Cu', 'Cu', 'Cu', 'Cu', 'Cu']
 atom_files = [ 'Cu.py']
+atom_files_dir = '/home/ty/research/repos/elph_calculations/stripes/simulated_anneal/4x4'
 atom_positions = [[ 0.0, 0.0, 0.0],
     [ 0.25, 0.0, 0.0],
     [ 0.5, 0.0, 0.0],
