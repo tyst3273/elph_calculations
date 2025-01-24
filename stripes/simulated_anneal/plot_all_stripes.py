@@ -163,7 +163,7 @@ else:
 doping_dir = f'{doping:.4f}'
 
 # get all unitcell sizes for this doping
-_sc_dirs = ['4x4','6x6','8x8','16x16']
+_sc_dirs = ['4x4','6x6','8x8'] #,'16x16']
 sc_dirs = []
 for _sc_dir in _sc_dirs:
     n = _sc_dir.split('x')[0]
