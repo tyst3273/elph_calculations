@@ -1,5 +1,5 @@
 task = 'phonon_self_energy'
-debug = True
+# debug = True
 
 atom_positions_file = None
 lattice_vectors = [[ 8.0, 0.0, 0.0],
@@ -86,8 +86,8 @@ num_kpts_procs = 4
 
 num_qpts_procs = 4
 qpts_option = 'path'
-qpts_path = [[   0,   0,   0],
-             [ 1/2,   0,   0]]
+qpts_path = [[   0,    0,   0],
+             [   0,  1/2,   0]]
 qpts_steps = 21
 spring_constants_file = 'spring_constants.py'
 

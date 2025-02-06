@@ -26,7 +26,7 @@ def get_qpt_strs(qpts):
     qpt_strs = np.zeros(qpts.shape[0],dtype=object)
     for ii in range(qpts.shape[0]):
         _q = qpts[ii,:]
-        qpt_strs[ii] = f'{_q[0]: 6.3f}, {_q[1]: 6.3f}, {_q[2]: 6.3f}'
+        qpt_strs[ii] = f'{_q[0]: 12.6f}, {_q[1]: 12.6f}, {_q[2]: 12.6f}'
     return qpt_strs
 
 # --------------------------------------------------------------------------------------------------
@@ -40,14 +40,12 @@ def plot_renormalized_neutrons(renorm_file,show=True):
         form_factors = db['form_factors'][...]
         structure_factors = db['structure_factors'][...]
         freqs = db['frequencies'][...]
-        qpts = np.abs(db['qpts_rlu'][...]).round(3)
+        qpts = np.abs(db['qpts_rlu'][...]).round(6)
         num_qpts = db['num_qpts'][...]
         if 'qpts_distances' in db.keys():
             qpts_dist = db['qpts_distances'][...]
             qpts_verts = db['qpts_vert_distances'][...]
             qpts_path = db['qpts_path'][...]
-
-    qpts[:,1] = 0.0
 
     qpts_verts /= qpts_dist.max()
     qpts_dist /= qpts_dist.max()
@@ -56,7 +54,9 @@ def plot_renormalized_neutrons(renorm_file,show=True):
         _freqs = db['frequencies'][...]
         renorm_freqs = db['renormalized_phonon_frequencies'][...]
         renorm_fwhm = db['phonon_fwhm'][...]
-        renorm_qpts = np.abs(db['qpts_rlu'][...]).round(3)
+        renorm_qpts = np.abs(db['qpts_rlu'][...]).round(6)
+
+    # qpts[:,0] = 0
 
     num_bands = freqs.shape[1]
     num_qpts = freqs.shape[0]
@@ -69,15 +69,10 @@ def plot_renormalized_neutrons(renorm_file,show=True):
     # weight specfun by form factors
     renorm_sqw = np.zeros((energy.size,num_qpts),dtype=float)
 
-
-    print(np.unique(qpts))
-    print(renorm_qpts)
-    # exit()
-
     for ii in range(num_qpts):
 
         _ind = np.flatnonzero(renorm_qpts == qpts[ii])
-        print(_ind)
+        # print(_ind)
 
         if _ind.size == 0:
             continue
@@ -87,13 +82,13 @@ def plot_renormalized_neutrons(renorm_file,show=True):
             renorm_sqw[:,ii] += _specfun*form_factors[ii,jj]
 
     #vmax = 2.5e-4 #0.025 #1.0
-    vmax = np.nanmax(renorm_sqw)*0.25
+    vmax = np.nanmax(renorm_sqw)*0.125
     extent = [0,1,energy.min(),energy.max()]
     ax.imshow(renorm_sqw,cmap='hot',vmin=0,vmax=vmax,aspect='auto',origin='lower',
                 interpolation='none',extent=extent)
 
     for ii in range(num_bands):
-        ax.plot(qpts_dist,freqs[:,ii],marker='o',ms=0,c='g',lw=1,ls=(0,(2,1)))
+        ax.plot(qpts_dist,freqs[:,ii],marker='o',ms=0,c='g',lw=1,ls=(0,(2,1)),alpha=0.25)
 
     for v in qpts_verts:
         ax.plot([v,v],[0,energy.max()],ms=0,c=(0.5,0.5,0.5),lw=1,ls='--')

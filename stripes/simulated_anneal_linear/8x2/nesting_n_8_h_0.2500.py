@@ -1,10 +1,9 @@
-task = 'neutron_scattering'
-debug = True
-
+task = 'electrons'
+debug = False
 atom_positions_file = None
 lattice_vectors = [[ 8.0, 0.0, 0.0],
-                   [ 0.0, 2.0, 0.0],
-                   [ 0.0, 0.0, 10.0]]
+    [ 0.0, 2.0, 0.0],
+    [ 0.0, 0.0, 10.0]]
 atom_types = [ 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O',
      'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu',
      'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O',
@@ -59,17 +58,35 @@ atom_positions = [[ 0.0, 0.0, 0.0],
     [ 0.875, 0.5, 0.0],
     [ 0.9375, 0.5, 0.0],
     [ 0.875, 0.75, 0.0]]
-
 temperature = 0.001
+num_electrons = 12.0
+num_bands = None
+use_spin = True
+orbital_type = 'tight_binding'
+potential_type = None
+hopping_file = 'hopping.py'
+kpts_option = 'mesh'
+kpts_mesh = [ 80, 400, 1]
+use_kpts_symmetry = False
+num_kpts_procs = 12
+use_hubbard_U = True
+spin_up_site_density = [ 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 0.75, 0.0, 0.0, 0.0,
+     0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0,
+     0.0, 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0,
+     0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 0.75, 0.0, 0.0]
+spin_down_site_density = [ 0.0, 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0,
+     0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 0.75, 0.0,
+     0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 0.75,
+     0.0, 0.0, 0.0, 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0]
+do_electron_scf = False
 
-num_qpts_procs = 4
-qpts_option = 'path'
-qpts_path = [[   0,   0,   0],
-             [   0,  10,   0]]
-qpts_steps = 10*40+1
-spring_constants_file = 'spring_constants.py'
+electron_fixed_fermi_energy = False
+calc_electron_fermi_surface = True
+electron_delta_width = 0.025
 
-phonon_output_file = 'neutrons.hdf5'
+electron_output_file = 'nesting_n_8_h_0.2500.hdf5'
 
-neutron_energy_step = 0.001
-neutron_delta_width = 0.0025
+write_electron_eigenvectors = False
+write_site_density = True
+site_density_input_file = 'restart_n_8_h_0.2500.hdf5'
+
