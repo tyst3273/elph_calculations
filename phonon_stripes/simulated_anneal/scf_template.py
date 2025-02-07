@@ -1,5 +1,6 @@
 
-task = 'electrons'
+debug = True
+task = 'polaron_mft'
 atom_files = [ 'Cu.py','O.py']
 temperature = 0.001
 use_spin = True
@@ -16,9 +17,17 @@ electron_mix_method = 'simple'
 electron_mix_alpha = 0.8
 write_electron_eigenvectors = False
 write_site_density = True
-do_simulated_annealing = True
+
+do_polaron_simulated_annealing = True
 num_anneal_steps = 50
 max_anneal_steps = 75
 anneal_start_temperature = 1.0
 anneal_end_temperature = 0.001
-anneal_step_size = 0.5
+anneal_step_size = 0.1
+
+spring_constants_file = 'spring_constants.py'
+
+do_polaron_scf = True
+max_polaron_scf_steps = 100
+polaron_scf_displacement_tol = 1e-4
+displacement_mix_alpha = 0.8
