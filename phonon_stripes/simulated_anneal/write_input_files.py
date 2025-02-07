@@ -13,17 +13,21 @@ nscf_template = 'nscf_template.py'
 restart_template = 'restart_template.py'
 
 # initial unitcell
-pos = [[ 0.0, 0.0, 0.0]]
-vecs = [[ 1.0, 0.0, 0.0],
-        [ 0.0, 1.0, 0.0],
-        [ 0.0, 0.0,10.0]]
-types = ['Cu']
+pos = [ [ 0.0, 0.0, 0.0],
+        [ 0.5, 0.0, 0.0],
+        [ 0.0, 0.5, 0.0] ]
+vecs = [ [ 1.0, 0.0, 0.0],
+         [ 0.0, 1.0, 0.0],
+         [ 0.0, 0.0,10.0] ]
+types = ['Cu','O','O']
 
-#num_sc = np.array([4,6,8,10,16,20],dtype=float)
-#num_holes = 2/num_sc
+electron_scf_density_tol = 1e-4
+electron_scf_energy_tol = 1e-5
+kpts_mesh = [400,400,1]
 
-num_sc = np.array([16])
-num_holes = [0.0625, 0.125, 0.25, 1/3., 0.5]
+num_sc = np.array([4,6,8,10]) #,16,20,40])
+num_holes = 2/num_sc
+print(num_holes)
 
 step = 0
 num_calcs = len(num_sc)*len(num_holes)
@@ -41,16 +45,27 @@ for ii, n in enumerate(num_sc):
 
         num_sites = len(kwargs['atom_types'])
         num_electrons = num_sites*(1-h)
+
+        _energy_tol = electron_scf_energy_tol*n**2
+        _density_tol = electron_scf_density_tol*n**2
+        _kpts_mesh = np.copy(kpts_mesh)
+        _kpts_mesh[0] /= n
+        _kpts_mesh[1] /= n
+        _kpts_mesh = _kpts_mesh.astype(int)
         
         model_file = f'scf_n_{n}_h_{h:.4f}.py'
         scf_output_file = f'scf_n_{n}_h_{h:.4f}.hdf5'
         kwargs.update({'electron_output_file':scf_output_file,
-                       'num_electrons':num_electrons})
+                       'num_electrons':num_electrons,
+                       'electron_scf_energy_tol':_energy_tol,
+                       'electron_scf_density_tol':_density_tol,
+                       'kpts_mesh':_kpts_mesh})
         ELPH = c_ELPH(scf_template)
         ELPH.set_config(**kwargs)
         ELPH.write_config(model_file)
         #ELPH.run()
 
+        """
         model_file = f'restart_n_{n}_h_{h:.4f}.py'
         restart_output_file = f'restart_n_{n}_h_{h:.4f}.hdf5'
         kwargs.update({'electron_output_file':restart_output_file,
@@ -70,6 +85,7 @@ for ii, n in enumerate(num_sc):
         ELPH.set_config(**kwargs)
         ELPH.write_config(model_file)
         #ELPH.run()
+        """
 
         # ------------------------------------------------------------------------------------------
 
