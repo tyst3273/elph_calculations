@@ -4,6 +4,8 @@ task = 'electrons'
 atom_files = [ 'Cu.py','O.py']
 temperature = 0.001
 use_spin = True
+use_hubbard_U = True
+
 orbital_type = 'tight_binding'
 hopping_file = 'hopping.py'
 kpts_option = 'mesh'
@@ -19,8 +21,8 @@ write_electron_eigenvectors = False
 write_site_density = True
 
 do_simulated_annealing = True
-num_anneal_steps = 50
-max_anneal_steps = 75
+num_anneal_steps = 20
+max_anneal_steps = 30
 anneal_start_temperature = 1.0
 anneal_end_temperature = 0.001
 anneal_step_size = 0.1
