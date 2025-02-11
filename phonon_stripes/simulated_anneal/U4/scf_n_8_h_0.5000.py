@@ -19,7 +19,7 @@ atom_types = [ 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O',
      'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O',
      'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O', 'Cu', 'O', 'O']
 atom_files = [ 'Cu.py', 'O.py']
-atom_files_dir = '/home/ty/research/repos/elph_calculations/phonon_stripes/simulated_anneal'
+atom_files_dir = '/home/ty/research/repos/elph_calculations/phonon_stripes/simulated_anneal/U4'
 atom_positions = [[ 0.0, 0.0, 0.0],
     [ 0.0625, 0.0, 0.0],
     [ 0.0, 0.0625, 0.0],

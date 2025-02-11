@@ -67,3 +67,42 @@ for ii, n in enumerate(num_sc):
 
         # ------------------------------------------------------------------------------------------
 
+        _energy_tol = electron_scf_energy_tol*n**2/10
+        _density_tol = electron_scf_density_tol*n**2/10
+        _num_kpts = 2*num_kpts/n**2
+        if _num_kpts % 2 != 0:
+            _num_kpts += 1
+        _kpts_mesh = [_num_kpts,_num_kpts,1]
+        
+        model_file = f'restart_n_{n}_h_{h:.4f}.py'
+        restart_output_file = f'restart_n_{n}_h_{h:.4f}.hdf5'
+        kwargs.update({'electron_output_file':restart_output_file,
+                       'num_electrons':num_electrons,
+                       'electron_scf_energy_tol':_energy_tol,
+                       'electron_scf_density_tol':_density_tol,
+                       'kpts_mesh':_kpts_mesh,
+                       'site_density_input_file':scf_output_file})
+        ELPH = c_ELPH(restart_template)
+        ELPH.set_config(**kwargs)
+        ELPH.write_config(model_file)
+        #ELPH.run()
+
+        # ------------------------------------------------------------------------------------------
+
+        _num_kpts = 4*num_kpts/n**2
+        if _num_kpts % 2 != 0:
+            _num_kpts += 1
+        _kpts_mesh = ls *[_num_kpts,_num_kpts,1]
+        
+        model_file = f'nscf_n_{n}_h_{h:.4f}.py'
+        nscf_output_file = f'nscf_n_{n}_h_{h:.4f}.hdf5'
+        kwargs.update({'electron_output_file':nscf_output_file,
+                       'num_electrons':num_electrons,
+                       'kpts_mesh':_kpts_mesh,
+                       'site_density_input_file':restart_output_file})
+        ELPH = c_ELPH(nscf_template)
+        ELPH.set_config(**kwargs)
+        ELPH.write_config(model_file)
+        #ELPH.run()
+
+        # ------------------------------------------------------------------------------------------
