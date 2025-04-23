@@ -20,7 +20,7 @@ orbital_type = 'tight_binding'
 kpts_option = 'mesh'
 kpts_mesh = [400,400,1]
 
-num_kpts_procs = 4
+num_kpts_procs = 8
 
 use_hubbard_U = True
 use_spin = True
@@ -31,6 +31,6 @@ temperature = 0.001
 
 write_electron_eigenvectors = False
 
-electron_delta_width = 0.05
+electron_delta_width = 0.025
 calc_electron_fermi_surface = True
 

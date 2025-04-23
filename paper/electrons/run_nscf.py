@@ -27,6 +27,9 @@ calcs = [[0.25,4,'pm'],
          [0.25,10,'fm']]
 num_calcs = len(calcs)
 
+with open('Cu_template.py','r') as f:
+    template = f.read()
+
 for ii in range(num_calcs):
     
     n, U, order = calcs[ii]
@@ -38,7 +41,13 @@ for ii in range(num_calcs):
     print('U:',U)
     print('order:',order)
 
+    # have to write U to the atom file ...
+    with open('Cu.py','w') as f:
+        f.write(template)
+        f.write(f'hubbard_U = [{U:.6f}]\n')
+
     run_calc(U,n,order)
+
 
 # --------------------------------------------------------------------------------------------------
 
