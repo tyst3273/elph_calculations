@@ -1,0 +1,13 @@
+in my hbco_zone_center_eph doc, the band is s-like w/ width ~ -1 to 2 eV. The bond-stretching 
+manifold goes from ~ 55 meV to 70 meV. 
+
+with t=1 [eV], the bandwidth is 8 eV. divided by 2.667, band with is 3. with m=1, M=4, K=0.015, 
+and k=0.002, the phonons are from ~ 0.2 to 0.17 eV. divided by 2.67, these are from ~ 75 meV to
+60 meV. this is pretty close to what we want :)
+
+to do:
+    PM-M: x=0.25, U=4
+    AMF-M: x=0.4, U=4
+    FiM-M: x=0.45, U=6
+    AFM-I: x=0.5, U=6
+    FM-M: x=0.25, U=10

@@ -20,7 +20,7 @@ orbital_type = 'tight_binding'
 kpts_option = 'mesh'
 kpts_mesh = [100,100,1]
 
-num_kpts_procs = 8
+num_kpts_procs = 12
 
 use_hubbard_U = True
 use_spin = True
@@ -40,12 +40,4 @@ electron_mix_history = 4
 electron_mix_delay = 10
 
 write_electron_eigenvectors = False
-
-num_electrons = 1.0
-
-electron_delta_width = 0.005
-calc_electron_fermi_surface = True
-
-# calc_electron_dos = True
-electron_dos_step = 0.01
 
