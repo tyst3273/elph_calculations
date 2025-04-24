@@ -39,9 +39,12 @@ def plot_fs(input_file):
 
     print(up.shape)
 
-    fig, ax = plt.subplots(1,2,figsize=(8,3.5))
+    fig, ax = plt.subplots(1,2,figsize=(8,3.5),clear=True,num=1)
 
     vmax = max(up.max(),down.max())*0.1
+    vmin = 0.0
+    if vmax <= vmin:
+        vmin = vmax
 
     lw = 0.5
     ls = (0,(2,1,1,1))
@@ -54,9 +57,9 @@ def plot_fs(input_file):
             extent = [-0.5+xx,0.5+xx,-0.5+yy,0.5+yy]
             # extent = [-0.5,0.5,-0.5,0.5]
 
-            ax[0].imshow(up.T,cmap=red,vmin=1e-6,vmax=vmax,aspect=aspect,origin='lower',
+            ax[0].imshow(up.T,cmap=red,vmin=vmin,vmax=vmax,aspect=aspect,origin='lower',
                 interpolation='none',extent=extent)
-            ax[1].imshow(down.T,cmap=blue,vmin=1e-6,vmax=vmax,aspect=aspect,origin='lower',
+            ax[1].imshow(down.T,cmap=blue,vmin=vmin,vmax=vmax,aspect=aspect,origin='lower',
                 interpolation='none',extent=extent)
 
             # ax[0].plot([xx+0.5,xx+0.5],[-1.5,1.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
@@ -79,12 +82,18 @@ def plot_fs(input_file):
 
     plt.show()
 
+    # plt.close()
+    # plt.clf()
+
 # --------------------------------------------------------------------------------------------------
 
 
-if len(sys.argv) > 1:
-    input_file = sys.argv[1]
-else:
-    input_file = 'electrons_out.hdf5'
+# if len(sys.argv) > 1:
+#     input_file = sys.argv[1]
+# else:
+#     input_file = 'electrons_out.hdf5'
 
-plot_fs(input_file)
+input_files = os.listdir('nscf')
+for input_file in input_files:
+    if input_file.endswith('hdf5'):
+        plot_fs(os.path.join('nscf',input_file))

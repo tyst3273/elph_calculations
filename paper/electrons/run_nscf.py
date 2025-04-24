@@ -20,11 +20,16 @@ def run_calc(U,n,order,input_file='nscf_template.py'):
 # --------------------------------------------------------------------------------------------------
 
 # parameters to sweep
-calcs = [[0.25,4,'pm'],
-         [0.4,4,'afm'],
-         [0.45,6,'fim'],
-         [0.5,6,'afm'],
-         [0.25,10,'fm']]
+calcs = [[0.2,  4, 'pm'],
+         [0.3,  4, 'pm'],
+         [0.4,  4, 'afm'],
+         [0.45, 4, 'fim'],
+         [0.5,  4, 'afm'],
+         [0.2,  8, 'pm'],
+         [0.3,  8, 'fm'],
+         [0.4,  8, 'fim'],
+         [0.45, 8, 'fim'],
+         [0.5,  8, 'afm']]
 num_calcs = len(calcs)
 
 with open('Cu_template.py','r') as f:
