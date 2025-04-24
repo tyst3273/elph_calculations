@@ -36,24 +36,36 @@ def run_calc(U,n,order,input_file='scf_template.py'):
 # --------------------------------------------------------------------------------------------------
 
 # parameters to sweep
-calcs = [[0.10,'pm'], [0.30,'pm'], [0.50,'pm'],  [0.70,'pm'],  [0.90,'pm'],
-         [1.10,'pm'], [1.30,'pm'], [1.50,'afm'], [1.70,'fim'], [1.90,'fim']]
+calcs = [[0.2,  4, 'pm'],
+         [0.3,  4, 'pm'],
+         [0.4,  4, 'afm'],
+         [0.45, 4, 'fim'],
+         [0.5,  4, 'afm'],
+         [0.2,  8, 'pm'],
+         [0.3,  8, 'fm'],
+         [0.4,  8, 'fim'],
+         [0.45, 8, 'fim'],
+         [0.5,  8, 'afm']]
 num_calcs = len(calcs)
 
-U = np.linspace(0,10.5,0.5)
-n = np.linspace(0,2.1,0.1)
-print(U.size)
-print(n.size)
-exit()
+with open('Cu_template.py','r') as f:
+    template = f.read()
 
 for ii in range(num_calcs):
+    
+    n, U, order = calcs[ii]
 
-    n = calcs[ii][0] 
-    order = calcs[ii][1]
+    n *= 4.0
 
     print(f'\nnow on num {ii}/{num_calcs}')
     print('n:',n)
+    print('U:',U)
     print('order:',order)
+
+    # have to write U to the atom file ...
+    with open('Cu.py','w') as f:
+        f.write(template)
+        f.write(f'hubbard_U = [{U:.6f}]\n')
 
     run_calc(U,n,order)
 

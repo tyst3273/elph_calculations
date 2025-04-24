@@ -18,9 +18,9 @@ hopping_file = 'hopping.py'
 orbital_type = 'tight_binding'
 
 kpts_option = 'mesh'
-kpts_mesh = [100,100,1]
+kpts_mesh = [200,200,1]
 
-num_kpts_procs = 12
+num_kpts_procs = 8
 
 use_hubbard_U = True
 use_spin = True
