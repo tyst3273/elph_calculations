@@ -22,7 +22,7 @@ num_modes = freqs.shape[1]
 qpts = dists/dists.max()
 verts = verts/dists.max()
 
-fig, ax = plt.subplots(figsize=(4.5,6))
+fig, ax = plt.subplots(figsize=(4.5,2))
             # gridspec_kw={'hspace':0.05,'wspace':0.1,'height_ratios':[0.75,1]})
 
 scale = 0.25
@@ -67,7 +67,7 @@ for _ax in [ax]: #ax.ravel():
     _ax.tick_params(which='minor',length=2)
     _ax.set_rasterized = True
 
-ax.axis([0,1,0.0,80])
+ax.axis([0,1,64,77])
 
 labels = [r'$\Gamma$','X','M',r'$\Gamma$']
 ax.set_xticks(verts)
@@ -75,7 +75,7 @@ ax.set_xticklabels(labels)
 
 ax.set_ylabel('Energy [meV]',fontsize=12,labelpad=5)
 
-plt.savefig(f'matrix_elements.png',dpi=300,bbox_inches='tight')
+plt.savefig(f'bond_stretching_matrix_elements.png',dpi=300,bbox_inches='tight')
 plt.show()
 # plt.close()
 
