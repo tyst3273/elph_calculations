@@ -7,7 +7,7 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg5"
-   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   inkscape:version="1.4.2 (1:1.4.2+202505120737+ebf0e940d0)"
    sodipodi:docname="lattice.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -27,14 +27,14 @@
      inkscape:snap-global="false"
      inkscape:snap-intersection-paths="true"
      inkscape:snap-object-midpoints="true"
-     inkscape:zoom="0.65051266"
-     inkscape:cx="674.08373"
-     inkscape:cy="1820.8715"
-     inkscape:window-width="1456"
-     inkscape:window-height="874"
-     inkscape:window-x="7"
-     inkscape:window-y="46"
-     inkscape:window-maximized="0"
+     inkscape:zoom="0.45998191"
+     inkscape:cx="669.59155"
+     inkscape:cy="1729.4158"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      inkscape:showpageshadow="2"
      inkscape:deskcolor="#d1d1d1" />
@@ -5366,7 +5366,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-297.77344"
-         y="158.82543"
+         y="160.23568"
          id="tspan132"><tspan
            style="font-style:italic"
            id="tspan131">k</tspan></tspan></text>
@@ -5379,7 +5379,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan134"><tspan
            style="font-style:italic"
            id="tspan133">K</tspan></tspan></text>
@@ -5392,7 +5392,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan135">M</tspan></text>
     <text
        xml:space="preserve"
@@ -5403,7 +5403,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-77.443359"
-         y="184.96801"
+         y="186.37825"
          id="tspan137"><tspan
            style="font-style:italic"
            id="tspan136">t</tspan></tspan></text>
@@ -5416,7 +5416,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan139"><tspan
            style="font-style:italic"
            id="tspan138">m</tspan></tspan></text>
@@ -5429,7 +5429,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan140">...</tspan></text>
     <text
        xml:space="preserve"
@@ -5440,7 +5440,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan141">...</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.510006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
@@ -5872,7 +5872,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-77.443359"
-         y="184.96801"
+         y="186.37825"
          id="tspan143"><tspan
            style="font-style:italic"
            id="tspan142">t</tspan></tspan></text>
@@ -5885,7 +5885,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan144">...</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.510006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
@@ -6332,7 +6332,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan146"><tspan
            style="font-style:italic"
            id="tspan145">U</tspan></tspan></text>
@@ -6345,7 +6345,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan147">...</tspan></text>
     <circle
        style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -6448,7 +6448,7 @@
        id="text32369"
        style="font-size:32px;line-height:1.25;font-family:'Ubuntu Mono';-inkscape-font-specification:'Ubuntu Mono';white-space:pre;shape-inside:url(#rect32371);display:inline"><tspan
          x="-2226.5664"
-         y="279.34691"
+         y="280.75716"
          id="tspan150"><tspan
            style="font-style:italic"
            id="tspan148">-|g|</tspan><tspan
@@ -6479,7 +6479,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-297.77344"
-         y="158.82543"
+         y="160.23568"
          id="tspan152"><tspan
            style="font-style:italic"
            id="tspan151">k</tspan></tspan></text>
@@ -6492,7 +6492,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan154"><tspan
            style="font-style:italic"
            id="tspan153">K</tspan></tspan></text>
@@ -6505,7 +6505,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan156"><tspan
            style="font-style:italic"
            id="tspan155">m</tspan></tspan></text>
@@ -6792,7 +6792,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan162"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';baseline-shift:baseline"
            id="tspan157">Un</tspan><tspan
@@ -6813,7 +6813,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan164"><tspan
            style="font-style:italic"
            id="tspan163">m</tspan></tspan></text>
@@ -7150,7 +7150,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan170"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';baseline-shift:baseline"
            id="tspan165">Un</tspan><tspan
@@ -7171,7 +7171,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan176"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';baseline-shift:baseline"
            id="tspan171">Un</tspan><tspan
@@ -7192,7 +7192,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-2226.5664"
-         y="279.34691"
+         y="280.75716"
          id="tspan179"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'"
            id="tspan177">g</tspan><tspan
@@ -7207,7 +7207,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-1694.375"
-         y="783.33129"
+         y="783.25272"
          id="tspan180">(b)</tspan></text>
     <text
        xml:space="preserve"
@@ -7218,7 +7218,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-1694.375"
-         y="783.33129"
+         y="783.25272"
          id="tspan181">(c)</tspan></text>
     <text
        xml:space="preserve"
@@ -7229,7 +7229,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan183"><tspan
            style="font-style:italic"
            id="tspan182">m</tspan></tspan></text>
@@ -7663,7 +7663,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-77.443359"
-         y="184.96801"
+         y="186.37825"
          id="tspan185"><tspan
            style="font-style:italic"
            id="tspan184">t</tspan></tspan></text>
@@ -7780,7 +7780,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-297.77344"
-         y="158.82543"
+         y="160.23568"
          id="tspan187"><tspan
            style="font-style:italic"
            id="tspan186">k</tspan></tspan></text>
@@ -7793,7 +7793,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan189"><tspan
            style="font-style:italic"
            id="tspan188">K</tspan></tspan></text>
@@ -7806,7 +7806,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan190">...</tspan></text>
     <text
        xml:space="preserve"
@@ -7817,7 +7817,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan191">...</tspan></text>
     <text
        xml:space="preserve"
@@ -7828,7 +7828,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan192">...</tspan></text>
     <text
        xml:space="preserve"
@@ -7839,7 +7839,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan193">...</tspan></text>
     <text
        xml:space="preserve"
@@ -7850,7 +7850,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan194">...</tspan></text>
     <text
        xml:space="preserve"
@@ -7861,7 +7861,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan195">...</tspan></text>
     <text
        xml:space="preserve"
@@ -7872,7 +7872,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan196">...</tspan></text>
     <text
        xml:space="preserve"
@@ -7883,7 +7883,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan197">...</tspan></text>
     <text
        xml:space="preserve"
@@ -7894,7 +7894,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan198">...</tspan></text>
     <text
        xml:space="preserve"
@@ -7905,7 +7905,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-1694.375"
-         y="783.33129"
+         y="783.25272"
          id="tspan199">(a)</tspan></text>
     <text
        xml:space="preserve"
@@ -7916,7 +7916,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-2226.5664"
-         y="279.34691"
+         y="280.75716"
          id="tspan202"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'"
            id="tspan200">g</tspan><tspan
@@ -7931,7 +7931,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan204"><tspan
            style="font-style:italic"
            id="tspan203">m</tspan></tspan></text>
@@ -8260,7 +8260,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-2226.5664"
-         y="279.34691"
+         y="280.75716"
          id="tspan207"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'"
            id="tspan205">g</tspan><tspan
@@ -8275,7 +8275,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-1694.375"
-         y="783.33129"
+         y="783.25272"
          id="tspan208">(d)</tspan></text>
     <text
        xml:space="preserve"
@@ -8286,7 +8286,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-2226.5664"
-         y="279.34691"
+         y="280.75716"
          id="tspan211"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'"
            id="tspan209">g</tspan><tspan
@@ -8301,7 +8301,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-2226.5664"
-         y="279.34691"
+         y="280.75716"
          id="tspan214"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'"
            id="tspan212">g</tspan><tspan
@@ -8316,7 +8316,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan215">...</tspan></text>
     <text
        xml:space="preserve"
@@ -8327,7 +8327,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan216">...</tspan></text>
     <text
        xml:space="preserve"
@@ -8338,7 +8338,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan217">...</tspan></text>
     <text
        xml:space="preserve"
@@ -8349,7 +8349,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan218">...</tspan></text>
     <path
        style="fill:none;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow2Mstart-4-3-1-6-48-6-7-3-8)"
@@ -8432,7 +8432,7 @@
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan220"><tspan
            style="font-style:italic"
            id="tspan219">m</tspan></tspan></text>
@@ -8719,7 +8719,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan226"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';baseline-shift:baseline"
            id="tspan221">Un</tspan><tspan
@@ -8740,7 +8740,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan228"><tspan
            style="font-style:italic"
            id="tspan227">m</tspan></tspan></text>
@@ -9077,7 +9077,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-2226.5664"
-         y="279.34691"
+         y="280.75716"
          id="tspan231"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'"
            id="tspan229">g</tspan><tspan
@@ -9092,7 +9092,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-1694.375"
-         y="783.33129"
+         y="783.25272"
          id="tspan232">(b)</tspan></text>
     <text
        xml:space="preserve"
@@ -9103,7 +9103,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-1694.375"
-         y="783.33129"
+         y="783.25272"
          id="tspan233">(c)</tspan></text>
     <text
        xml:space="preserve"
@@ -9114,7 +9114,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan235"><tspan
            style="font-style:italic"
            id="tspan234">m</tspan></tspan></text>
@@ -9486,17 +9486,6 @@
        inkscape:export-filename="/home/ty/research/repos/elph_calculations/figs/model.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
-    <rect
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:0.5, 1;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect1247-6-0-0-0-0-9-1-1"
-       width="38.648743"
-       height="38.648743"
-       x="415.16632"
-       y="-164.89465"
-       transform="rotate(90)"
-       inkscape:export-filename="/home/ty/research/repos/elph_calculations/figs/model.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow2Mstart-1-5-6-0);marker-end:url(#marker1770-88-3-5-0)"
        d="m 131.4636,447.4945 c 12.84724,-14.16468 15.68946,-14.54606 28.63299,-0.0998"
@@ -9538,7 +9527,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-77.443359"
-         y="184.96801"
+         y="186.37825"
          id="tspan237"><tspan
            style="font-style:italic"
            id="tspan236">t</tspan></tspan></text>
@@ -9655,7 +9644,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-297.77344"
-         y="158.82543"
+         y="160.23568"
          id="tspan239"><tspan
            style="font-style:italic"
            id="tspan238">k</tspan></tspan></text>
@@ -9668,7 +9657,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan241"><tspan
            style="font-style:italic"
            id="tspan240">K</tspan></tspan></text>
@@ -9681,7 +9670,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan242">...</tspan></text>
     <text
        xml:space="preserve"
@@ -9692,7 +9681,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan243">...</tspan></text>
     <text
        xml:space="preserve"
@@ -9703,7 +9692,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan244">...</tspan></text>
     <text
        xml:space="preserve"
@@ -9714,7 +9703,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan245">...</tspan></text>
     <text
        xml:space="preserve"
@@ -9725,7 +9714,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan246">...</tspan></text>
     <text
        xml:space="preserve"
@@ -9736,7 +9725,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan247">...</tspan></text>
     <text
        xml:space="preserve"
@@ -9747,7 +9736,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan248">...</tspan></text>
     <text
        xml:space="preserve"
@@ -9758,7 +9747,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan249">...</tspan></text>
     <text
        xml:space="preserve"
@@ -9769,7 +9758,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan250">...</tspan></text>
     <text
        xml:space="preserve"
@@ -9780,7 +9769,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-1694.375"
-         y="783.33129"
+         y="783.25272"
          id="tspan251">(a)</tspan></text>
     <text
        xml:space="preserve"
@@ -9791,7 +9780,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-2226.5664"
-         y="279.34691"
+         y="280.75716"
          id="tspan254"><tspan
            style="font-style:italic;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'"
            id="tspan252">g</tspan><tspan
@@ -9806,7 +9795,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-244.66016"
-         y="263.65941"
+         y="265.06966"
          id="tspan256"><tspan
            style="font-style:italic"
            id="tspan255">m</tspan></tspan></text>
@@ -10119,7 +10108,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-1694.375"
-         y="783.33129"
+         y="783.25272"
          id="tspan257">(d)</tspan></text>
     <text
        xml:space="preserve"
@@ -10130,7 +10119,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan258">...</tspan></text>
     <text
        xml:space="preserve"
@@ -10141,7 +10130,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan259">...</tspan></text>
     <text
        xml:space="preserve"
@@ -10152,7 +10141,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          x="-497.00586"
-         y="102.59887"
+         y="104.00911"
          id="tspan260">...</tspan></text>
     <path
        style="fill:none;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow2Mstart-4-3-1-6-48-6-7-3-8-4)"
@@ -10204,7 +10193,7 @@
        inkscape:export-ydpi="300" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1770-6-3-6-3-6-9-7)"
-       d="m 223.61618,524.02734 c -9.07433,13.39634 -5.18499,21.14749 -0.0998,28.63299"
+       d="m 223.61618,553.04912 c -9.07433,-13.39634 -5.18499,-21.14749 -0.0998,-28.63299"
        id="path1057-9-3-1-7-9-8-9"
        sodipodi:nodetypes="cc"
        inkscape:export-filename="/home/ty/research/repos/elph_calculations/figs/model.png"
@@ -10212,19 +10201,22 @@
        inkscape:export-ydpi="300" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1770-6-3-6-3-6-9-0-1)"
-       d="m 276.39866,552.37288 c 9.07433,-13.39634 5.18499,-21.14749 0.0998,-28.63299"
+       d="m 276.39866,523.3511 c 9.07433,13.39634 5.18499,21.14749 0.0998,28.63299"
        id="path1057-9-3-1-7-9-8-7-6"
        sodipodi:nodetypes="cc"
        inkscape:export-filename="/home/ty/research/repos/elph_calculations/figs/model.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="opacity:1;fill:none;fill-opacity:0.48228899;stroke:#000000;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-dasharray:1.5,3;stroke-dashoffset:0"
-       id="rect1"
-       width="27.529081"
-       height="27.529081"
-       x="396.40073"
-       y="217.86215"
-       transform="rotate(44.999972)" />
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:1,2;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect1247-6-0-0-0-0-9-1-1"
+       width="38.648743"
+       height="38.648743"
+       x="415.16632"
+       y="-164.89465"
+       transform="rotate(90)"
+       inkscape:export-filename="/home/ty/research/repos/elph_calculations/figs/model.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
   </g>
 </svg>
