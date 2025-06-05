@@ -8,7 +8,8 @@ class c_example_phase_calculator:
 
     # ----------------------------------------------------------------------------------------------
 
-    def __init__(self,num_x,num_y,r0=3/4,y0=1/2,x1=9/12,y1=9/12,x2=7/8,y2=7/8,x3=1/3):
+    def __init__(self,num_x,num_y,r0=3/4,y0=1/2,x1=9/12,y1=9/12,
+                 x2=7/8,y2=7/8,x3=1/3,x4=1/3,y4=3/5):
 
         """
         example phase checker that returns phases based on a simple condition
@@ -18,12 +19,21 @@ class c_example_phase_calculator:
         self.num_y = num_y
 
         self.r0 = r0
+
         self.y0 = y0
+
         self.x1 = x1
         self.y1 = y1
+
         self.x2 = x2
         self.y2 = y2
+
         self.x3 = x3
+
+        self.x4 = x4
+        self.y4 = y4
+
+        self.dx = 1/num_x
 
     # ----------------------------------------------------------------------------------------------
 
@@ -38,6 +48,7 @@ class c_example_phase_calculator:
         
         if y >= self.y0:
             val = 2
+
         if x >= self.x1 and y >= self.y1 and x <= self.x2 and y <= self.y2:
             val = 0
 
@@ -46,6 +57,9 @@ class c_example_phase_calculator:
 
         if np.sqrt(x**2+y**2) <= self.r0:
             val = 1
+        
+        if x <= self.x4+self.dx and x >= self.x4-self.dx and y <= self.y4:
+            val = 4
 
         return val
     
@@ -132,36 +146,42 @@ class c_text_file_phase_calculator:
 
 if __name__ == '__main__':
 
-    pc = c_phase_checker()
+    num_x = 100
+    num_y = 100
 
-    num_x = 100; num_y = 100
-    x = np.linspace(0,1,num_x); y = np.linspace(0,1,num_y)
+    example = c_example_phase_calculator(num_x,num_y)
+    example.plot_phase_diagram()
 
-    phases = np.zeros((num_x*num_y))
-    index = 0
-    for xx in x:
-        for yy in y:
-            phases[index] = pc.check_phase(xx,yy)
-            index += 1
+    # pc = c_phase_checker()
 
-    c = np.zeros((num_x*num_y,3),dtype=float)
-    c[np.flatnonzero(phases == 3),1] = 1.0 # pm
-    c[np.flatnonzero(phases == 1),2] = 1.0 # afm
-    c[np.flatnonzero(phases == 2),0] = 1.0 # fm
-    c[np.flatnonzero(phases == 4),0] = 1.0 # fim
-    c[np.flatnonzero(phases == 4),2] = 1.0 # fim
+    # num_x = 100; num_y = 100
+    # x = np.linspace(0,1,num_x); y = np.linspace(0,1,num_y)
 
-    fig, ax = plt.subplots(figsize=(4,4))
+    # phases = np.zeros((num_x*num_y))
+    # index = 0
+    # for xx in x:
+    #     for yy in y:
+    #         phases[index] = pc.check_phase(xx,yy)
+    #         index += 1
 
-    x, y = np.meshgrid(x,y,indexing='ij')
-    x = x.flatten(); y = y.flatten()
+    # c = np.zeros((num_x*num_y,3),dtype=float)
+    # c[np.flatnonzero(phases == 3),1] = 1.0 # pm
+    # c[np.flatnonzero(phases == 1),2] = 1.0 # afm
+    # c[np.flatnonzero(phases == 2),0] = 1.0 # fm
+    # c[np.flatnonzero(phases == 4),0] = 1.0 # fim
+    # c[np.flatnonzero(phases == 4),2] = 1.0 # fim
 
-    for ii in range(1,5):
+    # fig, ax = plt.subplots(figsize=(4,4))
 
-        inds = np.flatnonzero(phases == ii)
-        _x = x[inds]; _y = y[inds]; _c = c[inds]
-        ax.scatter(_x,_y,marker='o',s=1,c=_c,linewidths=1,clip_on=False)
+    # x, y = np.meshgrid(x,y,indexing='ij')
+    # x = x.flatten(); y = y.flatten()
 
-    plt.show()
+    # for ii in range(1,5):
+
+    #     inds = np.flatnonzero(phases == ii)
+    #     _x = x[inds]; _y = y[inds]; _c = c[inds]
+    #     ax.scatter(_x,_y,marker='o',s=1,c=_c,linewidths=1,clip_on=False)
+
+    # plt.show()
 
 # --------------------------------------------------------------------------------------------------

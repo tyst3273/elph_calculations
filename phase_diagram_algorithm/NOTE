@@ -1,0 +1,4 @@
+
+instead of drifting, guess a random point and calculate a plaquette. if plaquette has a phase
+boundary, explore.
+

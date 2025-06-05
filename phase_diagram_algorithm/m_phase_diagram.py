@@ -180,8 +180,8 @@ class _c_random_drifter:
                 x, y = previous_coords[-1]
                 previous_coords.pop(-1)
                                 
-                # phase = previous_phase[-1]
-                # previous_phase.pop(-1)
+                phase = previous_phase[-1]
+                previous_phase.pop(-1)
 
     # ----------------------------------------------------------------------------------------------
 
@@ -469,14 +469,14 @@ if __name__ == '__main__':
     num_y = 100
 
     example = c_example_phase_calculator(num_x,num_y)
-    example.plot_phase_diagram()
+    # example.plot_phase_diagram()
     check_phase = example.check_phase
 
     # phase_checker = c_phase_checker()
     # check_phase = phase_checker.check_phase
     
     phase_diagram = c_phase_diagram(check_phase,num_x,num_y)
-    phase_diagram.random_drifters(100)
+    phase_diagram.random_drifters(10)
     phase_diagram.plot_phase_diagram()
 
 
