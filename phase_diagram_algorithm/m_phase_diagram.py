@@ -469,7 +469,7 @@ if __name__ == '__main__':
     num_y = 100
 
     example = c_example_phase_calculator(num_x,num_y)
-    # example.plot_phase_diagram()
+    example.plot_phase_diagram()
     check_phase = example.check_phase
 
     # phase_checker = c_phase_checker()
