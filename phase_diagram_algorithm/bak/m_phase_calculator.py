@@ -8,12 +8,15 @@ class c_example_phase_calculator:
 
     # ----------------------------------------------------------------------------------------------
 
-    def __init__(self,r0=3/4,y0=1/2,x1=9/12,y1=9/12,
-                 x2=7/8,y2=7/8,x3=1/3,x4=1/3,y4=3/5,dx=1/100):
+    def __init__(self,num_x,num_y,r0=3/4,y0=1/2,x1=9/12,y1=9/12,
+                 x2=7/8,y2=7/8,x3=1/3,x4=1/3,y4=3/5):
 
         """
         example phase checker that returns phases based on a simple condition
         """
+
+        self.num_x = num_x
+        self.num_y = num_y
 
         self.r0 = r0
 
@@ -30,11 +33,11 @@ class c_example_phase_calculator:
         self.x4 = x4
         self.y4 = y4
 
-        self.dx = dx
+        self.dx = 1/num_x
 
     # ----------------------------------------------------------------------------------------------
 
-    def calculate_phase(self,x,y):
+    def check_phase(self,x,y):
 
         """
         check phase based on a simple condition:
@@ -62,11 +65,14 @@ class c_example_phase_calculator:
     
     # ----------------------------------------------------------------------------------------------
 
-    def plot_phase_diagram(self,num_x,num_y):
+    def plot_phase_diagram(self,):
 
         """
         plot the phase diagram on a uniform grid
         """
+
+        num_x = self.num_x
+        num_y = self.num_y
 
         fig, ax = plt.subplots(figsize=(6,6))
 
@@ -80,7 +86,7 @@ class c_example_phase_calculator:
 
         for ii in range(num_x):
             for jj in range(num_y):
-                phases[ii,jj] = self.calculate_phase(x[ii],y[jj])
+                phases[ii,jj] = self.check_phase(x[ii],y[jj])
 
         unique_phases = np.unique(phases)
         num_phases = unique_phases.size
@@ -122,7 +128,7 @@ class c_text_file_phase_calculator:
 
     # ----------------------------------------------------------------------------------------------
 
-    def calculate_phase(self,x,y):
+    def check_phase(self,x,y):
 
         """
         expects x and y to be between 0 and 1. normalize if u have to.
@@ -143,8 +149,8 @@ if __name__ == '__main__':
     num_x = 100
     num_y = 100
 
-    example = c_example_phase_calculator()
-    example.plot_phase_diagram(num_x,num_y)
+    example = c_example_phase_calculator(num_x,num_y)
+    example.plot_phase_diagram()
 
     # pc = c_phase_checker()
 
@@ -155,7 +161,7 @@ if __name__ == '__main__':
     # index = 0
     # for xx in x:
     #     for yy in y:
-    #         phases[index] = pc.calculate_phase(xx,yy)
+    #         phases[index] = pc.check_phase(xx,yy)
     #         index += 1
 
     # c = np.zeros((num_x*num_y,3),dtype=float)
