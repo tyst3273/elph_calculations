@@ -392,6 +392,8 @@ class _c_new_random_drifter:
         msg = '\n!!! ERROR !!!\ncould not find an unvisited point in the phase diagram!\n'
         print(msg)
 
+        return None, None
+
     # ----------------------------------------------------------------------------------------------
 
     def calculate_phase(self,x,y):
@@ -419,6 +421,11 @@ class _c_new_random_drifter:
         boundary, we switch over to algorithm for traversing the phase boundary.
         """
 
+        self.inds_stack = []
+        self.phase_stack = []
+
+        found_boundary = False
+
         # this finds a random point that has not been checked
         x, y = self._init_pos()
 
@@ -432,9 +439,16 @@ class _c_new_random_drifter:
         for ii in range(num_neighbors):
 
             _x, _y = neighbor_inds[ii]
-            phase = self.calculate_phase(_x,_y)
-            self.phase_diagram.phases[_x,_y] = phase
-    
+            neighbor_phase = self.calculate_phase(_x,_y)
+            self.phase_diagram.phases[_x,_y] = neighbor_phase
+
+            if neighbor_phase != phase:
+                
+                found_boundary = True
+                break
+
+        if found_boundary:
+            
     # ----------------------------------------------------------------------------------------------
 
     def _get_neighbor_inds(self,x,y,rectilinear=False):
