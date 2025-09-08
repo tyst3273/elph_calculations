@@ -33,11 +33,13 @@ electron_scf_energy_tol = 1e-5
 
 temperature = 0.001
 
-electron_mix_method = 'pulay'
-electron_mix_alpha = 0.4
-electron_mix_beta = 0.4
-electron_mix_history = 4
-electron_mix_delay = 10
+# electron_mix_method = 'pulay'
+# electron_mix_alpha = 0.4
+# electron_mix_beta = 0.4
+# electron_mix_history = 4
+# electron_mix_delay = 10
+electron_mix_method = 'simple'
+electron_mix_alpha = 0.8
 
 write_electron_eigenvectors = False
 
