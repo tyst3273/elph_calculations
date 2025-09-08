@@ -32,4 +32,4 @@ elph_UX_constants = [0.0]
 coh_neutron_scattering_len = 7.728+0j
 inc_neutron_scattering_len = 0.0
 
-hubbard_U = [10.000000]
+hubbard_U = [20.000000]

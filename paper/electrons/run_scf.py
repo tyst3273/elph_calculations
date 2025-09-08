@@ -42,11 +42,13 @@ def run_calc(U,n,order,input_file='scf_template.py'):
     # FM-M: x=0.25, U=10
 
 # parameters to sweep
-calcs = [[0.25,   4,  'pm'],
-         [ 0.4,   4, 'afm'],
-         [0.45,   6, 'fim'],
-         [ 0.5,   6, 'afm'],
-         [0.25,  10,  'fm']]
+calcs = [[ 0.5,   1, 'afm'],
+         [0.475, 20, 'fim']]
+        #  [0.25,   4,  'pm'],
+        #  [ 0.4,   4, 'afm'],
+        #  [0.45,   6, 'fim'],
+        #  [ 0.5,   6, 'afm'],
+        #  [0.25,  10,  'fm']]
 num_calcs = len(calcs)
 
 with open('Cu_template.py','r') as f:
