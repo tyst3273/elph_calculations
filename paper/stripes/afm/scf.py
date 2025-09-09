@@ -1,0 +1,36 @@
+task = 'electrons'
+debug = False
+atom_positions_file = None
+lattice_vectors = [[ 2.0**(1/2), 0.0, 0.0],
+    [ 0.0, 2.0**(1/2), 0.0],
+    [ 0.0, 0.0, 10.0]]
+atom_types = [ 'Cu', 'Cu' ]
+atom_positions = [[ 0.0, 0.0, 0.0],[0.5, 0.5, 0.0]]
+atom_files = ['Cu.py']
+temperature = 0.001
+num_electrons = 2.0
+use_spin = True
+orbital_type = 'tight_binding'
+potential_type = None
+hopping_file = 'hopping.py'
+kpts_option = 'mesh'
+kpts_mesh = [ 100, 100, 1]
+use_kpts_symmetry = False
+num_kpts_procs = 4
+use_hubbard_U = True
+spin_up_site_density = [ 1 , 0]
+spin_down_site_density = [ 0, 1 ]
+do_electron_scf = True
+max_electron_scf_steps = 100
+electron_scf_density_tol = 1e-5
+electron_scf_energy_tol = 1e-6
+calc_electron_fermi_surface = False
+electron_dos_step = None
+electron_mix_method = 'simple'
+electron_mix_alpha = 0.8
+electron_output_file = 'scf_afm.hdf5'
+write_electron_eigenvectors = False
+write_site_density = True
+write_kpts_hdf5_file = False
+_plot_electron_bands = False
+_write_kpts = False

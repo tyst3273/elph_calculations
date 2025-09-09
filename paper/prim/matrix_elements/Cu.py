@@ -26,7 +26,7 @@ onsite_energy = [0.0]
 hubbard_U = [5.0]
 
 # electron phonon parameters
-elph_holstein_constants = [-0.025]
+elph_holstein_constants = [-0.25]
 elph_UX_constants = [0.0]
 
 

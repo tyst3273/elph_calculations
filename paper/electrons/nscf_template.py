@@ -31,6 +31,6 @@ temperature = 0.001
 
 write_electron_eigenvectors = False
 
-electron_delta_width = 0.025
+electron_delta_width = 0.015
 calc_electron_fermi_surface = True
 

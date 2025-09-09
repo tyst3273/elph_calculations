@@ -6,11 +6,13 @@ and k=0.002, the phonons are from ~ 0.2 to 0.17 eV. times 3/8, these are from ~ 
 60 meV. this is pretty close to what we want :)
 
 to do:
-    PM-M: x=0.25, U=4
-    AMF-M: x=0.4, U=4
-    FiM-M: x=0.45, U=6
+    AFM-I: x=0.5, U=1
+    AFM-I: x=0.5, U=2
     AFM-I: x=0.5, U=6
+    AMF-M: x=0.4, U=4
+    PM-M: x=0.25, U=4
     FM-M: x=0.25, U=10
+    FiM-M: x=0.45, U=6
     smaller gap ~ order of phonon energies
     parallel stripes? 
     diagonal stripes?
