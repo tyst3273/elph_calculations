@@ -23,4 +23,4 @@ ang_mom_m = [0]
 onsite_energy = [0.0] 
 
 
-hubbard_U = [13.000000]
+hubbard_U = [13.500000]
