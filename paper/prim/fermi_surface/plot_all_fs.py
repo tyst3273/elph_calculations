@@ -71,15 +71,15 @@ for ii, n in enumerate(calcs):
 
 # ax[1].annotate('n=0.1',xycoords='data',textcoords='data',xy=(-0.45,0.45),xytext=(-0.075,0.0),
 #             arrowprops=dict(arrowstyle='-|>',lw=1,color='k'),fontsize=10)
-ax[1].annotate('',xycoords='data',textcoords='data',xy=(-0.41,0.41),xytext=(-0.09,0.09),
+ax[1].annotate('',xycoords='data',textcoords='data',xy=(0.41,0.41),xytext=(0.09,0.09),
             arrowprops=dict(arrowstyle='->',lw=1,color='k'),fontsize=10)
-ax[1].annotate('n=0.05',xycoords='data',xy=(-0.1,0.025),fontsize=10,fontweight='bold')
-ax[1].annotate('n=0.50',xycoords='data',xy=(-0.2,0.25),fontsize=10,fontweight='bold')
-ax[1].annotate('n=0.95',xycoords='data',xy=(-0.475,0.425),fontsize=10,fontweight='bold')
+ax[1].annotate('n=0.05',xycoords='data',xy=(-0.05,0.025),fontsize=10,fontweight='bold')
+ax[1].annotate('n=0.50',xycoords='data',xy=(0.05,0.225),fontsize=10,fontweight='bold')
+ax[1].annotate('n=0.95',xycoords='data',xy=(0.325,0.435),fontsize=10,fontweight='bold')
 
-ax[1].plot(-0.09,0.09,marker='o',ms=4,mec='k',mfc='k')
-ax[1].plot(-0.41,0.41,marker='o',ms=4,mec='k',mfc='k')
-ax[1].plot(-0.25,0.25,marker='o',ms=4,mec='k',mfc='k')
+ax[1].plot(0.09,0.09,marker='o',ms=4,mec='k',mfc='k')
+ax[1].plot(0.41,0.41,marker='o',ms=4,mec='k',mfc='k')
+ax[1].plot(0.25,0.25,marker='o',ms=4,mec='k',mfc='k')
 
 for _ax in ax:
     for axis in ['top','bottom','left','right']:
@@ -97,6 +97,8 @@ ax[0].axis([0,1,-1.5,1.5])
 ax[0].set_ylabel('E [eV]',fontsize=12,labelpad=5)
 
 ax[1].axis([-0.5,0.5,-0.5,0.5])
+ax[1].set_xticks([-0.5,-0.25,0,0.25,0.5])
+ax[1].set_yticks([-0.5,-0.25,0,0.25,0.5])
 ax[1].set_ylabel('k [rlu]',fontsize=12,labelpad=5)
 ax[1].set_xlabel('h [rlu]',fontsize=12,labelpad=5)
 
