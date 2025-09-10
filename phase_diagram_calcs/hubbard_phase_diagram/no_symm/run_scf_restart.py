@@ -31,7 +31,7 @@ n_arr, U_arr = np.meshgrid(n_arr,U_arr,indexing='ij')
 n_arr = n_arr.flatten(); U_arr = U_arr.flatten()
 num_calcs = n_arr.size
 
-orders = ['afm','pm','fm','fim','cdw']
+orders = ['afm','pm','fm','fim']
 
 with open('Cu_template.py','r') as f:
     template = f.read()

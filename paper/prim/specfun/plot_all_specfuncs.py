@@ -134,6 +134,7 @@ for ii in range(num_bands):
 # -------------------
 
 f = 'specfun/pm_U_0.00_N_0.80.hdf5'
+# f = 'specfun/pm_U_0.00_N_0.50.hdf5'
 spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
 norm = LogNorm(vmin=vmin,vmax=vmax)
@@ -287,11 +288,11 @@ pm1.annotate(f'(b)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotatio
 el0.annotate(f'(e)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='k')
 el1.annotate(f'(f)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='k')
 
-fm0.annotate(f'FM, U=15, n=0.40',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
-fm1.annotate(f'FM, U=15, n=0.50',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+fm0.annotate(f'FM, U=15, n=0.20',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+fm1.annotate(f'FM, U=15, n=0.25',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
 
-pm0.annotate(f'PM, U=0, n=0.20',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
-pm1.annotate(f'PM, U=0, n=0.25',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+pm0.annotate(f'PM, U=0, n=0.40',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+pm1.annotate(f'PM, U=0, n=0.50',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
 
 el0.set_title(f'FM, U=15, n=0.25',fontsize=10)
 

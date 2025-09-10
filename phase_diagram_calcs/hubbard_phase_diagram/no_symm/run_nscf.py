@@ -8,28 +8,12 @@ from elph.drivers.m_ELPH import c_ELPH
 
 # --------------------------------------------------------------------------------------------------
 
-def run_calc(U,n,order,input_file='electron_scf.py'):
-
-    if order == 'cdw':
-        spin_up_site_density =   [ 1, 0] #, 0,0,0,0]
-        spin_down_site_density = [ 1, 0] #, 0,0,0,0]
-    elif order == 'pm':
-        spin_up_site_density =   [ 1, 1] #, 0,0,0,0]
-        spin_down_site_density = [ 1, 1] #, 0,0,0,0]
-    elif order == 'afm':
-        spin_up_site_density =   [ 1, 0] #, 0,0,0,0]
-        spin_down_site_density = [ 0, 1] #, 0,0,0,0]
-    elif order == 'fm':
-        spin_up_site_density =   [ 1, 1] #, 0,0,0,0]
-        spin_down_site_density = [ 0, 0] #, 0,0,0,0]
-    elif order == 'fim':
-        spin_up_site_density =   [ 2, 0] #, 0,0,0,0]
-        spin_down_site_density = [ 0, 1] #, 0,0,0,0]
+def run_calc(U,n,order,input_file='electron_nscf.py'):
 
     kwargs = {'num_electrons':n,
-              'spin_up_site_density':spin_up_site_density,
-              'spin_down_site_density':spin_down_site_density,
-              'electron_output_file':f'scf/{order}_U_{U:3.2f}_N_{n:3.2f}.hdf5'}
+              'site_density_input_file':f'scf_restart/{order}_U_{U:3.2f}_N_{n:3.2f}.hdf5',
+              'electron_output_file':f'nscf/{order}_U_{U:3.2f}_N_{n:3.2f}.hdf5'}
+
     ELPH = c_ELPH(input_file)
     ELPH.set_config(**kwargs)
     ELPH.run()
