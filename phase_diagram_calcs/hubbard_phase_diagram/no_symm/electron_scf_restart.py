@@ -26,8 +26,8 @@ use_spin = True
 do_electron_scf = True
 max_electron_scf_steps = 400
 
-electron_scf_density_tol = 1e-5
-electron_scf_energy_tol = 1e-6
+electron_scf_density_tol = 1e-6
+electron_scf_energy_tol = 1e-7
 
 temperature = 0.001
 

@@ -7,66 +7,31 @@ import os
 
 # --------------------------------------------------------------------------------------------------
 
-def _get_data(file_name):
+def get_data(file_name):
 
     with h5py.File(file_name,'r') as db:
+        # print(db.keys())
         free_energy = db['free_energy'][...]
-        gs_energy = db['ground_state_energy'][...]
         gap = db['gap'][...]
         metal = db['is_metal'][...].astype(int)
         up = db['spin_up_site_density'][...]
         down = db['spin_down_site_density'][...]
-        converged = db['converged_electron_scf'][...]
 
-    if gap <= 0.010:
-        metal = True
-    else:
-        metal = False
-
-    mag = (up-down).round(2)
-    if np.all(mag == 0.0):
-        order = 'pm'
-    elif mag[0] == -mag[1]:
-        order = 'afm'
-    elif mag[0] == mag[1]:
-        order = 'fm'
-    else:
-        order = 'fim'
-
-    return converged, free_energy, order, metal
-
-# --------------------------------------------------------------------------------------------------
-
-def get_order(U,n,dir='scf_restart'):
-
-    energy = []
-    order = []
-    metal = []
-
-    _c, _e, _o, _m = _get_data(dir+'/'+f'afm_U_{U:3.2f}_N_{n:3.2f}.hdf5')
-    if _c:
-        energy.append(_e); order.append(_o); metal.append(_m)
-
-    _c, _e, _o, _m = _get_data(dir+'/'+f'fm_U_{U:3.2f}_N_{n:3.2f}.hdf5')
-    if _c:
-        energy.append(_e); order.append(_o); metal.append(_m)
-
-    _c, _e, _o, _m = _get_data(dir+'/'+f'fim_U_{U:3.2f}_N_{n:3.2f}.hdf5')
-    if _c:
-        energy.append(_e); order.append(_o); metal.append(_m)
-
-    _c, _e, _o, _m = _get_data(dir+'/'+f'pm_U_{U:3.2f}_N_{n:3.2f}.hdf5')
-    if _c:
-        energy.append(_e); order.append(_o); metal.append(_m)
-
-    ind = np.argmin(np.array(energy))
-    order = order[ind]; metal = metal[ind]
+    mag = (up-down).round(3)
+    if np.all(mag == 0.0): #'pm'
+        order = 2 
+    elif mag[0] == -mag[1]: #'afm'
+        order = 0 
+    elif mag[0] == mag[1]: #'fm'
+        order = 1 
+    else: #'fim'
+        order = 3 
 
     return order, metal
 
 # --------------------------------------------------------------------------------------------------
 
-fig, ax = plt.subplots(figsize=(4.5,4.5))
+fig, ax = plt.subplots(figsize=(4,4))
 
 
 # parameters to sweep
@@ -80,30 +45,20 @@ n_arr, U_arr = np.meshgrid(n_arr,U_arr,indexing='ij')
 n_arr = n_arr.flatten(); U_arr = U_arr.flatten()
 num_calcs = n_arr.size
 
-
 order = np.zeros(num_calcs,dtype=int) # 0=afm, 1=fm, 2=pm, 3=fim, 4=cdw
 metal = np.zeros(num_calcs,dtype=int) # 0=insulator, 1=metal
 
 for ii in range(num_calcs):
 
     U = U_arr[ii]; n = n_arr[ii]
-    _o, _m = get_order(U,n)
+    
+    file_name = f'nscf/U_{U:3.2f}_N_{n:3.2f}.hdf5'
+    _order, _metal = get_data(file_name)
 
-    if _o == 'afm':
-        _o = 0
-    elif _o == 'fm':
-        _o = 1
-    elif _o == 'pm':
-        _o = 2
-    elif _o == 'fim':
-        _o = 3
-    else: 
-        _o == 4
+    metal[ii] = _metal
+    order[ii] = _order
 
-    metal[ii] = _m
-    order[ii] = _o
-
-n_arr = n_arr/4
+n_arr = n_arr/4 # filling fraction
 c = np.zeros((num_calcs,3),dtype=float)
 c[np.flatnonzero(order == 2),1] = 1.0 # pm
 c[np.flatnonzero(order == 0),0] = 1.0 # afm
@@ -165,9 +120,6 @@ ax.annotate('FiM',xycoords='data',xy=(0.32,12),fontsize='xx-large',fontweight='b
 ax.annotate('FiM',xycoords='data',xy=(0.58,12),fontsize='xx-large',fontweight='bold')
 """
 
-# data = np.c_[U_arr,n_arr,]]`
-# np.savetxt('phase_diagram.txt',)`
-
-plt.savefig('hubbard_mft_phase_diagram.png',bbox_inches='tight',dpi=300)
+plt.savefig('hubbard_mft_phase_diagram.pdf',bbox_inches='tight',dpi=300)
 #plt.show()
 

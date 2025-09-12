@@ -37,7 +37,7 @@ def get_nest(filename):
 
 # --------------------------------------------------------------------------------------------------
 
-fig = plt.figure(figsize=(4.5,7))
+fig = plt.figure(figsize=(4.5,7.5))
 gs = plt.GridSpec(3, 2, hspace=0.1, wspace=0.2)
 
 ax0 = fig.add_subplot(gs[0,0])
@@ -50,7 +50,7 @@ ax4 = fig.add_subplot(gs[2,0])
 ax5 = fig.add_subplot(gs[2,1])
 
 extent = [-0.5,0.5,-0.5,0.5]
-norm = LogNorm(vmin=2e-2,vmax=1)
+norm = LogNorm(vmin=1e-2,vmax=1)
 
 
 nesting = get_nest('N_0.05.hdf5')

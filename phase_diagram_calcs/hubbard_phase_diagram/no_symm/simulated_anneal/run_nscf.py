@@ -8,11 +8,11 @@ from elph.drivers.m_ELPH import c_ELPH
 
 # --------------------------------------------------------------------------------------------------
 
-def run_calc(U,n,order,input_file='electron_scf_restart.py'):
+def run_calc(U,n,input_file='electron_nscf.py'):
 
     kwargs = {'num_electrons':n,
-              'site_density_input_file':f'scf_restart/{order}_U_{U:3.2f}_N_{n:3.2f}.hdf5',
-              'electron_output_file':f'scf_restart/{order}_U_{U:3.2f}_N_{n:3.2f}.hdf5'}
+              'site_density_input_file':f'scf_restart/U_{U:3.2f}_N_{n:3.2f}.hdf5',
+              'electron_output_file':f'nscf/U_{U:3.2f}_N_{n:3.2f}.hdf5'}
 
     ELPH = c_ELPH(input_file)
     ELPH.set_config(**kwargs)
@@ -31,8 +31,6 @@ n_arr, U_arr = np.meshgrid(n_arr,U_arr,indexing='ij')
 n_arr = n_arr.flatten(); U_arr = U_arr.flatten()
 num_calcs = n_arr.size
 
-orders = ['afm','pm','fm','fim']
-
 with open('Cu_template.py','r') as f:
     template = f.read()
 
@@ -50,8 +48,7 @@ for ii in range(num_calcs):
         f.write(template)
         f.write(f'hubbard_U = [{U:.6f}]\n')
 
-    for order in orders:
-        run_calc(U,n,order)
+    run_calc(U,n)
 
 # --------------------------------------------------------------------------------------------------
 
