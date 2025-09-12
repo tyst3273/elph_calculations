@@ -9,21 +9,12 @@ import numpy as np
 
 def run_calc(U,n,order,input_file='scf_template.py'):
 
-    if order == 'cdw':
-        spin_up_site_density =   [ 1, 0, 0,0,0,0]
-        spin_down_site_density = [ 1, 0, 0,0,0,0]
-    elif order == 'pm':
-        spin_up_site_density =   [ 1, 1, 0,0,0,0]
-        spin_down_site_density = [ 1, 1, 0,0,0,0]
-    elif order == 'afm':
-        spin_up_site_density =   [ 1, 0, 0,0,0,0]
-        spin_down_site_density = [ 0, 1, 0,0,0,0]
-    elif order == 'fm':
-        spin_up_site_density =   [ 1, 1, 0,0,0,0]
-        spin_down_site_density = [ 0, 0, 0,0,0,0]
+    if order == 'afm':
+        spin_up_site_density =   [ 1, 0]
+        spin_down_site_density = [ 0, 1]
     elif order == 'fim':
-        spin_up_site_density =   [ 2, 0, 0,0,0,0]
-        spin_down_site_density = [ 0, 1, 0,0,0,0]
+        spin_up_site_density =   [ 2, 0]
+        spin_down_site_density = [ 0, 1]
 
     kwargs = {'num_electrons':n,
               'spin_up_site_density':spin_up_site_density,
@@ -54,19 +45,22 @@ calcs = [[ 0.5,   0.5, 'afm'],
          [ 0.5,   1.4, 'afm'],
          [ 0.5,   1.5, 'afm'],
          [ 0.5,   2.0, 'afm'],
-         [ 0.5,     4, 'afm'],
-         [ 0.5,     6, 'afm'],
-         [ 0.5,    10, 'afm'],
-         [ 0.4,     4, 'afm'],
-         [0.45,   2.5, 'afm'],
          [0.475,    2, 'afm'],
-         [0.4,      5, 'fim'],
-         [0.4,      8, 'fim'],
-         [0.45,     3, 'fim'],
+         [0.45,     3, 'afm'],
+         [ 0.4,     4, 'afm'],
+         [ 0.3,     7, 'afm'],
+          [0.4,     5, 'fim'],
+          [0.4,     6, 'fim'],
+          [0.4,     7, 'fim'],
+         [0.475,    3, 'fim'],
+         [0.475,    4, 'fim'],
+         [0.475,    5, 'fim'],
+         [0.475,   10, 'fim'],
+         [0.475,   20, 'fim'],
          [0.45,     4, 'fim'],
+         [0.45,     5, 'fim'],
          [0.45,     6, 'fim'],
-         [0.45,     8, 'fim'],
-         [0.475,   20, 'fim']]   
+         [0.45,    10, 'fim']]   
 num_calcs = len(calcs)
 
 with open('Cu_template.py','r') as f:

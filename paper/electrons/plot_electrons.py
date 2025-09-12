@@ -4,11 +4,11 @@ import h5py
 import matplotlib.pyplot as plt
 import sys
 
-conv = 3/8
+conv = 1.0 #3/8
 
 # --------------------------------------------------------------------------------------------------
 
-def get_points(fs,kpts,cut=0.95):
+def get_points(fs,kpts):
     inds = np.flatnonzero(fs > 0.3)
     print(inds)
     x = kpts[inds,0]
@@ -20,21 +20,15 @@ def get_points(fs,kpts,cut=0.95):
 def plot_electrons(n,U,order):
 
     n *= 4.0
-
     fig, ax = plt.subplots(2,1,figsize=(4.5,8),height_ratios=[0.75,1],gridspec_kw={'hspace':0.1})
-
-    # fig = plt.figure(figsize=(4.5,6))
-    # gs = plt.GridSpec(1, 2, hspace = 0.1, wspace = 0.05)
-    # ax0 = fig.add_subplot(gs[0])
-    # ax1 = fig.add_subplot(gs[1])
 
     f = f'bands/{order}_U_{U:3.2f}_N_{n:3.2f}.hdf5'
     with h5py.File(f,'r') as db:
-        evals = db['eigenvalues'][...] * conv
+        evals = db['eigenvalues'][...] #* conv
         dist = db['kpts_vert_distances'][...]
-        ef = db['fermi_energy'][...] * conv
-        # print(db.keys())
-        # kpts = db['kpts_rlu'][...]
+        ef = db['fermi_energy'][...] #* conv
+
+    ax[0].axhline(ef,lw=0.75,ls='--',c='k')
 
     num_kpts, num_bands, num_spin = evals.shape
 
@@ -42,9 +36,10 @@ def plot_electrons(n,U,order):
 
     kpts = np.linspace(0,1,num_kpts)
 
-    ax[0].plot(kpts,evals[...,0],c='r',lw=2)
-    ax[0].plot(kpts,evals[...,1],c='b',lw=2)
-    ax[0].axhline(ef,lw=0.75,ls='--',c='m')
+    for ii in range(num_bands):
+        ax[0].plot(kpts,evals[:,ii,0],c='r',lw=2)
+        ax[0].plot(kpts,evals[:,ii,1],c='b',lw=2)
+
     for d in dist:
         ax[0].axvline(d,lw=0.5,ls=':',c=(0.25,0.25,0.25))
 
@@ -52,29 +47,32 @@ def plot_electrons(n,U,order):
 
     f = f'nscf/{order}_U_{U:3.2f}_N_{n:3.2f}.hdf5'
     with h5py.File(f,'r') as db:
+
         fermi_surface = db['fermi_surface'][...]
         if not 'kpts_mesh' in db.keys():                
             exit('do calculation on mesh instead')
         kpts_mesh = db['kpts_mesh'][...]
         kpts = db['kpts_rlu'][...]
+        metal = db['is_metal'][...]
 
-        ef = db['fermi_energy'][...] * conv
-
-    ax[0].axhline(ef,lw=0.75,ls='--',c='b')
+    # ax[0].axhline(ef,lw=0.75,ls='--',c='b')
+    # ax[0].axhline(ef,lw=0.75,ls='--',c='k')
 
     shape = fermi_surface.shape
     num_kpts = shape[0]
     num_bands = shape[1]
     num_spin = shape[2]
 
-    fermi_surface = fermi_surface.sum(axis=1)
-    fermi_surface /= fermi_surface.max()
+    fermi_surface = np.nansum(fermi_surface,axis=1)
+    # fermi_surface = fermi_surface.sum(axis=1)
+    # fermi_surface /= np.nanmax(fermi_surface)
 
     x, y = get_points(fermi_surface[...,0],kpts) # spin up
     ax[1].scatter(x,y,s=0.5,c='r',alpha=0.75)
-
     x, y = get_points(fermi_surface[...,1],kpts) # spin down
     ax[1].scatter(x,y,s=0.5,c='b',alpha=0.75)
+
+    ax[0].set_title(f'metal: {metal}, {f}')
 
     # -----------------------------------------
 
@@ -118,19 +116,22 @@ if __name__ == '__main__':
             [ 0.5,   1.4, 'afm'],
             [ 0.5,   1.5, 'afm'],
             [ 0.5,   2.0, 'afm'],
-            [ 0.5,     4, 'afm'],
-            [ 0.5,     6, 'afm'],
-            [ 0.5,    10, 'afm'],
-            [ 0.4,     4, 'afm'],
-            [0.45,   2.5, 'afm'],
             [0.475,    2, 'afm'],
-            [0.4,      5, 'fim'],
-            [0.4,      8, 'fim'],
-            [0.45,     3, 'fim'],
+            [0.45,     3, 'afm'],
+            [ 0.4,     4, 'afm'],
+            [ 0.3,     7, 'afm'],
+            [0.4,     5, 'fim'],
+            [0.4,     6, 'fim'],
+            [0.4,     7, 'fim'],
+            [0.475,    3, 'fim'],
+            [0.475,    4, 'fim'],
+            [0.475,    5, 'fim'],
+            [0.475,   10, 'fim'],
+            [0.475,   20, 'fim'],
             [0.45,     4, 'fim'],
+            [0.45,     5, 'fim'],
             [0.45,     6, 'fim'],
-            [0.45,     8, 'fim'],
-            [0.475,   20, 'fim']]  
+            [0.45,    10, 'fim']]   
     num_calcs = len(calcs)
 
     for calc in calcs:
