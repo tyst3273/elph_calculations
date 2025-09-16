@@ -38,11 +38,6 @@ def get_specfun(energy,freqs,real,imag,adiabatic,eta):
 
             d = real[:,ii,jj]
             d0 = adiabatic[ii,jj]
-            
-            #g = 0.0
-            #d = d0
-            #d -= d0
-            #d = 0.0
 
             b[:,ii,jj] = -2*wq * (2*wq*g - 2*energy*eta) / \
                     ( (energy**2 - wq**2 - 2*wq*d)**2 + (2*wq*g - 2*energy*eta)**2 )

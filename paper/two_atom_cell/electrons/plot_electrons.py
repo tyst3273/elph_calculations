@@ -28,13 +28,13 @@ def plot_electrons(n,U,order):
         dist = db['kpts_vert_distances'][...]
         ef = db['fermi_energy'][...] #* conv
 
-    ax[0].axhline(ef,lw=0.75,ls='--',c='k')
-
     num_kpts, num_bands, num_spin = evals.shape
 
     dist /= dist.max()
 
     kpts = np.linspace(0,1,num_kpts)
+    ax[0].axhline(ef,lw=0.75,ls='--',c='k')
+    ax[0].fill_between(kpts,ef+0.08,ef-0.08,color='m',alpha=0.1)
 
     for ii in range(num_bands):
         ax[0].plot(kpts,evals[:,ii,0],c='r',lw=2)
@@ -105,33 +105,39 @@ def plot_electrons(n,U,order):
 if __name__ == '__main__':
 
     calcs = [[ 0.5,   0.5, 'afm'],
-            [ 0.5,   0.6, 'afm'],
-            [ 0.5,   0.7, 'afm'],
-            [ 0.5,   0.8, 'afm'],
-            [ 0.5,   0.9, 'afm'],
-            [ 0.5,   1.0, 'afm'],
-            [ 0.5,   1.1, 'afm'],
-            [ 0.5,   1.2, 'afm'],
-            [ 0.5,   1.3, 'afm'],
-            [ 0.5,   1.4, 'afm'],
-            [ 0.5,   1.5, 'afm'],
-            [ 0.5,   2.0, 'afm'],
-            [0.475,    2, 'afm'],
-            [0.45,     3, 'afm'],
-            [ 0.4,     4, 'afm'],
-            [ 0.3,     7, 'afm'],
-            [0.4,     5, 'fim'],
-            [0.4,     6, 'fim'],
-            [0.4,     7, 'fim'],
-            [0.475,    3, 'fim'],
-            [0.475,    4, 'fim'],
-            [0.475,    5, 'fim'],
-            [0.475,   10, 'fim'],
-            [0.475,   20, 'fim'],
-            [0.45,     4, 'fim'],
-            [0.45,     5, 'fim'],
-            [0.45,     6, 'fim'],
-            [0.45,    10, 'fim']]   
+             [ 0.5,   0.6, 'afm'],
+             [ 0.5,   0.7, 'afm'],
+             [ 0.5,   0.8, 'afm'],
+             [ 0.5,   0.9, 'afm'],
+             [ 0.5,   1.0, 'afm'],
+             [ 0.5,   1.1, 'afm'],
+             [ 0.5,   1.2, 'afm'],
+             [ 0.5,   1.3, 'afm'],
+             [ 0.5,   1.4, 'afm'],
+             [ 0.5,   1.5, 'afm'],
+             [ 0.5,   2.0, 'afm'],
+             [0.475,    2, 'afm'],
+             [0.45,     3, 'afm'],
+             [ 0.4,     4, 'afm'],
+             [ 0.3,     7, 'afm'],
+              [0.4,     5, 'fim'],
+              [0.4,     6, 'fim'],
+              [0.4,     7, 'fim'],
+             [0.475,    3, 'fim'],
+             [0.475,    4, 'fim'],
+             [0.475,    5, 'fim'],
+             [0.475,   10, 'fim'],
+             [0.475,   20, 'fim'],
+             [0.45,     4, 'fim'],
+             [0.45,     5, 'fim'],
+             [0.45,     6, 'fim'],
+             [0.45,    10, 'fim'],
+            [ 0.5,   2.5, 'afm'],
+            [ 0.5,   3.0, 'afm'],
+            [ 0.5,   3.5, 'afm'],
+            [ 0.5,   4.0, 'afm'],
+            [ 0.5,   4.5, 'afm'],
+            [ 0.5,   5.0, 'afm']]   
     num_calcs = len(calcs)
 
     for calc in calcs:

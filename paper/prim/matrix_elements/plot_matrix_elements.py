@@ -2,11 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import h5py
 
-e_scale = 3.0/8.0
+e_scale = 3.0/8.0 * 1000
 
 with h5py.File('matrix_elements.hdf5','r') as db:
     matrix_elements = db['elph_matrix_elements'][...].squeeze()
-    freqs = db['frequencies'][...]*e_scale*1000
+    freqs = db['frequencies'][...]* e_scale 
     xi = db['coupled_orbital_area_modulation'][...].squeeze()
     qpts_rlu = db['qpts_rlu'][...]
     if 'qpts_distances' in db.keys():
@@ -25,11 +25,11 @@ verts = verts/dists.max()
 fig, ax = plt.subplots(figsize=(4.5,6))
             # gridspec_kw={'hspace':0.05,'wspace':0.1,'height_ratios':[0.75,1]})
 
-scale = 0.25
+g = -0.0025
 
 for ii in range(num_modes):
 
-    x = np.abs(xi[:,ii])*scale
+    x = np.abs(xi[:,ii]) * e_scale * g
     hi = freqs[:,ii]+x
     lo = freqs[:,ii]-x
 
@@ -67,7 +67,7 @@ for _ax in [ax]: #ax.ravel():
     _ax.tick_params(which='minor',length=2)
     _ax.set_rasterized = True
 
-ax.axis([0,1,0.0,80])
+# ax.axis([0,1,0.0,80])
 
 labels = [r'$\Gamma$','X','M',r'$\Gamma$']
 ax.set_xticks(verts)
@@ -75,7 +75,7 @@ ax.set_xticklabels(labels)
 
 ax.set_ylabel('Energy [meV]',fontsize=12,labelpad=5)
 
-plt.savefig(f'matrix_elements.png',dpi=300,bbox_inches='tight')
+# plt.savefig(f'matrix_elements.png',dpi=300,bbox_inches='tight')
 plt.show()
 # plt.close()
 

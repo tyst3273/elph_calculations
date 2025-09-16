@@ -101,15 +101,15 @@ def plot_specfunc(filename):
     for v in qpts_verts:
         ax.axvline(v,lw=0.5,ls=':',c='w')
 
-    num_bands = freqs.shape[1]
-    for ii in range(num_bands):
+    # num_bands = freqs.shape[1]
+    # for ii in range(num_bands):
 
-        hi = new_freqs+fwhm/2
-        lo = new_freqs-fwhm/2
-        ax.fill_between(qpts,hi[:,ii],lo[:,ii],color='g',alpha=0.25)
-        ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls='-')
+    #     hi = new_freqs+fwhm/2
+    #     lo = new_freqs-fwhm/2
+    #     ax.fill_between(qpts,hi[:,ii],lo[:,ii],color='g',alpha=0.25)
+    #     ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls='-')
 
-        ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
+    #     ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
 
     # -------------------
 
@@ -149,33 +149,39 @@ if __name__ == '__main__':
 
     # parameters to sweep
     calcs = [[ 0.5,   0.5, 'afm'],
-            [ 0.5,   0.6, 'afm'],
-            [ 0.5,   0.7, 'afm'],
-            [ 0.5,   0.8, 'afm'],
-            [ 0.5,   0.9, 'afm'],
-            [ 0.5,   1.0, 'afm'],
-            [ 0.5,   1.1, 'afm'],
-            [ 0.5,   1.2, 'afm'],
-            [ 0.5,   1.3, 'afm'],
-            [ 0.5,   1.4, 'afm'],
-            [ 0.5,   1.5, 'afm'],
-            [ 0.5,   2.0, 'afm'],
-            [0.475,    2, 'afm'],
-            [0.45,     3, 'afm'],
-            [ 0.4,     4, 'afm'],
-            [ 0.3,     7, 'afm'],
-            [0.4,     5, 'fim'],
-            [0.4,     6, 'fim'],
-            [0.4,     7, 'fim'],
-            [0.475,    3, 'fim'],
-            [0.475,    4, 'fim'],
-            [0.475,    5, 'fim'],
-            [0.475,   10, 'fim'],
-            [0.475,   20, 'fim'],
-            [0.45,     4, 'fim'],
-            [0.45,     5, 'fim'],
-            [0.45,     6, 'fim'],
-            [0.45,    10, 'fim']]   
+             [ 0.5,   0.6, 'afm'],
+             [ 0.5,   0.7, 'afm'],
+             [ 0.5,   0.8, 'afm'],
+             [ 0.5,   0.9, 'afm'],
+             [ 0.5,   1.0, 'afm'],
+             [ 0.5,   1.1, 'afm'],
+             [ 0.5,   1.2, 'afm'],
+             [ 0.5,   1.3, 'afm'],
+             [ 0.5,   1.4, 'afm'],
+             [ 0.5,   1.5, 'afm'],
+             [ 0.5,   2.0, 'afm'],
+             [0.475,    2, 'afm'],
+             [0.45,     3, 'afm'],
+             [ 0.4,     4, 'afm'],
+             [ 0.3,     7, 'afm'],
+              [0.4,     5, 'fim'],
+              [0.4,     6, 'fim'],
+              [0.4,     7, 'fim'],
+             [0.475,    3, 'fim'],
+             [0.475,    4, 'fim'],
+             [0.475,    5, 'fim'],
+             [0.475,   10, 'fim'],
+             [0.475,   20, 'fim'],
+             [0.45,     4, 'fim'],
+             [0.45,     5, 'fim'],
+             [0.45,     6, 'fim'],
+             [0.45,    10, 'fim'],   
+            [ 0.5,   2.5, 'afm'],
+            [ 0.5,   3.0, 'afm'],
+            [ 0.5,   3.5, 'afm'],
+            [ 0.5,   4.0, 'afm'],
+            [ 0.5,   4.5, 'afm'],
+            [ 0.5,   5.0, 'afm']]  
     num_calcs = len(calcs)
 
     for ii in range(num_calcs):
