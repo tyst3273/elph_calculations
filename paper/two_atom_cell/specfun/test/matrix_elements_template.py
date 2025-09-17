@@ -1,7 +1,7 @@
 
 debug = False
 
-task = 'phonon_self_energy' 
+task = 'elph_matrix_elements' 
 temperature = 0.001
 
 atom_files = ['Cu.py','O.py']
@@ -23,19 +23,19 @@ use_spin = True
 
 kpts_option = 'mesh'
 kpts_mesh = [50,50,1]
-num_kpts_procs = 2
+num_kpts_procs = 8
 
 hopping_file = 'hopping.py'
 spring_constants_file = 'spring_constants.py'
 
-num_qpts_procs = 1
 qpts_option = 'path'
+# qpts_path = [[   0,   0,   0],
+#              [ 1/2, 1/2,   0],
+#              [   0,   1,   0],
+#              [   0,   0,   0]]
 qpts_path = [[   0,   0,   0],
-             [ 1/2, 1/2,   0],
-             [   0,   1,   0],
-             [   0,   0,   0]]
+             [ 1/2, 1/2,   0]]
 qpts_steps = 50
-num_qpts_procs = 8
 
 use_qpts_symmetry = False
 
@@ -46,7 +46,7 @@ do_electron_scf = False
 
 ### --- electron phonon ---
 
-elph_phonon_frequency_window = [0.15,0.25]
+# elph_phonon_frequency_window = [0.15,0.25]
 
 phonon_self_energy_step = 0.00025
 phonon_self_energy_eps = 0.2
@@ -54,7 +54,7 @@ phonon_spectral_function_eps = 0.0001
 
 num_electrons = 2.0
 
-elph_output_file = 'skip.hdf5'
+elph_output_file = 'fold.hdf5'
 
 
 

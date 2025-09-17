@@ -77,6 +77,8 @@ def get_data(input_file):
     new_freqs *= conv
     fwhm *= conv
 
+    qpts = np.linspace(0,1,qpts.size)
+
     return spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts
 
 # --------------------------------------------------------------------------------------------------
@@ -101,15 +103,15 @@ def plot_specfunc(filename):
     for v in qpts_verts:
         ax.axvline(v,lw=0.5,ls=':',c='w')
 
-    # num_bands = freqs.shape[1]
-    # for ii in range(num_bands):
+    num_bands = freqs.shape[1]
+    for ii in range(num_bands):
 
-    #     hi = new_freqs+fwhm/2
-    #     lo = new_freqs-fwhm/2
-    #     ax.fill_between(qpts,hi[:,ii],lo[:,ii],color='g',alpha=0.25)
-    #     ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls='-')
+        hi = new_freqs+fwhm/2
+        lo = new_freqs-fwhm/2
+        ax.fill_between(qpts,hi[:,ii],lo[:,ii],color='g',alpha=0.25)
+        ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls='-')
 
-    #     ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
+        ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
 
     # -------------------
 

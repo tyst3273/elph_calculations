@@ -11,35 +11,38 @@ import time
 
 input_file = 'specfun_template.py'
 
-kwargs = {'elph_output_file' : f'nk_100_T_0.01.hdf5',
-          'temperature' : 0.01}
+qpts_path = [[   0,   0,   0],
+             [ 1/2, 1/2,   0]]
+kwargs = {'elph_output_file' : f'q1_new.hdf5',
+          'qpts_path' : qpts_path}
 ELPH = c_ELPH(input_file)
 ELPH.set_config(**kwargs)
 ELPH.run()
 
-kwargs = {'elph_output_file' : f'nk_100_T_0.001.hdf5',
-          'temperature' : 0.001}
+qpts_path = [[   0,   0,   0],
+             [-1/2, 1/2,   0]]
+kwargs = {'elph_output_file' : f'q2_new.hdf5',
+          'qpts_path' : qpts_path}
 ELPH = c_ELPH(input_file)
 ELPH.set_config(**kwargs)
 ELPH.run()
 
-kwargs = {'elph_output_file' : f'nk_100_T_0.0001.hdf5',
-          'temperature' : 0.0001}
-ELPH = c_ELPH(input_file)
-ELPH.set_config(**kwargs)
-ELPH.run()
+# qpts_path = [[   0,   0,   0],
+#              [ 1/2,-1/2,   0]]
+# kwargs = {'elph_output_file' : f'q3_new.hdf5',
+#           'qpts_path' : qpts_path}
+# ELPH = c_ELPH(input_file)
+# ELPH.set_config(**kwargs)
+# ELPH.run()
 
-kwargs = {'elph_output_file' : f'nk_100_T_0.00001.hdf5',
-          'temperature' : 0.00001}
-ELPH = c_ELPH(input_file)
-ELPH.set_config(**kwargs)
-ELPH.run()
+# qpts_path = [[   0,   0,   0],
+#              [-1/2,-1/2,   0]]
+# kwargs = {'elph_output_file' : f'q4_new.hdf5',
+#           'qpts_path' : qpts_path}
+# ELPH = c_ELPH(input_file)
+# ELPH.set_config(**kwargs)
+# ELPH.run()
 
-kwargs = {'elph_output_file' : f'nk_100_T_0.000001.hdf5',
-          'temperature' : 0.000001}
-ELPH = c_ELPH(input_file)
-ELPH.set_config(**kwargs)
-ELPH.run()
 
 # --------------------------------------------------------------------------------------------------
 

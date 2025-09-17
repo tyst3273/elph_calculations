@@ -13,8 +13,8 @@ atom_positions = [[0.00,0.00,0.00],
                   [0.25,0.75,0.00],
                   [0.75,0.75,0.00]]
 
-spin_up_site_density = [1, 0,  0, 0, 0, 0]
-spin_down_site_density = [0, 1,  0, 0, 0, 0]
+spin_up_site_density = [1, 1,  0, 0, 0, 0]
+spin_down_site_density = [1, 1,  0, 0, 0, 0]
 
 hopping_file = 'hopping.py'
 orbital_type = 'tight_binding'

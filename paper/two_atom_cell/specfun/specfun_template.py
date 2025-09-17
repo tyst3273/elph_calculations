@@ -1,5 +1,5 @@
 
-debug = False
+debug = True
 
 task = 'phonon_self_energy' 
 temperature = 0.001

@@ -43,7 +43,8 @@ def get_specfun(energy,freqs,real,imag,adiabatic,eta):
             d = real[:,ii,jj]
             d0 = adiabatic[ii,jj]
 
-            d -= d0
+            g = 0.0
+            # d-= d0
 
             b[:,ii,jj] = -2*wq * (2*wq*g - 2*energy*eta) / \
                     ( (energy**2 - wq**2 - 2*wq*d)**2 + (2*wq*g - 2*energy*eta)**2 )
@@ -108,10 +109,10 @@ def plot_specfunc(filename):
     num_bands = freqs.shape[1]
     for ii in range(num_bands):
 
-        hi = new_freqs+fwhm/2
-        lo = new_freqs-fwhm/2
-        ax.fill_between(qpts,hi[:,ii],lo[:,ii],color='g',alpha=0.25)
-        ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls='-')
+        # hi = new_freqs+fwhm/2
+        # lo = new_freqs-fwhm/2
+        # ax.fill_between(qpts,hi[:,ii],lo[:,ii],color='g',alpha=0.25)
+        # ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls='-')
 
         ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
 
@@ -127,8 +128,8 @@ def plot_specfunc(filename):
         _ax.set_rasterization_zorder = 1000000000
 
     ax.axis([0,1,62,80])
-    ax.set_xticks(qpts_verts)
-    ax.set_xticklabels([r'$\Gamma$','X','M',r'$\Gamma$'])
+    # ax.set_xticks(qpts_verts)
+    # ax.set_xticklabels([r'$\Gamma$','X','M',r'$\Gamma$'])
     ax.set_ylabel('Energy [meV]',fontsize=10,labelpad=5)
 
     ax.set_title(filename)
