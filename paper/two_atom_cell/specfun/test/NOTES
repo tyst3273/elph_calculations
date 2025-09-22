@@ -8,3 +8,7 @@ then i set the 1st non-zero element of each eigenvector to be real for each band
 
 OH! the eigenvectors of the perturbation matrix arent the new eigenvectors, they are the expansion
 coefficients of the subspace eigenvectors ... see eq. 38
+
+STATUS: parallelized it, but not correctly yet. each call to fix_gauge uses "this_kpt" etc to get 
+eigenvalues and vectors from global array, but that isnt in the scope. not until each proc returns
+its stuff
