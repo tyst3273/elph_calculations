@@ -46,7 +46,7 @@ do_electron_scf = False
 
 ### --- electron phonon ---
 
-elph_phonon_frequency_window = [0.15,0.25]
+# elph_phonon_frequency_window = [0.15,0.25]
 
 phonon_self_energy_step = 0.00025
 phonon_self_energy_eps = 0.2
@@ -54,7 +54,7 @@ phonon_spectral_function_eps = 0.0001
 
 num_electrons = 2.0
 
-elph_output_file = 'skip.hdf5'
+elph_output_file = 'elph_out.hdf5'
 
 
 
