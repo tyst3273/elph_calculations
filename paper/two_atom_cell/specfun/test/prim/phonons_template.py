@@ -1,7 +1,7 @@
 
-debug = True
+debug = False
 
-task = 'phonon_self_energy' 
+task = 'phonons' 
 temperature = 0.001
 
 atom_files = ['Cu.py','O.py']
@@ -16,16 +16,6 @@ atom_positions = [[0.00,0.00,0.00],
                   [0.25,0.75,0.00],
                   [0.75,0.75,0.00]]
 
-orbital_type = 'tight_binding'
-
-use_hubbard_U = True
-use_spin = True
-
-kpts_option = 'mesh'
-kpts_mesh = [50,50,1]
-num_kpts_procs = 2
-
-hopping_file = 'hopping.py'
 spring_constants_file = 'spring_constants.py'
 
 num_qpts_procs = 10
@@ -40,25 +30,9 @@ qpts_steps = 50
 
 use_qpts_symmetry = False
 
-site_density_input_file = 'nscf.hdf5'
+phonon_output_file = '1.hdf5'
 
-electron_fixed_fermi_energy = True
-do_electron_scf = False
-
-### --- electron phonon ---
-
-# elph_phonon_frequency_window = [0.15,0.25]
-
-phonon_self_energy_step = 0.00025
-phonon_self_energy_eps = 0.2
-phonon_spectral_function_eps = 0.0001
-
-num_electrons = 2.0
-
-elph_output_file = '2.hdf5'
-
-
-
+_plot_phonon_bands = True
 
 
 

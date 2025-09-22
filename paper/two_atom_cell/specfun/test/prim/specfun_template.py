@@ -5,16 +5,15 @@ task = 'phonon_self_energy'
 temperature = 0.001
 
 atom_files = ['Cu.py','O.py']
-lattice_vectors = [[ 2**(1/2),     0.00,     0.00],
-                   [     0.00, 2**(1/2),     0.00],
+lattice_vectors = [[     1.00,     0.00,     0.00],
+                   [     0.00,     1.00,     0.00],
                    [     0.00,     0.00,    10.00]]
-atom_types = ['Cu','Cu','O','O','O','O']
+atom_types = ['Cu','O','O']
 atom_positions = [[0.00,0.00,0.00],
-                  [0.50,0.50,0.00],
-                  [0.25,0.25,0.00],
-                  [0.75,0.25,0.00],
-                  [0.25,0.75,0.00],
-                  [0.75,0.75,0.00]]
+                  [0.50,0.00,0.00],
+                  [0.00,0.50,0.00]]
+spin_up_site_density = [1, 0, 0]
+spin_down_site_density = [1, 0, 0]
 
 orbital_type = 'tight_binding'
 
@@ -31,8 +30,8 @@ spring_constants_file = 'spring_constants.py'
 num_qpts_procs = 1
 qpts_option = 'path'
 qpts_path = [[   0,   0,   0],
+             [ 1/2,   0,   0],
              [ 1/2, 1/2,   0],
-             [   0,   1,   0],
              [   0,   0,   0]]
 qpts_steps = 50
 num_qpts_procs = 8
@@ -46,13 +45,11 @@ do_electron_scf = False
 
 ### --- electron phonon ---
 
-elph_phonon_frequency_window = [0.15,0.25]
+# elph_phonon_frequency_window = [0.15,0.25]
 
 phonon_self_energy_step = 0.00025
 phonon_self_energy_eps = 0.2
 phonon_spectral_function_eps = 0.0001
-
-num_electrons = 2.0
 
 elph_output_file = 'elph_out.hdf5'
 
