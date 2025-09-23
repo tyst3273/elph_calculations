@@ -32,9 +32,10 @@ qpts_path = [[   0,   0,   0],
              [ 1/2,   0,   0],
              [ 1/2, 1/2,   0],
              [   0,   0,   0]]
-# qpts_path = [[   0,   0,   0],
-#              [ 1/2, 1/2,   0]]
-qpts_steps = 25
+# qpts_path = [[-1/2,   0,   0],
+#              [   0,   0,   0],
+#              [ 1/2,   0,   0]]
+qpts_steps = 51
 
 use_qpts_symmetry = False
 
@@ -45,7 +46,7 @@ do_electron_scf = False
 
 ### --- electron phonon ---
 
-elph_output_file = 'matelem_1.hdf5'
+elph_output_file = 'matelem.hdf5'
 
 
 
