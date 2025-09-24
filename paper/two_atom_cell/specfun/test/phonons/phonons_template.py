@@ -21,8 +21,8 @@ spring_constants_file = 'spring_constants.py'
 num_qpts_procs = 10
 qpts_option = 'path'
 qpts_path = [[   0,   0,   0],
-             [ 1/2, 1/2,   0],
-             [   0,   1,   0],
+             [ 1/2, 0.11,   0],
+             [   0.387,   1,   0],
              [   0,   0,   0]]
 # qpts_path = [[-1/2,-1/2,   0],
 #              [ 1/2, 1/2,   0]]
