@@ -22,13 +22,12 @@ use_hubbard_U = True
 use_spin = True
 
 kpts_option = 'mesh'
-kpts_mesh = [100,100,1]
+kpts_mesh = [50,50,1]
 num_kpts_procs = 3
 
 hopping_file = 'hopping.py'
 spring_constants_file = 'spring_constants.py'
 
-num_qpts_procs = 1
 qpts_option = 'path'
 qpts_path = [[   0,   0,   0],
              [ 1/2, 1/2,   0],
