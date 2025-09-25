@@ -17,10 +17,11 @@ class c_connectivity:
 
         with h5py.File(filename,'r') as db:
 
-            # [qpts, bands, basis]
-            self.evecs = db['eigenvectors'][...]
+            # [qpts, bands, basis] : note that bands/basis order is backwards from 
+            # common definition
+            self.evecs = db['eigenvectors'][...] 
 
-            # [qpts, bands]
+            # [qpts, bands] 
             self.freqs = db['frequencies'][...]
 
             self.qpts = db['qpts_rlu'][...]
@@ -32,6 +33,11 @@ class c_connectivity:
         # sort modes are neighboring qpts according to size of projection
         self._connect_bands()
 
+        for ii in range(self.num_bands):
+            plt.plot(self.qpts_dists,self.freqs[:,ii])
+        plt.show()
+        exit()
+
         # find all the degeneracies
         self._find_all_degeneracies()
 
@@ -42,16 +48,32 @@ class c_connectivity:
         """
         sort modes are neighboring qpts according to size of projection 
             P_nm = | < q, n| q + dq, m >|**2
+
+        NOTE: below, k = q+dq
         """
 
-        self.band_order = np.zeros(self.freqs.size,dtype=int)
+        self.band_order = np.zeros(self.freqs.shape,dtype=int)
+        self.band_order[0,:] = np.arange(self.num_bands)
 
-        for ii in range(self.num_qpts-1):
+        for ii in range(1,self.num_qpts):
 
-            _e_q0 = self.evecs[ii,...] 
-            _e_q1 = self.evecs[ii+1,...]
+            _eq = self.evecs[ii-1,...]
+            _ek = self.evecs[ii,...]
 
-            
+            _Pqk = np.abs( _eq.conj() @ _ek.T )**2
+
+            _order = []
+            for nn in range(self.num_bands):
+
+                _sorted = np.flip(np.argsort(_Pqk[nn,:]))
+                for mm in _sorted:
+                    if mm not in _order:
+                        _order.append(int(mm))
+                        break
+
+            self.freqs[ii,:] = self.freqs[ii,_order]
+            self.evecs[ii,...] = self.evecs[ii,_order,:]
+            self.band_order[ii,:] = _order
 
     # ----------------------------------------------------------------------------------------------
 
