@@ -17,8 +17,7 @@ class c_connectivity:
 
         with h5py.File(filename,'r') as db:
 
-            # [qpts, bands, basis] : note that bands/basis order is backwards from 
-            # common definition
+            # [qpts, bands, basis] : note that bands/basis order backwards from common definition
             self.evecs = db['eigenvectors'][...] 
 
             # [qpts, bands] 
@@ -77,10 +76,11 @@ class c_connectivity:
 
     # ----------------------------------------------------------------------------------------------
 
-    def _find_all_degeneracies(self):
+    def _find_all_degeneracies_unconnected(self):
 
         """
-        loop over all q-points and find any degeneracies
+        loop over all q-points and find any degeneracies -- only works for unconnected bands since
+        this algo assumes that the bands are sorted in ascending order of frequency
         """
 
         self.num_degen_manifolds = []
