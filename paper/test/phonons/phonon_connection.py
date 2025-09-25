@@ -48,20 +48,10 @@ class c_connectivity:
 
         for ii in range(self.num_qpts-1):
 
-            _e_q1 = self.evecs[ii,...] 
-            _e_q2 = self.evecs[ii,...]
+            _e_q0 = self.evecs[ii,...] 
+            _e_q1 = self.evecs[ii+1,...]
 
-            _freqs = self.freqs[ii,:]
-            _num_degen, _sizes, _freqs, _manifolds = \
-                self._find_degenerate_manifolds(_freqs)
             
-            if _num_degen != 0:
-                self.has_degeneracies[ii] = True
-
-            self.num_degen_manifolds.append(_num_degen)
-            self.manifold_sizes.append(_sizes)
-            self.manifold_freqs.append(_freqs)
-            self.manifolds.append(_manifolds)
 
     # ----------------------------------------------------------------------------------------------
 
