@@ -29,8 +29,39 @@ class c_connectivity:
 
         self.num_qpts, self.num_bands, self.num_basis = self.evecs.shape
 
+        # sort modes are neighboring qpts according to size of projection
+        self._connect_bands()
+
         # find all the degeneracies
         self._find_all_degeneracies()
+
+    # ----------------------------------------------------------------------------------------------
+
+    def _connect_bands(self):
+
+        """
+        sort modes are neighboring qpts according to size of projection 
+            P_nm = | < q, n| q + dq, m >|**2
+        """
+
+        self.band_order = np.zeros(self.freqs.size,dtype=int)
+
+        for ii in range(self.num_qpts-1):
+
+            _e_q1 = self.evecs[ii,...] 
+            _e_q2 = self.evecs[ii,...]
+
+            _freqs = self.freqs[ii,:]
+            _num_degen, _sizes, _freqs, _manifolds = \
+                self._find_degenerate_manifolds(_freqs)
+            
+            if _num_degen != 0:
+                self.has_degeneracies[ii] = True
+
+            self.num_degen_manifolds.append(_num_degen)
+            self.manifold_sizes.append(_sizes)
+            self.manifold_freqs.append(_freqs)
+            self.manifolds.append(_manifolds)
 
     # ----------------------------------------------------------------------------------------------
 
