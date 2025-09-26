@@ -129,7 +129,7 @@ def plot_specfunc(filename):
     #     ax.fill_between(qpts,hi[:,ii],lo[:,ii],color='g',alpha=0.25)
     #     ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls='-')
 
-        # ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
+    #     ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
 
     # ---------------------------
 
