@@ -32,7 +32,7 @@ class c_connectivity:
         self.num_qpts, self.num_bands, self.num_basis = self.evecs.shape
         self.num_atoms = self.num_basis // 3
 
-        self.effective_charges = np.array([-2, -2, 1, 1, 1, 1],dtype=float)
+        self.effective_charges = np.array([2, 2, 1, 1, 1, 1],dtype=float)
 
         # self._calc_pam()
 
