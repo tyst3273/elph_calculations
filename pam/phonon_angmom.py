@@ -32,7 +32,7 @@ class c_connectivity:
         self.num_qpts, self.num_bands, self.num_basis = self.evecs.shape
         self.num_atoms = self.num_basis // 3
 
-        self.effective_charges = np.array([2, 2, 1, 1, 1, 1],dtype=float)
+        self.effective_charges = np.array([-2, -2, 1, 1, 1, 1],dtype=float)
 
         # self._calc_pam()
 
@@ -57,7 +57,7 @@ class c_connectivity:
         ### DEV ###
         fig, ax = plt.subplots(figsize=(4.5,4.5))
         for vv in range(self.num_bands):
-            ax.plot(self.qpts_dists,self.freqs[:,vv],c='k')
+            ax.plot(self.qpts_dists,self.freqs[:,vv],c='k',lw=0,ms=1)
             _hi = self.freqs[:,vv] + self.pam[:,vv]
             _lo = self.freqs[:,vv] - self.pam[:,vv]
             ax.fill_between(self.qpts_dists,_hi,_lo)
@@ -176,12 +176,13 @@ class c_connectivity:
 
                 _evals, _evecs = np.linalg.eigh(_pert)
                 self.new_freqs[qq,_manifold] = np.sqrt(_w**2+_evals)
-                print(_evals)
+
+                # self.new_evecs[qq,_manifold,...] = 
         
         ### DEV ###
         fig, ax = plt.subplots(figsize=(4.5,4.5))
         for ii in range(self.num_bands):
-            ax.plot(self.qpts_dists,self.new_freqs[:,ii])
+            ax.plot(self.qpts_dists,self.new_freqs[:,ii],lw=0,ms=1,marker='o')
         plt.show()
         ### DEV ###
 

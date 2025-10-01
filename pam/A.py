@@ -9,7 +9,7 @@ conduction orbitals: ...
 
 # atomic data
 atomic_number = 1
-atomic_mass = 4
+atomic_mass = 1
 num_valence = 1
 
 orbital_type = 'tight_binding'
