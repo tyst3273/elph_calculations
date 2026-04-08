@@ -22,35 +22,38 @@ use_hubbard_U = True
 use_spin = True
 
 kpts_option = 'mesh'
-# kpts_mesh = [50,50,1]
-kpts_mesh = [10,10,1]
-num_kpts_procs = 6
+kpts_mesh = [50,50,1]
+# kpts_mesh = [10,10,1]
+num_kpts_procs = 10
 
 hopping_file = 'hopping.py'
 spring_constants_file = 'spring_constants.py'
 
 qpts_option = 'path'
-qpts_path = [[   0,   0,   0],
-             [ 1/2, 1/2,   0],
-             [   0,   1,   0],
-             [   0,   0,   0]]
-# qpts_path = [[-1/2,-1/2,   0],
-#              [   0,   0,   0],
-#              [ 1/2, 1/2,   0]]
-qpts_steps = 51
+# qpts_path = [[   0,   0,   0],
+#              [ 1/2, 1/2,   0],
+#              [   0,   1,   0],
+#              [   0,   0,   0]]
+qpts_steps = 25
 
 use_qpts_symmetry = False
 
 site_density_input_file = 'nscf.hdf5'
 
-electron_fixed_fermi_energy = True
+# electron_fixed_fermi_energy = True
 do_electron_scf = False
 
 ### --- electron phonon ---
 
 num_electrons = 2.0
 
-elph_output_file = 'matelem.hdf5'
+qpts_path = [[   0,   0,   0],
+             [ 1/2, 1/2,   0]]
+elph_output_file = 'matelem_1.hdf5'
+
+# qpts_path = [[   0,   0,   0],
+#              [-1/2, 1/2,   0]]
+# elph_output_file = 'matelem_2.hdf5'
 
 
 

@@ -22,9 +22,9 @@ use_hubbard_U = True
 use_spin = True
 
 kpts_option = 'mesh'
-# kpts_mesh = [50,50,1]
-kpts_mesh = [25,25,1]
-num_kpts_procs = 2
+kpts_mesh = [50,50,1]
+# kpts_mesh = [25,25,1]
+num_kpts_procs = 4
 
 hopping_file = 'hopping.py'
 spring_constants_file = 'spring_constants.py'
@@ -38,7 +38,7 @@ qpts_path = [[   0,   0,   0],
              [   0,   1,   0],
              [   0,   0,   0]]
 qpts_steps = 51
-num_qpts_procs = 3
+num_qpts_procs = 2
 
 use_qpts_symmetry = False
 
