@@ -103,24 +103,25 @@ def plot_specfunc(filename):
     for v in qpts_verts:
         ax.axvline(v,lw=0.5,ls=':',c='w')
 
-    num_bands = freqs.shape[1]
-    for ii in range(num_bands):
+    # num_bands = freqs.shape[1]
+    # for ii in range(num_bands):
 
-        hi = new_freqs+fwhm/2
-        lo = new_freqs-fwhm/2
-        ax.fill_between(qpts,hi[:,ii],lo[:,ii],color='g',alpha=0.25)
-        ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls='-')
+    #     hi = new_freqs+fwhm/2
+    #     lo = new_freqs-fwhm/2
+    #     ax.fill_between(qpts,hi[:,ii],lo[:,ii],color='g',alpha=0.25)
+    #     ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls='-')
 
-        ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
+    #     ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
 
     # -------------------
 
-    f = '/home/ty/research/repos/elph_calculations/paper/prim/specfun/specfun/pm_U_0.00_N_1.00.hdf5'
-    _, _, freqs, _, _, qpts, _ = get_data(f)
+    f = '/home/tyler/research/repos/elph_calculations/paper/prim/specfun/specfun/pm_U_0.00_N_1.00.hdf5'
+    _, _, freqs, new_freqs, _, qpts, _ = get_data(f)
 
     num_bands = freqs.shape[1]
     for ii in range(num_bands):
         ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c=c,lw=0.75,ls=(0,(2,1)))
+        ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='m',lw=0.75,ls=(0,(2,1)))
 
     # ---------------------------
 

@@ -27,21 +27,21 @@ ELPH = c_ELPH(input_file)
 ELPH.set_config(**kwargs)
 ELPH.run()
 
-# qpts_path = [[   0,   0,   0],
-#              [ 1/2,-1/2,   0]]
-# kwargs = {'elph_output_file' : f'q3_new.hdf5',
-#           'qpts_path' : qpts_path}
-# ELPH = c_ELPH(input_file)
-# ELPH.set_config(**kwargs)
-# ELPH.run()
+qpts_path = [[   0,   0,   0],
+             [ 1/2,-1/2,   0]]
+kwargs = {'elph_output_file' : f'q3_new.hdf5',
+          'qpts_path' : qpts_path}
+ELPH = c_ELPH(input_file)
+ELPH.set_config(**kwargs)
+ELPH.run()
 
-# qpts_path = [[   0,   0,   0],
-#              [-1/2,-1/2,   0]]
-# kwargs = {'elph_output_file' : f'q4_new.hdf5',
-#           'qpts_path' : qpts_path}
-# ELPH = c_ELPH(input_file)
-# ELPH.set_config(**kwargs)
-# ELPH.run()
+qpts_path = [[   0,   0,   0],
+             [-1/2,-1/2,   0]]
+kwargs = {'elph_output_file' : f'q4_new.hdf5',
+          'qpts_path' : qpts_path}
+ELPH = c_ELPH(input_file)
+ELPH.set_config(**kwargs)
+ELPH.run()
 
 
 # --------------------------------------------------------------------------------------------------

@@ -41,10 +41,11 @@ def plot_fs(input_file):
 
     fig, ax = plt.subplots(1,2,figsize=(8,3.5),clear=True,num=1)
 
-    vmax = max(up.max(),down.max())*0.1
-    vmin = 0.0
-    if vmax <= vmin:
-        vmin = vmax
+    vmax = max(up.max(),down.max())*0.2
+    vmin = vmax*0.99
+    # vmin = 0.0
+    # if vmax <= vmin:
+    #     vmin = vmax
 
     lw = 0.5
     ls = (0,(2,1,1,1))
@@ -62,20 +63,23 @@ def plot_fs(input_file):
             ax[1].imshow(down.T,cmap=blue,vmin=vmin,vmax=vmax,aspect=aspect,origin='lower',
                 interpolation='none',extent=extent)
 
-            # ax[0].plot([xx+0.5,xx+0.5],[-1.5,1.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
-            # ax[0].plot([xx-0.5,xx-0.5],[-1.5,1.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
-            # ax[0].plot([-1.5,1.5],[yy+0.5,yy+0.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
-            # ax[0].plot([-1.5,1.5],[yy-0.5,yy-0.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
+            ax[0].plot([xx+0.5,xx+0.5],[-1.5,1.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
+            ax[0].plot([xx-0.5,xx-0.5],[-1.5,1.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
+            ax[0].plot([-1.5,1.5],[yy+0.5,yy+0.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
+            ax[0].plot([-1.5,1.5],[yy-0.5,yy-0.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
 
-            # ax[1].plot([xx+0.5,xx+0.5],[-1.5,1.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
-            # ax[1].plot([xx-0.5,xx-0.5],[-1.5,1.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
-            # ax[1].plot([-1.5,1.5],[yy+0.5,yy+0.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
-            # ax[1].plot([-1.5,1.5],[yy-0.5,yy-0.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
+            ax[1].plot([xx+0.5,xx+0.5],[-1.5,1.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
+            ax[1].plot([xx-0.5,xx-0.5],[-1.5,1.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
+            ax[1].plot([-1.5,1.5],[yy+0.5,yy+0.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
+            ax[1].plot([-1.5,1.5],[yy-0.5,yy-0.5],lw=lw,ls=ls,c=c,ms=0,alpha=a)
 
     fig.suptitle(input_file)
 
-    ax[0].axis([-0.75,0.75,-0.75,0.75])
-    ax[1].axis([-0.75,0.75,-0.75,0.75])
+    # ax[0].axis([-0.75,0.75,-0.75,0.75])
+    # ax[1].axis([-0.75,0.75,-0.75,0.75])
+
+    ax[0].axis([-1.5,1.5,-1.5,1.5])
+    ax[1].axis([-1.5,1.5,-1.5,1.5])
 
     pdf = input_file.replace('hdf5','pdf')
     plt.savefig(pdf,dpi=100,bbox_inches='tight')
