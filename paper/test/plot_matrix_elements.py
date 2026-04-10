@@ -22,9 +22,8 @@ num_qpts = freqs.shape[0]
 num_modes = freqs.shape[1]
 qpts = np.linspace(0,1,qpts_rlu.shape[0])
 
-fig, ax = plt.subplots(figsize=(8,6))
+fig, ax = plt.subplots(1,3,figsize=(16,4))
 
-scale = 0.1
 
 for ii in range(num_modes-4,num_modes): 
 
@@ -34,14 +33,38 @@ for ii in range(num_modes-4,num_modes):
     # ax.fill_between(qpts,lo,hi,color='m',alpha=0.5)
     # ax.errorbar(qpts,freqs[:,ii],x,marker='o',ms=0,c='k',elinewidth=2)
 
-    ax.plot(qpts,freqs[:,ii],lw=1,ls='-',c='k')
+    ax[0].plot(qpts,freqs[:,ii],lw=1,ls='-',c='k')
+    ax[1].plot(qpts,freqs[:,ii],lw=1,ls='-',c='k')
+    ax[2].plot(qpts,freqs[:,ii],lw=1,ls='-',c='k')
 
-    g = np.abs(matrix_elements[:,ii])**2 * 0.1
-    # g = np.abs(matrix_elements[:,ii]).imag * scale ** 2
+    g = matrix_elements[:,ii].real * 0.025
+    hi = freqs[:,ii]+np.abs(g)
+    lo = freqs[:,ii]-np.abs(g)
+    ax[0].fill_between(qpts,lo,hi,color='k',alpha=0.25)
+    inds = np.flatnonzero( g <= 0 )
+    ax[0].errorbar(qpts[inds],freqs[inds,ii],np.abs(g[inds]),
+                   marker='o',ms=0,c='r',elinewidth=2,lw=0)
+    inds = np.flatnonzero( g > 0 )
+    ax[0].errorbar(qpts[inds],freqs[inds,ii],np.abs(g[inds]),
+                   marker='o',ms=0,c='b',elinewidth=2,lw=0)
+
+    g = matrix_elements[:,ii].imag * 0.025
+    hi = freqs[:,ii]+np.abs(g)
+    lo = freqs[:,ii]-np.abs(g)
+    ax[1].fill_between(qpts,lo,hi,color='k',alpha=0.25)
+    inds = np.flatnonzero( g <= 0 )
+    ax[1].errorbar(qpts[inds],freqs[inds,ii],np.abs(g[inds]),
+                   marker='o',ms=0,c='r',elinewidth=2,lw=0)
+    inds = np.flatnonzero( g > 0 )
+    ax[1].errorbar(qpts[inds],freqs[inds,ii],np.abs(g[inds]),
+                   marker='o',ms=0,c='b',elinewidth=2,lw=0)
+    
+
+    g = np.abs(matrix_elements[:,ii]) * 0.025
     hi = freqs[:,ii]+g
     lo = freqs[:,ii]-g
-    ax.fill_between(qpts,lo,hi,color='b',alpha=0.5)
-    ax.errorbar(qpts,freqs[:,ii],g,marker='o',ms=0,c='k',elinewidth=2)
+    ax[2].fill_between(qpts,lo,hi,color='k',alpha=0.25)
+    ax[2].errorbar(qpts,freqs[:,ii],g,marker='o',ms=0,c='k',elinewidth=2,lw=0)
 
 plt.show()
 

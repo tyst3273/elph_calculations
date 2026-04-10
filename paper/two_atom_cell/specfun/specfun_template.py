@@ -1,5 +1,6 @@
 
 debug = False
+# debug = True
 
 task = 'phonon_self_energy' 
 temperature = 0.001
@@ -23,13 +24,13 @@ use_spin = True
 
 kpts_option = 'mesh'
 # kpts_mesh = [100,100,1]
-kpts_mesh = [25,25,1]
-num_kpts_procs = 4
+kpts_mesh = [20,20,1]
+num_kpts_procs = 2
 
 hopping_file = 'hopping.py'
 spring_constants_file = 'spring_constants.py'
 
-num_qpts_procs = 4
+num_qpts_procs = 8
 qpts_option = 'path'
 qpts_path = [[   0,   0,   0],
              [ 1/2, 1/2,   0],
@@ -39,14 +40,13 @@ qpts_steps = 50
 
 electron_fixed_fermi_energy = True
 do_electron_scf = False
-fix_electron_gauge = True
+# fix_electron_gauge = True
 
 ### --- electron phonon ---
 
 phonon_self_energy_step = 0.00025
 phonon_self_energy_eps = 0.2
 phonon_spectral_function_eps = 0.0001
-
 
 """
 description: energy window around FS for calculating electron phonon matrix elements and 
