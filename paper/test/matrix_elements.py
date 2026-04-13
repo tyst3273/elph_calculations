@@ -45,10 +45,14 @@ do_electron_scf = False
 num_electrons = 2.0
 
 qpts_path = [[   0,   0,   0],
-             [ 1/2,   0,   0],
              [ 1/2, 1/2,   0],
-             [   0, 1/2,   0],
-             [   0,   0,   0]]
+             [   1,   0,   0]]
+
+# qpts_path = [[   0,   0,   0],
+#              [ 1/2,   0,   0],
+#              [ 1/2, 1/2,   0],
+#              [   0, 1/2,   0],
+#              [   0,   0,   0]]
 elph_output_file = 'matelems.hdf5'
 
 
