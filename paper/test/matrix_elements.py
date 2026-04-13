@@ -23,6 +23,7 @@ use_spin = True
 
 kpts_option = 'mesh'
 kpts_mesh = [24,24,1]
+# kpts_mesh = [48,48,1]
 # kpts_mesh = [10,10,1]
 num_kpts_procs = 10
 
