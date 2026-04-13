@@ -63,7 +63,9 @@ for ii in range(num_modes-4,num_modes):
 
     # ----------------------------------------------
 
-    g = matrix_elements[:,ii].real * 0.0025
+    scale = 10
+
+    g = matrix_elements[:,ii].real * 0.0025 * scale
     hi = freqs[:,ii]+np.abs(g)
     lo = freqs[:,ii]-np.abs(g)
     ax[0].fill_between(qpts,lo,hi,color='k',alpha=0.25)
@@ -74,7 +76,7 @@ for ii in range(num_modes-4,num_modes):
     ax[0].errorbar(qpts[inds],freqs[inds,ii],np.abs(g[inds]),
                    marker='o',ms=0,c='b',elinewidth=2,lw=0)
 
-    g = matrix_elements[:,ii].imag * 0.0025
+    g = matrix_elements[:,ii].imag * 0.0025 * scale
     hi = freqs[:,ii]+np.abs(g)
     lo = freqs[:,ii]-np.abs(g)
     ax[1].fill_between(qpts,lo,hi,color='k',alpha=0.25)
@@ -86,7 +88,7 @@ for ii in range(num_modes-4,num_modes):
                    marker='o',ms=0,c='b',elinewidth=2,lw=0)
     
 
-    g = np.abs(matrix_elements[:,ii]) * 0.0025
+    g = np.abs(matrix_elements[:,ii]) * 0.0025 * scale
     hi = freqs[:,ii]+g
     lo = freqs[:,ii]-g
     ax[2].fill_between(qpts,lo,hi,color='k',alpha=0.25)

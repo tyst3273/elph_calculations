@@ -117,52 +117,53 @@ ax0.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
 
 # -------------------
 
-f = 'specfun/afm_U_2.00_N_2.00.hdf5'
-spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
+# f = 'specfun/afm_U_2.00_N_2.00.hdf5'
+# spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
-norm = LogNorm(vmin=vmin,vmax=vmax)
-extent = [0,1,energy.min(),energy.max()]
-im = ax1.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-            interpolation='none',extent=extent)    
-
-# -------------------
-
-f = 'specfun/afm_U_2.00_N_1.90.hdf5'
-spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
-
-norm = LogNorm(vmin=vmin,vmax=vmax)
-extent = [0,1,energy.min(),energy.max()]
-ax2.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-            interpolation='none',extent=extent)    
+# norm = LogNorm(vmin=vmin,vmax=vmax)
+# extent = [0,1,energy.min(),energy.max()]
+# im = ax1.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+#             interpolation='none',extent=extent)    
 
 # -------------------
 
-f = 'specfun/afm_U_3.00_N_1.80.hdf5'
-spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
+# f = 'specfun/afm_U_2.00_N_1.90.hdf5'
+# spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
-norm = LogNorm(vmin=vmin,vmax=vmax)
-extent = [0,1,energy.min(),energy.max()]
-im = ax3.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-            interpolation='none',extent=extent)    
-# -------------------
-
-f = 'specfun/fim_U_10.00_N_1.80.hdf5'
-spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
-
-norm = LogNorm(vmin=vmin,vmax=vmax)
-extent = [0,1,energy.min(),energy.max()]
-ax4.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-            interpolation='none',extent=extent)    
+# norm = LogNorm(vmin=vmin,vmax=vmax)
+# extent = [0,1,energy.min(),energy.max()]
+# ax2.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+#             interpolation='none',extent=extent)    
 
 # -------------------
 
-f = 'specfun/afm_U_0.80_N_2.00.hdf5'
-spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
+# f = 'specfun/afm_U_3.00_N_1.80.hdf5'
+# spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
-norm = LogNorm(vmin=vmin,vmax=vmax)
-extent = [0,1,energy.min(),energy.max()]
-im = ax5.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-            interpolation='none',extent=extent)    
+# norm = LogNorm(vmin=vmin,vmax=vmax)
+# extent = [0,1,energy.min(),energy.max()]
+# im = ax3.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+#             interpolation='none',extent=extent)    
+
+# -------------------
+
+# f = 'specfun/fim_U_10.00_N_1.80.hdf5'
+# spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
+
+# norm = LogNorm(vmin=vmin,vmax=vmax)
+# extent = [0,1,energy.min(),energy.max()]
+# ax4.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+#             interpolation='none',extent=extent)    
+
+# -------------------
+
+# f = 'specfun/afm_U_0.80_N_2.00.hdf5'
+# spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
+
+# norm = LogNorm(vmin=vmin,vmax=vmax)
+# extent = [0,1,energy.min(),energy.max()]
+# im = ax5.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+#             interpolation='none',extent=extent)    
 
 # -------------------
 
@@ -176,12 +177,14 @@ for v in qpts_verts:
 
 # -------------------
 
-f = '/home/ty/research/repos/elph_calculations/paper/prim/specfun/specfun/pm_U_0.00_N_1.00.hdf5'
-_, _, freqs, _, _, qpts, _ = get_data(f)
+f = '/home/tyler/research/repos/elph_calculations/paper/prim/specfun/specfun/pm_U_0.00_N_1.00.hdf5'
+_, _, freqs, new_freqs, widths, qpts, _ = get_data(f)
 
 num_bands = freqs.shape[1]
 for ii in range(num_bands):
     ax0.plot(qpts,freqs[:,ii],marker='o',ms=0,c=c,lw=0.75,ls=(0,(2,1)))
+
+    ax0.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls=(0,(2,1)))
     
 # ---------------------------
 

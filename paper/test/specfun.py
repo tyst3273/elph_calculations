@@ -22,7 +22,7 @@ use_hubbard_U = True
 use_spin = True
 
 kpts_option = 'mesh'
-kpts_mesh = [24,24,1]
+kpts_mesh = [100,100,1]
 num_kpts_procs = 4
 
 hopping_file = 'hopping.py'
@@ -39,8 +39,8 @@ qpts_path = [[   0,   0,   0],
 # qpts_path = [[ 1/2,   0,   0],
 #              [ 1/2, 1/2,   0],
 #              [   0, 1/2,   0]]
-qpts_steps = 51
-num_qpts_procs = 4
+qpts_steps = 50
+num_qpts_procs = 6
 
 site_density_input_file = 'nscf.hdf5'
 
@@ -49,7 +49,8 @@ do_electron_scf = False
 
 ### --- electron phonon ---
 
-# elph_phonon_frequency_window = [0.15,0.25]
+elph_electron_energy_window = None 
+elph_phonon_frequency_window = [0.15,0.25]
 
 phonon_self_energy_step = 0.00025
 phonon_self_energy_eps = 0.2
