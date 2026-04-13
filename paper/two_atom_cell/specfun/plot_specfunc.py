@@ -171,5 +171,6 @@ if __name__ == '__main__':
         filename = f'{order}_U_{U:3.2f}_N_{n:3.2f}.hdf5'
         plot_specfunc(filename)
 
-        if ii == 10:
+        if ii == 18:
             exit()
+

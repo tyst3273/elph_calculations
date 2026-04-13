@@ -117,53 +117,53 @@ ax0.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
 
 # -------------------
 
-# f = 'specfun/afm_U_2.00_N_2.00.hdf5'
-# spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
+f = 'specfun/afm_U_2.00_N_2.00.hdf5'
+spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
-# norm = LogNorm(vmin=vmin,vmax=vmax)
-# extent = [0,1,energy.min(),energy.max()]
-# im = ax1.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-#             interpolation='none',extent=extent)    
-
-# -------------------
-
-# f = 'specfun/afm_U_2.00_N_1.90.hdf5'
-# spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
-
-# norm = LogNorm(vmin=vmin,vmax=vmax)
-# extent = [0,1,energy.min(),energy.max()]
-# ax2.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-#             interpolation='none',extent=extent)    
+norm = LogNorm(vmin=vmin,vmax=vmax)
+extent = [0,1,energy.min(),energy.max()]
+im = ax1.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+            interpolation='none',extent=extent)    
 
 # -------------------
 
-# f = 'specfun/afm_U_3.00_N_1.80.hdf5'
-# spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
+f = 'specfun/afm_U_2.00_N_1.90.hdf5'
+spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
-# norm = LogNorm(vmin=vmin,vmax=vmax)
-# extent = [0,1,energy.min(),energy.max()]
-# im = ax3.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-#             interpolation='none',extent=extent)    
-
-# -------------------
-
-# f = 'specfun/fim_U_10.00_N_1.80.hdf5'
-# spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
-
-# norm = LogNorm(vmin=vmin,vmax=vmax)
-# extent = [0,1,energy.min(),energy.max()]
-# ax4.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-#             interpolation='none',extent=extent)    
+norm = LogNorm(vmin=vmin,vmax=vmax)
+extent = [0,1,energy.min(),energy.max()]
+ax2.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+            interpolation='none',extent=extent)    
 
 # -------------------
 
-# f = 'specfun/afm_U_0.80_N_2.00.hdf5'
-# spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
+f = 'specfun/afm_U_3.00_N_1.80.hdf5'
+spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
-# norm = LogNorm(vmin=vmin,vmax=vmax)
-# extent = [0,1,energy.min(),energy.max()]
-# im = ax5.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-#             interpolation='none',extent=extent)    
+norm = LogNorm(vmin=vmin,vmax=vmax)
+extent = [0,1,energy.min(),energy.max()]
+im = ax3.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+            interpolation='none',extent=extent)    
+
+# -------------------
+
+f = 'specfun/fim_U_10.00_N_1.80.hdf5'
+spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
+
+norm = LogNorm(vmin=vmin,vmax=vmax)
+extent = [0,1,energy.min(),energy.max()]
+ax4.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+            interpolation='none',extent=extent)    
+
+# -------------------
+
+f = 'specfun/afm_U_0.80_N_2.00.hdf5'
+spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
+
+norm = LogNorm(vmin=vmin,vmax=vmax)
+extent = [0,1,energy.min(),energy.max()]
+im = ax5.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+            interpolation='none',extent=extent)    
 
 # -------------------
 
@@ -177,15 +177,46 @@ for v in qpts_verts:
 
 # -------------------
 
-f = '/home/tyler/research/repos/elph_calculations/paper/prim/specfun/specfun/pm_U_0.00_N_1.00.hdf5'
-_, _, freqs, new_freqs, widths, qpts, _ = get_data(f)
+# f = '/home/tyler/research/repos/elph_calculations/paper/prim/specfun/specfun/pm_U_0.00_N_1.00.hdf5'
+# _, _, freqs, new_freqs, fwhm, qpts, _ = get_data(f)
 
-num_bands = freqs.shape[1]
-for ii in range(num_bands):
-    ax0.plot(qpts,freqs[:,ii],marker='o',ms=0,c=c,lw=0.75,ls=(0,(2,1)))
+# num_bands = freqs.shape[1]
+# for ii in range(num_bands): 
 
-    ax0.plot(qpts,new_freqs[:,ii],marker='o',ms=0,c='g',lw=0.75,ls=(0,(2,1)))
+#     hi = new_freqs[:,ii]+fwhm[:,ii]/2
+#     lo = new_freqs[:,ii]-fwhm[:,ii]/2
+
+#     ax0.fill_between(qpts,hi,lo,color='g',alpha=0.25)
+#     ax0.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax0.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax0.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
+
+#     ax1.fill_between(qpts,hi,lo,color='g',alpha=0.25)
+#     ax1.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax1.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax1.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
+
+#     ax2.fill_between(qpts,hi,lo,color='g',alpha=0.25)
+#     ax2.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax2.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax2.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
+
+#     ax3.fill_between(qpts,hi,lo,color='g',alpha=0.25)
+#     ax3.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax3.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax3.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
+
+#     ax4.fill_between(qpts,hi,lo,color='g',alpha=0.25)
+#     ax4.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax4.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax4.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
+
+#     ax5.fill_between(qpts,hi,lo,color='g',alpha=0.25)
+#     ax5.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax5.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
+#     ax5.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
     
+        
 # ---------------------------
 
 for _ax in [ax0,ax1,ax2,ax3,ax4,ax5]:
@@ -238,7 +269,7 @@ ax1.set_ylabel('Energy [meV]',fontsize=10,labelpad=5)
 
 # ax4.set_title(f'FM, U=15, n=0.25',fontsize=10)
 
-# plt.savefig(f'afm_cell_specfuns.png',dpi=300,bbox_inches='tight')
+plt.savefig(f'specfuns.png',dpi=300,bbox_inches='tight')
 plt.show()
 plt.close()
 
