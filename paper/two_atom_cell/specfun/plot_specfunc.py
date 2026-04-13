@@ -104,14 +104,14 @@ def plot_specfunc(filename):
         ax.axvline(v,lw=0.5,ls=':',c='w')
 
     num_bands = freqs.shape[1]
-    # for ii in range(num_bands):
+    for ii in range(num_bands):
 
-        # hi = new_freqs+fwhm[:,ii]/2
-        # lo = new_freqs-fwhm[:,ii/2
-        # ax.fill_between(qpts,hi[:,ii],lo[:,ii],color='g',alpha=0.25)
+        hi = new_freqs[:,ii]+fwhm[:,ii]/2
+        lo = new_freqs[:,ii]-fwhm[:,ii]/2
+        ax.fill_between(qpts,hi,lo,color='r',alpha=0.25)
 
-        # ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0.5,c='g',lw=0.0,ls='-')
-        # ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
+        ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0.5,c='g',lw=0.0,ls='-')
+        ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
 
     # -------------------
 
@@ -170,7 +170,3 @@ if __name__ == '__main__':
 
         filename = f'{order}_U_{U:3.2f}_N_{n:3.2f}.hdf5'
         plot_specfunc(filename)
-
-        if ii == 18:
-            exit()
-
