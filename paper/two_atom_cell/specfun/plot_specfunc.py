@@ -109,9 +109,11 @@ def plot_specfunc(filename):
         hi = new_freqs[:,ii]+fwhm[:,ii]/2
         lo = new_freqs[:,ii]-fwhm[:,ii]/2
         ax.fill_between(qpts,hi,lo,color='r',alpha=0.25)
+        ax.plot(qpts,hi,marker='o',ms=0,c='r',lw=0.75,ls='-',alpha=0.5)
+        ax.plot(qpts,lo,marker='o',ms=0,c='r',lw=0.75,ls='-',alpha=0.5)
 
-        ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0.5,c='g',lw=0.0,ls='-')
-        ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
+        # ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0.5,c='g',lw=0.0,ls='-')
+        # ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')
 
     # -------------------
 
