@@ -12,8 +12,6 @@ cmap = cmaps.amethyst
 conv = 3/8 * 1000 # meV
 el_conv = 3/8
 
-# conv = 1.0
-
 # --------------------------------------------------------------------------------------------------
 
 def get_points(fs,kpts):
@@ -40,11 +38,6 @@ def get_specfun(energy,freqs,real,imag,adiabatic,eta):
 
             d = real[:,ii,jj]
             d0 = adiabatic[ii,jj]
-            
-            #g = 0.0
-            #d = d0
-            #d -= d0
-            #d = 0.0
 
             b[:,ii,jj] = -2*wq * (2*wq*g - 2*energy*eta) / \
                     ( (energy**2 - wq**2 - 2*wq*d)**2 + (2*wq*g - 2*energy*eta)**2 )
@@ -91,15 +84,15 @@ def get_data(input_file):
 # --------------------------------------------------------------------------------------------------
 
 fig = plt.figure(figsize=(9,4))
-gs = plt.GridSpec(2, 3, hspace = 0.25, wspace = 0.1, width_ratios=[1,1,1])
-ax0 = fig.add_subplot(gs[0,0])
-ax1 = fig.add_subplot(gs[1,0])
+gs = plt.GridSpec(2, 3, hspace = 0.25, wspace = 0.1, width_ratios=[1,1,0.6])
+fm0 = fig.add_subplot(gs[0,1])
+fm1 = fig.add_subplot(gs[1,1])
 
-ax2 = fig.add_subplot(gs[0,1])
-ax3 = fig.add_subplot(gs[1,1])
+pm0 = fig.add_subplot(gs[0,0])
+pm1 = fig.add_subplot(gs[1,0])
 
-ax4 = fig.add_subplot(gs[0,2])
-ax5 = fig.add_subplot(gs[1,2])
+el0 = fig.add_subplot(gs[0,2])
+el1 = fig.add_subplot(gs[1,2])
 
 vmin = 1e-5
 vmax = 0.01
@@ -107,119 +100,138 @@ c = (1.0,0.0,0.0)
 
 # -------------------
 
-f = 'specfun/afm_U_0.50_N_2.00.hdf5'
+f = 'specfun/fm_U_15.00_N_0.40.hdf5'
 spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
 norm = LogNorm(vmin=vmin,vmax=vmax)
 extent = [0,1,energy.min(),energy.max()]
-ax0.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+fm0.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
             interpolation='none',extent=extent)    
+
+num_bands = freqs.shape[1]
+for ii in range(num_bands):
+    fm0.plot(qpts,freqs[:,ii],marker='o',ms=0,c=c,lw=0.75,ls=(0,(2,1)))
 
 # -------------------
 
-f = 'specfun/afm_U_2.00_N_2.00.hdf5'
+f = 'specfun/fm_U_15.00_N_0.50.hdf5'
 spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
 norm = LogNorm(vmin=vmin,vmax=vmax)
 extent = [0,1,energy.min(),energy.max()]
-im = ax1.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+im = fm1.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
             interpolation='none',extent=extent)    
+
+num_bands = freqs.shape[1]
+for ii in range(num_bands):
+    fm1.plot(qpts,freqs[:,ii],marker='o',ms=0,c=c,lw=0.75,ls=(0,(2,1)))
 
 # -------------------
 
-f = 'specfun/afm_U_2.00_N_1.90.hdf5'
+f = 'specfun/pm_U_0.00_N_0.80.hdf5'
+# f = 'specfun/pm_U_0.00_N_0.50.hdf5'
 spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
 norm = LogNorm(vmin=vmin,vmax=vmax)
 extent = [0,1,energy.min(),energy.max()]
-ax2.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+pm0.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
             interpolation='none',extent=extent)    
+
+num_bands = freqs.shape[1]
+for ii in range(num_bands):
+    pm0.plot(qpts,freqs[:,ii],marker='o',ms=0,c=c,lw=0.75,ls=(0,(2,1)))
 
 # -------------------
 
-f = 'specfun/afm_U_3.00_N_1.80.hdf5'
+f = 'specfun/pm_U_0.00_N_1.00.hdf5'
 spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
 
 norm = LogNorm(vmin=vmin,vmax=vmax)
 extent = [0,1,energy.min(),energy.max()]
-im = ax3.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
+im = pm1.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
             interpolation='none',extent=extent)    
+
+num_bands = freqs.shape[1]
+for ii in range(num_bands):
+    pm1.plot(qpts,freqs[:,ii],marker='o',ms=0,c=c,lw=0.75,ls=(0,(2,1)))
 
 # -------------------
 
-f = 'specfun/fim_U_10.00_N_1.80.hdf5'
-spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
-
-norm = LogNorm(vmin=vmin,vmax=vmax)
-extent = [0,1,energy.min(),energy.max()]
-ax4.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-            interpolation='none',extent=extent)    
-
-# -------------------
-
-f = 'specfun/afm_U_0.80_N_2.00.hdf5'
-spec_func, energy, freqs, new_freqs, fwhm, qpts, qpts_verts = get_data(f)
-
-norm = LogNorm(vmin=vmin,vmax=vmax)
-extent = [0,1,energy.min(),energy.max()]
-im = ax5.imshow(spec_func,cmap=cmap,norm=norm,aspect='auto',origin='lower',
-            interpolation='none',extent=extent)    
-
-# -------------------
+# cbar = fig.colorbar(im,ax=[pm0,pm1],location='top',extend='both',aspect=40,pad=0.01)
 
 for v in qpts_verts:
-    ax0.axvline(v,lw=0.5,ls=':',c='w')
-    ax1.axvline(v,lw=0.5,ls=':',c='w')
-    ax2.axvline(v,lw=0.5,ls=':',c='w')
-    ax3.axvline(v,lw=0.5,ls=':',c='w')
-    ax4.axvline(v,lw=0.5,ls=':',c='w')
-    ax5.axvline(v,lw=0.5,ls=':',c='w')
+    pm0.axvline(v,lw=0.5,ls=':',c='w')
+    pm1.axvline(v,lw=0.5,ls=':',c='w')
+    fm0.axvline(v,lw=0.5,ls=':',c='w')
+    fm1.axvline(v,lw=0.5,ls=':',c='w')
 
 # -------------------
 
-# f = '/home/tyler/research/repos/elph_calculations/paper/prim/specfun/specfun/pm_U_0.00_N_1.00.hdf5'
-# _, _, freqs, new_freqs, fwhm, qpts, _ = get_data(f)
+f = f'../electrons/bands/fm_U_15.00_N_0.50.hdf5'
+with h5py.File(f,'r') as db:
+    evals = db['eigenvalues'][...].squeeze() * el_conv
+    kpts = db['kpts_vert_distances'][...]
+    kpts_verts = db['kpts_vert_distances'][...]
+    ef = db['fermi_energy'][...] * el_conv
+    # print(db.keys())
+    # kpts = db['kpts_rlu'][...]
 
-# num_bands = freqs.shape[1]
-# for ii in range(num_bands): 
+num_kpts, num_spin = evals.shape
 
-#     hi = new_freqs[:,ii]+fwhm[:,ii]/2
-#     lo = new_freqs[:,ii]-fwhm[:,ii]/2
+kpts /= kpts.max()
+kpts_verts /= kpts_verts.max()
 
-#     ax0.fill_between(qpts,hi,lo,color='g',alpha=0.25)
-#     ax0.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax0.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax0.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
+kpts = np.linspace(0,1,num_kpts)
 
-#     ax1.fill_between(qpts,hi,lo,color='g',alpha=0.25)
-#     ax1.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax1.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax1.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
+el0.plot(kpts,evals[...,0],c='r',lw=2)
+el0.plot(kpts,evals[...,1],c='b',lw=2)
+el0.axhline(ef,lw=0.75,ls='--',c='m')
+for v in kpts_verts:
+    el0.axvline(v,lw=0.5,ls=':',c=(0.25,0.25,0.25))
 
-#     ax2.fill_between(qpts,hi,lo,color='g',alpha=0.25)
-#     ax2.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax2.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax2.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
+# -----------------------------------------
 
-#     ax3.fill_between(qpts,hi,lo,color='g',alpha=0.25)
-#     ax3.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax3.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax3.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
+f = f'../electrons/nscf/fm_U_15.00_N_0.50.hdf5'
+with h5py.File(f,'r') as db:
+    fermi_surface = db['fermi_surface'][...]
+    if not 'kpts_mesh' in db.keys():                
+        exit('do calculation on mesh instead')
+    kpts_mesh = db['kpts_mesh'][...]
+    kpts = db['kpts_rlu'][...]
 
-#     ax4.fill_between(qpts,hi,lo,color='g',alpha=0.25)
-#     ax4.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax4.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax4.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
+    ef = db['fermi_energy'][...] * el_conv
 
-#     ax5.fill_between(qpts,hi,lo,color='g',alpha=0.25)
-#     ax5.plot(qpts,hi,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax5.plot(qpts,lo,marker='o',ms=0,c='g',lw=0.75,ls='-',alpha=0.5)
-#     ax5.plot(qpts,freqs[:,ii],marker='o',ms=0,c='g',lw=1.00,ls=(0,(2,1)))
-    
-        
+shape = fermi_surface.shape
+num_kpts = shape[0]
+num_bands = shape[1]
+num_spin = shape[2]
+
+fermi_surface = fermi_surface.squeeze()
+fermi_surface /= fermi_surface.max()
+
+print(np.nanmax(fermi_surface))
+
+x, y = get_points(fermi_surface[...,0],kpts) # spin up
+el1.scatter(x,y,s=0.5,c='r',alpha=0.75)
+
+x, y = get_points(fermi_surface[...,1],kpts) # spin down
+el1.scatter(x,y,s=0.5,c='b',alpha=0.75)
+
 # ---------------------------
 
-for _ax in [ax0,ax1,ax2,ax3,ax4,ax5]:
+# ax[1].annotate('n=0.1',xycoords='data',textcoords='data',xy=(-0.45,0.45),xytext=(-0.075,0.0),
+#             arrowprops=dict(arrowstyle='-|>',lw=1,color='k'),fontsize=10)
+# ax[1].annotate('',xycoords='data',textcoords='data',xy=(-0.41,0.41),xytext=(-0.09,0.09),
+#             arrowprops=dict(arrowstyle='->',lw=1,color='k'),fontsize=10)
+# ax[1].annotate('n=0.05',xycoords='data',xy=(-0.1,0.025),fontsize=10,fontweight='bold')
+# ax[1].annotate('n=0.50',xycoords='data',xy=(-0.2,0.25),fontsize=10,fontweight='bold')
+# ax[1].annotate('n=0.95',xycoords='data',xy=(-0.475,0.425),fontsize=10,fontweight='bold')
+
+# ax[1].plot(-0.09,0.09,marker='o',ms=4,mec='k',mfc='k')
+# ax[1].plot(-0.41,0.41,marker='o',ms=4,mec='k',mfc='k')
+# ax[1].plot(-0.25,0.25,marker='o',ms=4,mec='k',mfc='k')
+
+for _ax in [fm0,fm1,pm0,pm1,el0,el1]:
     for axis in ['top','bottom','left','right']:
         _ax.spines[axis].set_linewidth(1.5)
     # _ax.minorticks_on()
@@ -228,48 +240,59 @@ for _ax in [ax0,ax1,ax2,ax3,ax4,ax5]:
     _ax.tick_params(which='minor',length=2)
     _ax.set_rasterization_zorder = 1000000000
 
-ax0.axis([0,1,62,80])
-ax1.axis([0,1,62,80])
-ax2.axis([0,1,62,80])
-ax3.axis([0,1,62,80])
-ax4.axis([0,1,62,80])
-ax5.axis([0,1,62,80])
+el0.yaxis.tick_right()
+el1.yaxis.tick_right()
+el0.yaxis.label_position = 'right'
+el1.yaxis.label_position = 'right'
 
-ax2.set_yticklabels([])
-ax3.set_yticklabels([])
-ax4.set_yticklabels([])
-ax5.set_yticklabels([])
+fm0.axis([0,1,62,80])
+fm1.axis([0,1,62,80])
+pm0.axis([0,1,62,80])
+pm1.axis([0,1,62,80])
+el0.axis([0,1,-2,4.5])
+el1.axis([-0.5,0.5,-0.5,0.5])
 
-ax0.set_xticks(qpts_verts)
-ax2.set_xticks(qpts_verts)
-ax4.set_xticks(qpts_verts)
+fm0.set_yticklabels([])
+fm1.set_yticklabels([])
 
-ax1.set_xticks(qpts_verts)
-ax1.set_xticklabels([r'$\Gamma$','X','M',r'$\Gamma$'])
-ax3.set_xticks(qpts_verts)
-ax3.set_xticklabels([r'$\Gamma$','X','M',r'$\Gamma$'])
-ax5.set_xticks(qpts_verts)
-ax5.set_xticklabels([r'$\Gamma$','X','M',r'$\Gamma$'])
+fm0.set_xticks(qpts_verts)
+fm0.set_xticklabels([r'$\Gamma$','X','M',r'$\Gamma$'])
+fm1.set_xticks(qpts_verts)
+fm1.set_xticklabels([r'$\Gamma$','X','M',r'$\Gamma$'])
 
-ax0.set_ylabel('Energy [meV]',fontsize=10,labelpad=5)
-ax1.set_ylabel('Energy [meV]',fontsize=10,labelpad=5)
+pm0.set_xticks(qpts_verts)
+pm0.set_xticklabels([r'$\Gamma$','X','M',r'$\Gamma$'])
+pm1.set_xticks(qpts_verts)
+pm1.set_xticklabels([r'$\Gamma$','X','M',r'$\Gamma$'])
 
-# ax0.annotate(f'(c)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
-# ax1.annotate(f'(d)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
-# ax2.annotate(f'(a)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
-# ax3.annotate(f'(b)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
-# ax4.annotate(f'(e)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='k')
-# ax5.annotate(f'(f)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='k')
+pm0.set_ylabel('Energy [meV]',fontsize=10,labelpad=5)
+pm1.set_ylabel('Energy [meV]',fontsize=10,labelpad=5)
 
-# ax0.annotate(f'FM, U=15, n=0.20',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
-# ax1.annotate(f'FM, U=15, n=0.25',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+el0.set_xticks(qpts_verts)
+el0.set_xticklabels([r'$\Gamma$','X','M',r'$\Gamma$'])
+el1.set_xticks([-0.5,0,0.5])
+el1.set_yticks([-0.5,0,0.5])
+el0.set_ylabel('Energy [eV]',fontsize=10,labelpad=20)
+el1.set_ylabel('k [rlu]',fontsize=10,labelpad=10)
+el1.set_xlabel('h [rlu]',fontsize=10,labelpad=5)
 
-# ax2.annotate(f'PM, U=0, n=0.40',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
-# ax3.annotate(f'PM, U=0, n=0.50',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+fm0.annotate(f'(c)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+fm1.annotate(f'(d)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+pm0.annotate(f'(a)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+pm1.annotate(f'(b)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+el0.annotate(f'(e)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='k')
+el1.annotate(f'(f)',xy=(0.01,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='k')
 
-# ax4.set_title(f'FM, U=15, n=0.25',fontsize=10)
+fm0.annotate(f'FM, U=15, n=0.20',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+fm1.annotate(f'FM, U=15, n=0.25',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
 
-plt.savefig(f'specfuns.png',dpi=300,bbox_inches='tight')
+pm0.annotate(f'PM, U=0, n=0.40',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+pm1.annotate(f'PM, U=0, n=0.50',xy=(0.4,0.9),xycoords='axes fraction',fontsize=10,annotation_clip=False,c='w')
+
+el0.set_title(f'FM, U=15, n=0.25',fontsize=10)
+
+
+plt.savefig(f'prim_specfuns.png',dpi=300,bbox_inches='tight')
 plt.show()
 plt.close()
 

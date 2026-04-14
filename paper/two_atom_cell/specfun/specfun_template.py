@@ -40,6 +40,8 @@ qpts_steps = 100
 electron_fixed_fermi_energy = True
 do_electron_scf = False
 
+write_phonon_eigenvectors = True
+
 ### --- electron phonon ---
 
 phonon_self_energy_step = 0.00025
