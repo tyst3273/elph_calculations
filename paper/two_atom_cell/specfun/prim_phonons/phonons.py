@@ -22,7 +22,7 @@ qpts_path = [[   0,   0,   0],
              [ 1/2,   0,   0],
              [ 1/2, 1/2,   0],
              [   0,   0,   0]]
-qpts_steps = 50
+qpts_steps = 100
 
 use_qpts_symmetry = False
 

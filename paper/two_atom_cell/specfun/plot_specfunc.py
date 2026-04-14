@@ -24,11 +24,14 @@ def get_points(fs,kpts):
 
 # --------------------------------------------------------------------------------------------------
 
-def get_specfun(energy,freqs,real,imag,adiabatic,eta):
+def get_specfun(energy,freqs,real,imag,adiabatic,eta,weights=None):
 
     shape = real.shape
     num_qpts = shape[1]
     num_modes = shape[2]
+
+    if weights is None:
+        weights = np.ones((num_qpts,num_modes))
 
     b = np.zeros(shape,dtype=float)
 
@@ -41,7 +44,7 @@ def get_specfun(energy,freqs,real,imag,adiabatic,eta):
             d = real[:,ii,jj]
             d0 = adiabatic[ii,jj]
 
-            b[:,ii,jj] = -2*wq * (2*wq*g - 2*energy*eta) / \
+            b[:,ii,jj] = weights[ii,jj] * -2*wq * (2*wq*g - 2*energy*eta) / \
                     ( (energy**2 - wq**2 - 2*wq*d)**2 + (2*wq*g - 2*energy*eta)**2 )
 
     b = np.nan_to_num(b,nan=0.0)
@@ -65,10 +68,15 @@ def get_data(input_file):
             qpts_dist = db['qpts_distances'][...]
             qpts_verts = db['qpts_vert_distances'][...]
 
+        if '_unfolding_weights' in db.keys():
+            weights = db['_unfolding_weights'][...]
+        else:
+            weights = None
+
     qpts_verts /= qpts_verts.max()
     qpts = qpts_dist / qpts_dist.max()
 
-    spec_func = get_specfun(energy,freqs,real,imag,adiabatic,1e-5)
+    spec_func = get_specfun(energy,freqs,real,imag,adiabatic,1e-5,weights)
     spec_func = spec_func.sum(axis=-1) # sum over spins ?
     spec_func /= spec_func.max()
 
@@ -103,14 +111,14 @@ def plot_specfunc(filename):
     for v in qpts_verts:
         ax.axvline(v,lw=0.5,ls=':',c='w')
 
-    num_bands = freqs.shape[1]
-    for ii in range(num_bands):
+    # num_bands = freqs.shape[1]
+    # for ii in range(num_bands):
 
-        hi = new_freqs[:,ii]+fwhm[:,ii]/2
-        lo = new_freqs[:,ii]-fwhm[:,ii]/2
-        ax.fill_between(qpts,hi,lo,color='r',alpha=0.25)
-        ax.plot(qpts,hi,marker='o',ms=0,c='r',lw=0.75,ls='-',alpha=0.5)
-        ax.plot(qpts,lo,marker='o',ms=0,c='r',lw=0.75,ls='-',alpha=0.5)
+    #     hi = new_freqs[:,ii]+fwhm[:,ii]/2
+    #     lo = new_freqs[:,ii]-fwhm[:,ii]/2
+    #     ax.fill_between(qpts,hi,lo,color='r',alpha=0.25)
+    #     ax.plot(qpts,hi,marker='o',ms=0,c='r',lw=0.75,ls='-',alpha=0.5)
+    #     ax.plot(qpts,lo,marker='o',ms=0,c='r',lw=0.75,ls='-',alpha=0.5)
 
         # ax.plot(qpts,new_freqs[:,ii],marker='o',ms=0.5,c='g',lw=0.0,ls='-')
         # ax.plot(qpts,freqs[:,ii],marker='o',ms=0,c='m',lw=0.5,ls='-')

@@ -200,6 +200,6 @@ class c_unfold_phonons:
 if __name__ == '__main__':
 
     unfold = c_unfold_phonons()
-    unfold.unfold('phonons.hdf5','specfun.hdf5')
+    unfold.unfold('prim_phonons/phonons.hdf5','specfun/fim_U_6.00_N_1.80.hdf5')
     
     
