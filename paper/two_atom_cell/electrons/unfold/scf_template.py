@@ -26,15 +26,13 @@ num_kpts_procs = 8
 use_hubbard_U = True
 use_spin = True
 
-do_electron_scf = False
+do_electron_scf = True
 max_electron_scf_steps = 400
 
 temperature = 0.001
 
-write_electron_eigenvectors = True
+write_electron_eigenvectors = False
 
-electron_output_file = 'scf.hdf5'
 
-num_electrons = 0.95
 
 

@@ -29,10 +29,10 @@ do_electron_scf = False
 
 temperature = 0.001
 
-write_electron_eigenvectors = False
+write_electron_eigenvectors = True
 
 electron_delta_width = 0.08 #0.025
 calc_electron_fermi_surface = True
 
-fix_electron_gauge = True
+# fix_electron_gauge = True
 

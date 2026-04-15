@@ -30,6 +30,8 @@ use_spin = True
 
 temperature = 0.001
 
+write_electron_eigenvectors = True
+
 do_electron_scf = False
 # site_density_input_file = 'scf.hdf5'
 # electron_output_file = 'bands.hdf5'

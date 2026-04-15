@@ -28,12 +28,13 @@ use_spin = True
 
 temperature = 0.001
 
-do_electron_scf = False
-site_density_input_file = 'scf.hdf5'
+site_density_input_file = 'nscf.hdf5'
 electron_output_file = 'bands.hdf5'
+
+do_electron_scf = False
 electron_fixed_fermi_energy = True
 
-_plot_electron_bands = True
+# _plot_electron_bands = True
 
 # num_electrons = 0.95
 
