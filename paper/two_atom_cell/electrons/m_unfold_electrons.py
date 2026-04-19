@@ -114,7 +114,7 @@ class c_unfold_electrons:
 
         _eigs = self.sc_eigs
         _ef = self.sc_ef
-        fwhm = 0.01
+        fwhm = 0.05
         sigma = fwhm / 2.35482 
         fs_weights = np.exp(-0.5 * (_eigs-_ef)**2/sigma**2 ) 
 

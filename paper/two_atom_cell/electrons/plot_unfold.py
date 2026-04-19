@@ -11,14 +11,18 @@ from calcs import calcs
 
 # --------------------------------------------------------------------------------------------------
 
-def get_points(eigs,ef,kpts,fwhm=0.025):
+def get_points(eigs,ef,kpts,fwhm=0.01):
 
     sigma = fwhm / 2.35482
 
-    fs_weights = np.exp(-0.5 * (eigs-ef)**2/sigma**2 ) 
+    # fs_weights = np.exp(-0.5 * (eigs-ef)**2/sigma**2 ) 
+    # fs_weights = fs_weights.sum(axis=1)  / eigs.shape[1]
+
+    fs_weights = ( np.abs(eigs-ef) < fwhm ).astype(int)
     fs_weights = fs_weights.sum(axis=1)  / eigs.shape[1]
 
-    inds = np.flatnonzero( np.greater(fs_weights,0.000001) )
+    # inds = np.flatnonzero( np.greater(fs_weights,0.000001) )
+    inds = np.flatnonzero( fs_weights > 1 )
 
     x = kpts[inds,0]
     y = kpts[inds,1]
@@ -95,8 +99,8 @@ def plot_electrons(bands_file,fs_file,prim_bands_file,prim_fs_file):
         kpts = db['kpts_rlu'][...]
         metal = db['is_metal'][...]
 
-    x, y, fs_weights = get_points(eigs[...,0],ef,kpts) 
-    ax[1].scatter(x,y,s=0.5,c='k',alpha=fs_weights,zorder=100)
+    # x, y, fs_weights = get_points(eigs[...,0],ef,kpts) 
+    # ax[1].scatter(x,y,s=0.5,c='k',alpha=fs_weights,zorder=100)
 
     with h5py.File(fs_file,'r') as db:
 
@@ -112,27 +116,34 @@ def plot_electrons(bands_file,fs_file,prim_bands_file,prim_fs_file):
         weights = db['_unfolding_weights'][...]
         fs_weights = db['_fs_weights'][...]
 
+    # x, y, fs_weights = get_points(eigs[...,0],ef,kpts) 
+    # if fs_weights.size != 0:
+    #     ax[1].scatter(x,y,s=0.5,c='r',alpha=fs_weights,zorder=100)
+    # x, y, fs_weights = get_points(eigs[...,1],ef,kpts) 
+    # if fs_weights.size != 0:
+    #     ax[1].scatter(x,y,s=0.5,c='b',alpha=fs_weights,zorder=100)
+
     x, y, fs_weights = get_points(eigs[...,0],ef,kpts) 
     if fs_weights.size != 0:
-        ax[1].scatter(x,y,s=0.5,c='r',alpha=fs_weights,zorder=100)
+        ax[1].scatter(x,y,s=0.5,c='r',alpha=1.0,zorder=100)
     x, y, fs_weights = get_points(eigs[...,1],ef,kpts) 
     if fs_weights.size != 0:
-        ax[1].scatter(x,y,s=0.5,c='b',alpha=fs_weights,zorder=100)
+        ax[1].scatter(x,y,s=0.5,c='b',alpha=1.0,zorder=100)
 
-    if weights.size != 0:
+    # if weights.size != 0:
 
-        norm_weights = weights / weights.max() 
+    #     norm_weights = weights / weights.max() 
 
-        shape = fermi_surface.shape
-        num_kpts = shape[0]
-        num_bands = shape[1]
-        num_spin = shape[2]
+    #     shape = fermi_surface.shape
+    #     num_kpts = shape[0]
+    #     num_bands = shape[1]
+    #     num_spin = shape[2]
 
-        # x, y = mapped_kpts[:,0], mapped_kpts[:,1]
-        # # ax[1].scatter(x,y,s=0.5,c='r',alpha=(fs_weights[:,:,0]*norm_weights[:,:,0]).sum(axis=1))
-        # # ax[1].scatter(x,y,s=0.5,c='b',alpha=(fs_weights[:,:,1]*norm_weights[:,:,1]).sum(axis=1))
-        # ax[1].scatter(x,y,s=0.5,c='r',alpha=(fs_weights[:,:,0]).sum(axis=1)/2.0)
-        # ax[1].scatter(x,y,s=0.5,c='b',alpha=(fs_weights[:,:,1]).sum(axis=1)/2.0)
+    #     x, y = mapped_kpts[:,0], mapped_kpts[:,1]
+    #     # ax[1].scatter(x,y,s=0.5,c='r',alpha=(fs_weights[:,:,0]*norm_weights[:,:,0]).sum(axis=1))
+    #     # ax[1].scatter(x,y,s=0.5,c='b',alpha=(fs_weights[:,:,1]*norm_weights[:,:,1]).sum(axis=1))
+    #     ax[1].scatter(x,y,s=0.5,c='r',alpha=(fs_weights[:,:,0]).sum(axis=1)/2.0)
+    #     ax[1].scatter(x,y,s=0.5,c='b',alpha=(fs_weights[:,:,1]).sum(axis=1)/2.0)
 
     ax[0].set_title(f'metal: {metal}')
 
