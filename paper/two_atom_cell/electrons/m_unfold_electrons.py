@@ -112,60 +112,48 @@ class c_unfold_electrons:
         ...
         """
 
-        _eigs = self.sc_eigs
-        _ef = self.sc_ef
-        fwhm = 0.05
-        sigma = fwhm / 2.35482 
-        fs_weights = np.exp(-0.5 * (_eigs-_ef)**2/sigma**2 ) 
-
-        self.kpt_inds_to_keep = np.flatnonzero( 
-            np.greater(fs_weights.sum(axis=(1,2))/_eigs.shape[1] * 2,
-                       0.000001) )
-        self.num_kpts_keep = self.kpt_inds_to_keep.size
-        self.fs_weights = fs_weights[self.kpt_inds_to_keep,...]
-
         # -------------------------------
         # map prim kpts to supercell kpts
 
         _trans = np.linalg.inv( self.prim_recip_lat_vecs.T )
-        self.sc_to_prim_kpt_map = np.zeros(self.num_kpts_keep,dtype=int)
-        self.mapped_kpts = np.zeros((self.num_kpts_keep,3),dtype=float)
+        self.sc_to_prim_kpt_map = np.zeros(self.num_kpts,dtype=int)
+        self.mapped_kpts = np.zeros((self.num_kpts,3),dtype=float)
 
-        for ii, kk in enumerate(self.kpt_inds_to_keep):  
+        for ii in range(self.num_kpts):
 
-            if ii % 1000 == 0:
-                print(ii,'/',self.num_kpts_keep)
+            # if ii % 1000 == 0:
+            #     print(ii,'/',self.num_kpts)
 
-            _vec = _trans @ self.sc_kpts_cart[kk,:] 
-            self.sc_to_prim_kpt_map[ii] = self._get_kpt_ind_in_supercell(_vec)
+            _vec = _trans @ self.sc_kpts_cart[ii,:] 
+            # self.sc_to_prim_kpt_map[ii] = self._get_kpt_ind_in_supercell(_vec)
             self.mapped_kpts[ii,:] = _vec
 
         # -------------------------------
         # map prim evecs to supercell evecs
 
-        _trans = np.linalg.inv( self.prim_lat_vecs.T )
-        self.sc_to_prim_map = np.zeros(self.sc_num_orbs,dtype=int)
+        # _trans = np.linalg.inv( self.prim_lat_vecs.T )
+        # self.sc_to_prim_map = np.zeros(self.sc_num_orbs,dtype=int)
 
-        for ii in range(self.sc_num_orbs):
-            _vec = _trans @ self.sc_orb_coords_cart[ii,:] 
-            self.sc_to_prim_map[ii] = self._get_ind_in_supercell(_vec)
+        # for ii in range(self.sc_num_orbs):
+        #     _vec = _trans @ self.sc_orb_coords_cart[ii,:] 
+        #     self.sc_to_prim_map[ii] = self._get_ind_in_supercell(_vec)
 
-        _prim_eigvecs = self.prim_eigvecs
-        self.transformed_eigvecs = np.zeros((self.num_kpts_keep,
-                                             self.prim_num_bands,self.sc_num_bands,
-                                             self.num_spin),dtype=complex)
+        # _prim_eigvecs = self.prim_eigvecs
+        # self.transformed_eigvecs = np.zeros((self.num_kpts,
+        #                                      self.prim_num_bands,self.sc_num_bands,
+        #                                      self.num_spin),dtype=complex)
         
-        for qq in range(self.num_kpts_keep):
+        # for qq in range(self.num_kpts):
 
-            prim_ind = self.sc_to_prim_kpt_map[qq]
+        #     prim_ind = self.sc_to_prim_kpt_map[qq]
 
-            for nn in range(self.prim_num_bands):
-                for ss in range(self.num_spin):
+        #     for nn in range(self.prim_num_bands):
+        #         for ss in range(self.num_spin):
 
-                    _eigvec = _prim_eigvecs[prim_ind,nn,:,ss]
+        #             _eigvec = _prim_eigvecs[prim_ind,nn,:,ss]
 
-                    for ii, ind in enumerate(self.sc_to_prim_map):
-                        self.transformed_eigvecs[qq,nn,ii,ss] = _eigvec[ind]
+        #             for ii, ind in enumerate(self.sc_to_prim_map):
+        #                 self.transformed_eigvecs[qq,nn,ii,ss] = _eigvec[ind]
     
     # ----------------------------------------------------------------------------------------------
 
@@ -253,64 +241,6 @@ class c_unfold_electrons:
                                             _prim_vecs[:,2] == _mod[2] ))[0]
         
         return ind
-    
-    # ----------------------------------------------------------------------------------------------
-
-    def get_projection_weights(self):
-
-        """
-        ...
-        """
-
-        self.weights = np.zeros((self.num_kpts,self.sc_num_bands,self.num_spin))
-
-        for qq in range(self.num_kpts):
-
-                for ss in range(self.num_spin):
-                         
-                    for mm in range(self.sc_num_bands):
-                            
-                        _weight = 0.0
-                        _sc_evec = self.sc_eigvecs[qq,mm,:,ss]
-
-                        for nn in range(self.prim_num_bands):
-                            _weight += np.abs(
-                                _sc_evec.conj() @ self.transformed_eigvecs[qq,nn,:,ss])**2
-
-                        self.weights[qq,mm,ss] = _weight
-
-                    self.weights[qq,:,ss] *= \
-                        self.prim_num_bands / self.weights[qq,:,ss].sum() 
-                    
-    # ----------------------------------------------------------------------------------------------
-
-    def get_projection_weights_keep(self):
-
-        """
-        ...
-        """
-
-        self.weights = np.zeros((self.num_kpts_keep,self.sc_num_bands,self.num_spin))
-
-        for qq in range(self.num_kpts_keep):
-                
-                ind = self.kpt_inds_to_keep[qq]
-
-                for ss in range(self.num_spin):
-                         
-                    for mm in range(self.sc_num_bands):
-                            
-                        _weight = 0.0
-                        _sc_evec = self.sc_eigvecs[ind,mm,:,ss]
-
-                        for nn in range(self.prim_num_bands):
-                            _weight += np.abs(
-                                _sc_evec.conj() @ self.transformed_eigvecs[qq,nn,:,ss])**2
-
-                        self.weights[qq,mm,ss] = _weight
-
-                    self.weights[qq,:,ss] *= \
-                        self.prim_num_bands / self.weights[qq,:,ss].sum() 
 
     # ----------------------------------------------------------------------------------------------
 
@@ -350,37 +280,18 @@ class c_unfold_electrons:
 
         with h5py.File(self.sc_file,'a') as db:
 
-            if '_unfolding_weights' in db.keys():
-                del db['_unfolding_weights']
-            db.create_dataset('_unfolding_weights',data=self.weights)
+            if hasattr(self,'weights'):
+                if '_unfolding_weights' in db.keys():
+                    del db['_unfolding_weights']
+                db.create_dataset('_unfolding_weights',data=self.weights)
+
+            if hasattr(self,'mapped_kpts'):
+                if '_mapped_kpts' in db.keys():
+                    del db['_mapped_kpts']
+                db.create_dataset('_mapped_kpts',data=self.mapped_kpts)
 
     # ----------------------------------------------------------------------------------------------
 
-    def write_fs_weights(self):
-
-        """
-        ...
-        """
-
-        with h5py.File(self.sc_file,'a') as db:
-
-            if '_fs_weights' in db.keys():
-                del db['_fs_weights']
-            db.create_dataset('_fs_weights',data=self.fs_weights)
-        
-    # ----------------------------------------------------------------------------------------------
-
-    def write_mapped_kpts(self):
-
-        """
-        ...
-        """
-
-        with h5py.File(self.sc_file,'a') as db:
-
-            if '_mapped_kpts' in db.keys():
-                del db['_mapped_kpts']
-            db.create_dataset('_mapped_kpts',data=self.mapped_kpts)
 
 # --------------------------------------------------------------------------------------------------
 
@@ -409,11 +320,9 @@ def unfold_bands(bands,nscf,prim_bands,prim_nscf):
     unfold.check_files()
 
     unfold.transform_prim_fs()
-    unfold.get_projection_weights_keep()
+    # unfold.get_projection_weights()
 
     unfold.write_projection_weights()
-    unfold.write_fs_weights()
-    unfold.write_mapped_kpts()
 
 # --------------------------------------------------------------------------------------------------
 
