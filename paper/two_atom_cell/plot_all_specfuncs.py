@@ -254,79 +254,7 @@ f = 'electrons/nscf/fim_U_15.00_N_1.90.hdf5'
 p = 'electrons/unfold/nscf/pm_U_0.00_N_1.00.hdf5'
 plot_fs(f,p,fim_fs)
 
-# # cbar = fig.colorbar(im,ax=[pm0,pm1],location='top',extend='both',aspect=40,pad=0.01)
-
-# for v in qpts_verts:
-#     pm0.axvline(v,lw=0.5,ls=':',c='w')
-#     pm1.axvline(v,lw=0.5,ls=':',c='w')
-#     fm0.axvline(v,lw=0.5,ls=':',c='w')
-#     fm1.axvline(v,lw=0.5,ls=':',c='w')
-
-# # -------------------
-
-# f = f'../electrons/bands/fm_U_15.00_N_0.50.hdf5'
-# with h5py.File(f,'r') as db:
-#     evals = db['eigenvalues'][...].squeeze() * el_conv
-#     kpts = db['kpts_vert_distances'][...]
-#     kpts_verts = db['kpts_vert_distances'][...]
-#     ef = db['fermi_energy'][...] * el_conv
-#     # print(db.keys())
-#     # kpts = db['kpts_rlu'][...]
-
-# num_kpts, num_spin = evals.shape
-
-# kpts /= kpts.max()
-# kpts_verts /= kpts_verts.max()
-
-# kpts = np.linspace(0,1,num_kpts)
-
-# el0.plot(kpts,evals[...,0],c='r',lw=2)
-# el0.plot(kpts,evals[...,1],c='b',lw=2)
-# el0.axhline(ef,lw=0.75,ls='--',c='m')
-# for v in kpts_verts:
-#     el0.axvline(v,lw=0.5,ls=':',c=(0.25,0.25,0.25))
-
-# # -----------------------------------------
-
-# f = f'../electrons/nscf/fm_U_15.00_N_0.50.hdf5'
-# with h5py.File(f,'r') as db:
-#     fermi_surface = db['fermi_surface'][...]
-#     if not 'kpts_mesh' in db.keys():                
-#         exit('do calculation on mesh instead')
-#     kpts_mesh = db['kpts_mesh'][...]
-#     kpts = db['kpts_rlu'][...]
-
-#     ef = db['fermi_energy'][...] * el_conv
-
-# shape = fermi_surface.shape
-# num_kpts = shape[0]
-# num_bands = shape[1]
-# num_spin = shape[2]
-
-# fermi_surface = fermi_surface.squeeze()
-# fermi_surface /= fermi_surface.max()
-
-# print(np.nanmax(fermi_surface))
-
-# x, y = get_points(fermi_surface[...,0],kpts) # spin up
-# el1.scatter(x,y,s=0.5,c='r',alpha=0.75)
-
-# x, y = get_points(fermi_surface[...,1],kpts) # spin down
-# el1.scatter(x,y,s=0.5,c='b',alpha=0.75)
-
-# # ---------------------------
-
-# # ax[1].annotate('n=0.1',xycoords='data',textcoords='data',xy=(-0.45,0.45),xytext=(-0.075,0.0),
-# #             arrowprops=dict(arrowstyle='-|>',lw=1,color='k'),fontsize=10)
-# # ax[1].annotate('',xycoords='data',textcoords='data',xy=(-0.41,0.41),xytext=(-0.09,0.09),
-# #             arrowprops=dict(arrowstyle='->',lw=1,color='k'),fontsize=10)
-# # ax[1].annotate('n=0.05',xycoords='data',xy=(-0.1,0.025),fontsize=10,fontweight='bold')
-# # ax[1].annotate('n=0.50',xycoords='data',xy=(-0.2,0.25),fontsize=10,fontweight='bold')
-# # ax[1].annotate('n=0.95',xycoords='data',xy=(-0.475,0.425),fontsize=10,fontweight='bold')
-
-# # ax[1].plot(-0.09,0.09,marker='o',ms=4,mec='k',mfc='k')
-# # ax[1].plot(-0.41,0.41,marker='o',ms=4,mec='k',mfc='k')
-# # ax[1].plot(-0.25,0.25,marker='o',ms=4,mec='k',mfc='k')
+# -------------------
 
 for _ax in [afm_sf,afm_b,afm_fs, fim_sf,fim_b,fim_fs]:
     for axis in ['top','bottom','left','right']:
@@ -355,10 +283,11 @@ afm_b.axis([0,1,-3.5,6.5])
 afm_fs.axis([-0.5,0.5,-0.5,0.5])
 
 fim_sf.axis([0,1,62,80])
-fim_b.axis([0,1,-4.5,5.5])
+fim_b.axis([0,1,-3.5,6.5])
 fim_fs.axis([-0.5,0.5,-0.5,0.5])
 
 afm_fs.set_yticklabels([])
+afm_b.set_yticklabels([])
 # fm1.set_yticklabels([])
 
 afm_sf.set_xticks(qpts_verts)
