@@ -24,7 +24,7 @@ def get_weights(eigs,ef,fwhm=0.01):
 
 # --------------------------------------------------------------------------------------------------
 
-def plot_electrons(bands_file,fs_file,prim_bands_file,prim_fs_file):
+def plot_electrons(bands_file,fs_file,prim_bands_file,prim_fs_file,output_file):
 
     fig, ax = plt.subplots(2,1,figsize=(4.5,8),height_ratios=[0.75,1],gridspec_kw={'hspace':0.1})
 
@@ -155,8 +155,8 @@ def plot_electrons(bands_file,fs_file,prim_bands_file,prim_fs_file):
     ax[1].annotate(f'(b)',xy=(-0.1,0.975),xycoords='axes fraction',
                    fontsize=10,annotation_clip=False)
 
-    plt.savefig(f'electrons.png',dpi=300,bbox_inches='tight')
-    plt.show()
+    plt.savefig(output_file,dpi=300,bbox_inches='tight')
+    # plt.show()
     plt.close()
 
 
@@ -181,5 +181,7 @@ if __name__ == '__main__':
         prim_n = n / 2.0
         prim_bands_file = f'unfold/bands/pm_U_{U:3.2f}_N_{prim_n:3.2f}.hdf5'
         prim_nscf_file = f'unfold/nscf/pm_U_{U:3.2f}_N_{prim_n:3.2f}.hdf5'
+
+        output_file = f'{order}_U_{U:3.2f}_N_{n:3.2f}.png'
         
-        plot_electrons(bands_file,nscf_file,prim_bands_file,prim_nscf_file)
+        plot_electrons(bands_file,nscf_file,prim_bands_file,prim_nscf_file,output_file)

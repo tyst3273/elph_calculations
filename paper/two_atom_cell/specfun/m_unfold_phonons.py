@@ -199,7 +199,15 @@ class c_unfold_phonons:
 
 if __name__ == '__main__':
 
-    unfold = c_unfold_phonons()
-    unfold.unfold('prim_phonons/phonons.hdf5','specfun/fim_U_6.00_N_1.80.hdf5')
+    from calcs import calcs
+    num_calcs = len(calcs)
+
+    for ii in range(num_calcs):
+        
+        n, U, order = calcs[ii]
+        n *= 4.0
+        
+        unfold = c_unfold_phonons()
+        unfold.unfold('prim_phonons/phonons.hdf5',f'specfun/{order}_U_{U:3.2f}_N_{n:3.2f}.hdf5')
     
     
