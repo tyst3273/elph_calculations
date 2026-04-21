@@ -355,7 +355,7 @@ afm_b.axis([0,1,-3.5,6.5])
 afm_fs.axis([-0.5,0.5,-0.5,0.5])
 
 fim_sf.axis([0,1,62,80])
-fim_b.axis([0,1,-1.5,1])
+fim_b.axis([0,1,-4.5,5.5])
 fim_fs.axis([-0.5,0.5,-0.5,0.5])
 
 afm_fs.set_yticklabels([])
